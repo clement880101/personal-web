@@ -1,25 +1,29 @@
+import {  useState } from 'react';
+import { ThemeProvider, createTheme, CssBaseline} from '@mui/material';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import { Box } from '@mui/material';
 
-import TopNav from './components/top-nav';
-
+import Lightswitch from './components/Lightswitch';
 import Home from "./pages/Home";
-import About from './pages/About';
-import Contact from './pages/Contact';
+import Contact from "./pages/Contact";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const theme = createTheme({palette:{
+      mode: (darkMode) ? 'dark':'light',
+    }
+  });
+
   return (
-    <BrowserRouter>
-      <Box sx={{width:"100vw"}}>
-        <TopNav/>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path="*" element={<Home/>} />
-        </Routes>
-      </Box>
-    </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+          <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />
+        </BrowserRouter>
+      </ThemeProvider>
   );
 }
 
