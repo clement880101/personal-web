@@ -14,9 +14,9 @@ export default function Lightswitch({darkmode, setDarkMode}) {
         <IconButton sx={{position:"fixed", bottom:"0", right:"0"}} 
         onClick={() => setDarkMode(!darkmode)} disableRipple
         component={motion.div} 
-        whileHover={{rotate: -30, scale: 1.1, transition: { duration: 0.2 }}} 
-        whileTap={{ scale: 0.5, rotate:-180 }}>
-            {(darkmode) ?  <LightModeIcon />:<NightlightIcon />}
+        whileHover={{rotate: -40}} 
+        whileTap={{ rotate:-200 }}>
+            {darkmode ?  <LightModeIcon />:<NightlightIcon />}
         </IconButton>
     );
 }
