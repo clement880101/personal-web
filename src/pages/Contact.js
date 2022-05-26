@@ -29,7 +29,7 @@ export default function Contact() {
         flexDirection={(vheight + 200> vwidth) ? "column":"row"}>
             <Box sx={{ minWidth:"50vw", marginTop:7}}>
                 <Typography variant="h2">Contact</Typography>
-                <Divider textAlign="left">Socials</Divider>
+                <Divider textAlign="left" variant="middle">Socials</Divider>
                 <Box sx={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-evenly"}}>
                     <IconButton  disableRipple component={motion.div} whileTap={{scale:0.95}} 
                     whileHover={{y:-3, transition:{duration:0.1}}}
@@ -47,7 +47,7 @@ export default function Contact() {
                         <TwitterIcon sx={{fontSize:70, color:"#1DA1F2"}} />
                     </IconButton>
                 </Box>
-                <Divider textAlign="left">Email</Divider>
+                <Divider textAlign="left" variant="middle">Email</Divider>
                 <Box sx={{display:"flex", flexDirection:"column", padding:2}}>
                     <TextField size="small" sx={{width:250, marginY:1}} label="Your Email" variant="outlined" required/>
                     <TextField size="small" sx={{marginY:1}} label="Message Title" variant="outlined" required/>
