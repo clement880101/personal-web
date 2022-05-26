@@ -23,7 +23,7 @@ export default function Navbar() {
             <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
                 <List sx={{ marginTop: "10vh", minWidth:300}}>
                     {
-                        pages.map((page, index) => (
+                        pages.map((page) => (
                             <ListItem selected={(pathname === "/") ? 
                             "/" + page.toLowerCase() === "/home" : "/" + page.toLowerCase() === pathname
                             } disablePadding>
