@@ -22,12 +22,12 @@ export default function Contact() {
     useEffect(() => {      
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
-    })
+    },[])
 
     return (
         <Box sx={{ display: "flex", maxWidth: "100vw", minHeight:"100vh"}} 
         flexDirection={(vheight + 200> vwidth) ? "column":"row"}>
-            <Box sx={{ minWidth:"50vw", marginTop:7}}>
+            <Box sx={{ minWidth:"50vw", marginTop:10}}>
                 <Typography variant="h2">Contact</Typography>
                 <Divider textAlign="left" variant="middle">Socials</Divider>
                 <Box sx={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-evenly"}}>
@@ -49,7 +49,10 @@ export default function Contact() {
                 </Box>
                 <Divider textAlign="left" variant="middle">Email</Divider>
                 <Box sx={{display:"flex", flexDirection:"column", padding:2}}>
-                    <TextField size="small" sx={{width:250, marginY:1}} label="Your Email" variant="outlined" required/>
+                    <Box sx={{display:"flex", flexDirection:"row", width:"100%",  justifyContent:"space-between"}}>
+                        <TextField size="small" sx={{marginY:1, marginRight:2, flexGrow:1}} label="Your Email" variant="outlined" required/>
+                        <TextField size="small" sx={{marginY:1, flexGrow:1}} label="Your Name" variant="outlined" required/>
+                    </Box>
                     <TextField size="small" sx={{marginY:1}} label="Message Title" variant="outlined" required/>
                     <TextField size="small" sx={{marginY:1}} label="Message Content" variant="outlined" required 
                     multiline rows={3}/>

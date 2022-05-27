@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
-    const pages = ["Home", "Project", "Contact"];
+    const pages = ["Home", "Projects", "Articles",  "Contact"];
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
@@ -17,7 +17,7 @@ export default function Navbar() {
             <IconButton sx={{ zIndex: 1500, margin:1, position:'fixed'}} onClick={() => setOpen(!open)} 
             disableRipple component={motion.div} whileTap={{scale:0.8}} whileHover={{scale:0.95}}>
                 {
-                    open ? <CloseIcon fontSize='large'/> : <DensityMediumIcon fontSize='large'/>
+                    open ? <CloseIcon sx={{fontSize:50}}/> : <DensityMediumIcon sx={{fontSize:50}}/>
                 }
             </IconButton>
             <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>
