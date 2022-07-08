@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Projects from './pages/Projects';
 import Articles from './pages/Articles';
+import ArticlePage from './pages/ArticlePage'
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -26,7 +27,8 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/projects" element={<Projects />} />
-            <Route exact path="/articles" element={<Articles />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/article/:articleID" element={<ArticlePage />} />
           </Routes>
           <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />
         </BrowserRouter>
