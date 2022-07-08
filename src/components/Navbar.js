@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
-    const pages = ["Home", "Projects", "Articles",  "Contact"];
+    const pages = ["Home", "About", "Articles", "Projects", "Contact"];
     const navigate = useNavigate();
     const { pathname } = useLocation();
 

@@ -9,6 +9,8 @@ import Contact from "./pages/Contact";
 import Projects from './pages/Projects';
 import Articles from './pages/Articles';
 import ArticlePage from './pages/ArticlePage'
+import About from './pages/About';
+import Notfound from './pages/Notfound';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -27,8 +29,10 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/about" element={<About />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/article/:articleID" element={<ArticlePage />} />
+            <Route path="*" element={<Notfound />} />
           </Routes>
           <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />
         </BrowserRouter>
