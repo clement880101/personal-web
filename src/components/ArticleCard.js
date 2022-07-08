@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function ArticleCard(doc){
     const navigate = useNavigate();
-    const limit = 110
+    const limit = 100
 
     return(
-        <Card sx={{ width: 300, height:200, margin:3, borderRadius:4}}>
+        <Card sx={{ width: 300, height:200, margin:1, borderRadius:4}}>
             <CardActionArea sx={{height:"100%", width:"100%"}} onClick={()=>{navigate("/article/" + doc.doc[0])}}>
                 <CardContent sx={{height:"100%", width:"100%" , padding: 3}}>
                     <Typography variant="h6" gutterBottom>{(doc.doc !== null) ? doc.doc[1].Title: <Skeleton/>}</Typography> 

@@ -20,7 +20,7 @@ export default function ArticlePage({match}) {
                 navigate("/articles")
             }
         })
-    }, []);
+    }, [articleID, navigate]);
 
    
     return(

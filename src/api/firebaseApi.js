@@ -16,6 +16,21 @@ export async function getArticleList(lim){
     }
 }
 
+export async function getProjectList(lim){
+    try{
+        const qr = query(collection(db, "projects"), orderBy("Date"), limit(lim))
+        const docSnap = await getDocs(qr);
+        const out = []
+        docSnap.forEach((document) => {
+            out.push([document.id, document.data()])
+        });
+        console.log(out)
+        return [true, out];
+    }catch(error){
+        return [false, String(error)]
+    }
+}
+
 export async function getArticle(id){
     try{
         const qr = doc(db, "articles", id)
