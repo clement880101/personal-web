@@ -4,11 +4,8 @@ import { Card, Box, CardContent, CardMedia, IconButton, Skeleton, Typography,
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-import checksumnft from "../assets/preview/checksumnft.PNG"
-
 export default function ProjectCard(doc){
     const [expanded, setExpanded] = useState(false);
-    const format = new Intl.DateTimeFormat('en-US',{ year: 'numeric', month: '2-digit', day: '2-digit'})
 
     const handleExpandClick = function() {
         setExpanded(!expanded);
@@ -17,7 +14,8 @@ export default function ProjectCard(doc){
     return(
         <Card sx={{ width: 300, margin:1, borderRadius:4}}>
             {
-                (doc.doc !== null) ? <CardMedia component="img" height="140" image={checksumnft}/>
+                (doc.doc !== null) ? <CardMedia component="img" height="140" 
+                image={require("../assets/preview/"+doc.doc[1].Image)}/>
                 : <Skeleton variant="rectangular" sx={{height:140}}/>
             }
             <Box sx={{width:"100%", display:"flex", flexDirection:"row"}}>
@@ -30,17 +28,17 @@ export default function ProjectCard(doc){
             </Box>
             <Collapse in={expanded} timeout="auto">
                 <CardContent>
-                    <Typography>{(doc.doc !== null) ? format.format(doc.doc[1].Date.seconds * 1000): <Skeleton/>}</Typography>
+                    <Typography>{(doc.doc !== null) ? "Tech Used": <Skeleton/>}</Typography>
+                    <Box sx={{display:"flex", flexDirection:"row", gap:1, flexWrap:"wrap", marginBottom:3}}>
+                        {(doc.doc !== null) ? doc.doc[1].Tags.map((item)=> <Chip label={item}/>) : <Box/>}
+                    </Box>
                     <Typography>{(doc.doc !== null) ? doc.doc[1].Desc: <Skeleton/>}</Typography>
                 </CardContent>
-                <CardActions sx={{width:"100%", display:"flex", flexDirection:"row"}}>
-                    <Box sx={{flexGrow:4}}>
-                    {
-                        (doc.doc !== null) ? doc.doc[1].Tags.map((item)=> <Chip label="test" size="small"/>) 
-                        : <Box/>
+                <CardActions sx={{width:"100%", display:"flex", flexDirection:"row", justifyContent:"flex-end"}}>
+                    {(doc.doc !== null) ? <Button size="small" href={doc.doc[1].Link}>
+                            See More
+                        </Button> : <Skeleton/>
                     }
-                    </Box>
-                    <Button href={doc.doc[1].Link}>See More</Button>
                 </CardActions>
             </Collapse>
         </Card>

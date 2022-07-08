@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getArticleList, getProjectList } from "../api/firebaseApi.js"
 import ArticleCard from "../components/ArticleCard";
-import OtherArticleBtn from "../components/OtherArticleBtn.js";
+import OtherBtn from "../components/OtherBtn.js";
 import ProjectCard from "../components/ProjectCard.js";
 
 
@@ -41,12 +41,13 @@ export default function Home() {
             <Typography variant="h4">Articles</Typography>
             <Box sx={{flexWrap:"wrap", flexDirection:"row", display:"flex", justifyContent:"center"}}>
                 {article.map((doc) => <ArticleCard doc={doc}/>)}
-                <OtherArticleBtn/>
+                <OtherBtn page="articles"/>
             </Box>
 
             <Typography variant="h4">Projects</Typography>
             <Box sx={{flexWrap:"wrap", flexDirection:"row", display:"flex", justifyContent:"center"}}>
                 {project.map((doc) => <ProjectCard doc={doc}/>)}
+                <OtherBtn page="projects"/>
             </Box>
         </Box>
     )
