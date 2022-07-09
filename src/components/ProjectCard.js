@@ -12,7 +12,7 @@ export default function ProjectCard(doc){
     }
 
     return(
-        <Card sx={{ width: 300, margin:1, borderRadius:4}}>
+        <Card sx={{ width: 300, margin:1, borderRadius:4, height:(expanded)? "auto": 200, transitionDuration:'1s'}}>
             {
                 (doc.doc !== null) ? <CardMedia component="img" height="140" 
                 image={require("../assets/preview/"+doc.doc[1].Image)}/>

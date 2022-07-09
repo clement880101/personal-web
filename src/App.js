@@ -11,6 +11,7 @@ import Articles from './pages/Articles';
 import ArticlePage from './pages/ArticlePage'
 import About from './pages/About';
 import Notfound from './pages/Notfound';
+import Endnote from './components/Endnote';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -35,6 +36,7 @@ function App() {
             <Route path="*" element={<Notfound />} />
           </Routes>
           <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />
+          <Endnote/>
         </BrowserRouter>
       </ThemeProvider>
   );
