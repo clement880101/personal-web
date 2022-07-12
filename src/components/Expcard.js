@@ -13,7 +13,7 @@ export default function ExpCard(doc){
     }
 
     return(
-        <Card sx={{ width: 300, margin:1, borderRadius:4, height:(expanded)? "auto": 200, transitionDuration:'1s'}}>
+        <Card sx={{ width: 300, margin:1, borderRadius:4, height:(expanded)? "auto": 200}}>
             {
                 (doc.doc !== null) ? <CardMedia component="img" height="140" 
                 image={require("../assets/"+doc.doc[1].Image)}/>

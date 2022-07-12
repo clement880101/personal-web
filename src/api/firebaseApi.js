@@ -24,7 +24,6 @@ export async function getProjectList(lim){
         docSnap.forEach((document) => {
             out.push([document.id, document.data()])
         });
-        console.log(out)
         return [true, out];
     }catch(error){
         return [false, String(error)]
@@ -53,7 +52,28 @@ export async function getExperiences(lim){
         docSnap.forEach((document) => {
             out.push([document.id, document.data()])
         });
-        console.log(out)
+        return [true, out];
+    }catch(error){
+        return [false, String(error)]
+    }
+}
+
+export async function getSkills(){
+    try{
+        const qr = query(collection(db, "skills"))
+        const out = {
+            All:{
+                skills:[],
+                languages:[]
+            }
+        }
+        const docSnap = await getDocs(qr);
+        docSnap.forEach((document) => {
+            const doc = document.data()
+            out.All.skills = out.All.skills.concat(doc.skills)
+            out.All.languages = out.All.languages.concat(doc.languages)
+            out[document.id] = doc
+        });
         return [true, out];
     }catch(error){
         return [false, String(error)]

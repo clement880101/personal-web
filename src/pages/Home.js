@@ -40,7 +40,7 @@ export default function Home() {
 
     return(
         <Box sx={{display:"flex", flexDirection:"column", alignItems:"center", width:"100%", paddingX: 5}}>
-            <Box sx={{height: "50vh", display: "flex", flexDirection: "column", alignItems: "center",
+            <Box sx={{minHeight: "50vh", display: "flex", flexDirection: "column", alignItems: "center",
                 justifyContent: "center", padding: 5}}>
                 <Typography variant="h4">Hi, I'm Clement Chang</Typography>
                 <Typography variant="h5">I'm a DevOps & a Fullstack Engineer based in the Bay Area</Typography>
@@ -55,7 +55,7 @@ export default function Home() {
             </Box>
             
             <Box sx={{height: "30vh", display: "flex", flexDirection: "row", alignItems: "center",
-                justifyContent: "center", padding: 5}}>
+                justifyContent: "center", padding: 5, flexWrap:"wrap"}}>
                 <Typography variant="h6">if you like what you are seeing here, take a look at these </Typography>
                 <Button variant="contained" size="small" disableTouchRipple sx={{ borderRadius: 10, margin:1}}
                     onClick={() => { navigate("/about") }}>About</Button>
