@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider, createTheme, CssBaseline, Toolbar } from '@mui/material';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import Lightswitch from './components/Lightswitch';
 import Navbar from './components/Navbar';
@@ -26,8 +26,9 @@ function App() {
       <CssBaseline />
       <BrowserRouter>
         <Navbar />
+        <Toolbar/>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/projects" element={<Projects />} />

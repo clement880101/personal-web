@@ -15,11 +15,13 @@ export default function SkillDesc({ data }) {
     }
 
     return (
-        <Box sx={{ width: 400, height:"100%", alignItems:"center", justifyContent:"center", 
-        display:"flex", flexDirection:"column"}}>
-            <Typography>{(searchParams.get("skills") === null) ? "None":searchParams.get("skills")}</Typography>
-            <Typography>
-                {((searchParams.get("skills") === null) || (data === null)) ? "None" : 
+        <Box sx={{ width: 400, minHeight:200, alignItems:"center", justifyContent:"center", 
+        display:"flex", flexDirection:"column", padding:3}}>
+            <Typography variant='h6'>{(searchParams.get("skills") === null) ? 
+            "To learn more about my experiences, click on the tags"
+            :searchParams.get("skills")}</Typography>
+            <Typography variant="body1">
+                {((searchParams.get("skills") === null) || (data === null)) ? "" : 
                 find(data, searchParams.get("skills"))}
             </Typography>
         </Box>

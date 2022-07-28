@@ -18,11 +18,11 @@ export default function About() {
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: 5 }}>
             <Typography sx={{ padding: 10 }} variant="h4">About</Typography>
-
             <Typography variant="h5">Experiences</Typography>
             <Box sx={{ flexWrap: "wrap", flexDirection: "row", display: "flex", justifyContent: "center" }}>
                 {exp.map((doc) => <ExpCard doc={doc} />)}
             </Box>
+            <Box sx={{height:"20vh"}}/>
             <Typography variant="h5">Skills</Typography>
             <Skillmodule />
         </Box>

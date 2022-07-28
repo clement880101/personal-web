@@ -5,7 +5,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import SendIcon from '@mui/icons-material/Send';
 import { useState, useEffect } from "react";
 import { motion } from 'framer-motion';
 
@@ -27,9 +26,8 @@ export default function Contact() {
     return (
         <Box sx={{ display: "flex", maxWidth: "100vw", minHeight:"100vh"}} 
         flexDirection={(vheight + 200> vwidth) ? "column":"row"}>
-            <Box sx={{ minWidth:"50vw", marginTop:10}}>
-                <Typography variant="h2">Contact</Typography>
-                <Divider textAlign="left" variant="middle">Socials</Divider>
+            <Box sx={{ minWidth:"50vw", marginTop:10, alignContent:"center  "}}>
+                <Typography variant="h4">Contact</Typography>
                 <Box sx={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-evenly"}}>
                     <IconButton  disableRipple component={motion.div} whileTap={{scale:0.95}} 
                     whileHover={{y:-3, transition:{duration:0.1}}}
@@ -45,20 +43,6 @@ export default function Contact() {
                     whileHover={{y:-3, transition:{duration:0.1}}}
                     onClick={()=>{window.open('https://twitter.com/clement880101', '_blank')}}>
                         <TwitterIcon sx={{fontSize:70, color:"#1DA1F2"}} />
-                    </IconButton>
-                </Box>
-                <Divider textAlign="left" variant="middle">Email</Divider>
-                <Box sx={{display:"flex", flexDirection:"column", padding:2}}>
-                    <Box sx={{display:"flex", flexDirection:"row", width:"100%",  justifyContent:"space-between"}}>
-                        <TextField size="small" sx={{marginY:1, marginRight:2, flexGrow:1}} label="Your Email" variant="outlined" required/>
-                        <TextField size="small" sx={{marginY:1, flexGrow:1}} label="Your Name" variant="outlined" required/>
-                    </Box>
-                    <TextField size="small" sx={{marginY:1}} label="Message Title" variant="outlined" required/>
-                    <TextField size="small" sx={{marginY:1}} label="Message Content" variant="outlined" required 
-                    multiline rows={3}/>
-                    <IconButton sx={{alignSelf:"end"}} disableRipple component={motion.div}
-                    whileHover={{scale:1.1}} whileTap={{x:3}}>
-                        <SendIcon fontSize="large"/>
                     </IconButton>
                 </Box>
             </Box>

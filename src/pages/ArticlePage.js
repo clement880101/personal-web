@@ -24,7 +24,7 @@ export default function ArticlePage({match}) {
 
    
     return(
-        <Box>
+        <Box sx={{paddingX:30, paddingY:5}}>
             <Typography>{(data === null) ? <Skeleton/> : data.Title}</Typography>
             <Typography>{(data === null) ? <Skeleton/> : format.format(data.Date.seconds * 1000)}</Typography>
             <Typography>{(data === null) ? <Skeleton/> : data.Subtitle}</Typography>
