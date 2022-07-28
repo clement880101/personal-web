@@ -7,7 +7,7 @@ export default function ArticleCard(doc){
 
     return(
         <Card variant="outlined" sx={{ width: 300, height:200, margin:1, borderRadius:4}}>
-            <CardActionArea sx={{height:"100%", width:"100%"}} onClick={()=>{navigate("/article/" + doc.doc[0])}}>
+            <CardActionArea sx={{height:"100%", width:"100%"}} onClick={()=>{navigate("/articles/" + doc.doc[0])}}>
                 <CardContent sx={{height:"100%", width:"100%" , padding: 3}}>
                     <Typography variant="h6" gutterBottom>{(doc.doc !== null) ? doc.doc[1].Title: <Skeleton/>}</Typography> 
                     <Typography variant="body2" color="text.secondary" >{(doc.doc !== null) ? 

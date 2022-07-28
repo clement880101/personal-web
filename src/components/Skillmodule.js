@@ -1,6 +1,7 @@
 import { Box, ButtonGroup, Button} from "@mui/material"
 import { useState, useEffect } from "react"
 import SkillCard from "./SkillCard"
+import SkillDesc from "./SkillDesc"
 import { getSkills } from "../api/firebaseApi"
 
 
@@ -29,6 +30,7 @@ export default function Skillmodule() {
             <Box sx={{width:"100%", display:"flex", flexDirection:"row", flexWrap:"wrap", 
             justifyContent:"center", gap:2}}>
                 <SkillCard data={data} title={selected}/>
+                <SkillDesc data={data}/>
             </Box>
         </Box>
     )

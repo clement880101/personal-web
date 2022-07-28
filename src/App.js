@@ -1,6 +1,6 @@
-import {  useState } from 'react';
-import { ThemeProvider, createTheme, CssBaseline} from '@mui/material';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { useState } from 'react';
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Lightswitch from './components/Lightswitch';
 import Navbar from './components/Navbar';
@@ -15,30 +15,31 @@ import Endnote from './components/Endnote';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const theme = createTheme({palette:{
-      mode: (darkMode) ? 'dark':'light',
+  const theme = createTheme({
+    palette: {
+      mode: (darkMode) ? 'dark' : 'light',
     }
   });
 
   return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <Navbar/>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/article/:articleID" element={<ArticlePage />} />
-            <Route path="*" element={<Notfound />} />
-          </Routes>
-          <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />
-          <Endnote/>
-        </BrowserRouter>
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:articleID" element={<ArticlePage />} />
+          <Route path="*" element={<Notfound />} />
+        </Routes>
+        <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />
+        <Endnote />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

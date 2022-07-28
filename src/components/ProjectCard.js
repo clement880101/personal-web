@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Card, Box, CardContent, CardMedia, IconButton, Skeleton, Typography, 
     Collapse, CardActions, Button, Chip } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 export default function ProjectCard(doc){
+    const navigate = useNavigate();
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = function() {
@@ -30,7 +32,9 @@ export default function ProjectCard(doc){
                 <CardContent>
                     <Typography>{(doc.doc !== null) ? "Tech Used": <Skeleton/>}</Typography>
                     <Box sx={{display:"flex", flexDirection:"row", gap:1, flexWrap:"wrap", marginBottom:3}}>
-                        {(doc.doc !== null) ? doc.doc[1].Tags.map((item)=> <Chip label={item}/>) : <Box/>}
+                        {(doc.doc !== null) ? doc.doc[1].Tags.map((item)=> <Chip 
+                        onClick={()=>{navigate({pathname:"/about", search:"?skills="+item})}} 
+                        label={item}/>) : <Box/>}
                     </Box>
                     <Typography>{(doc.doc !== null) ? doc.doc[1].Desc: <Skeleton/>}</Typography>
                 </CardContent>

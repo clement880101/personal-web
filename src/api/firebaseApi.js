@@ -1,8 +1,8 @@
-import { collection, getDocs, query, orderBy, limit, doc, getDoc} from "firebase/firestore";
-import {db} from "./firebaseConfig.js"
+import { collection, getDocs, query, orderBy, limit, doc, getDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig.js"
 
-export async function getArticleList(lim){
-    try{
+export async function getArticleList(lim) {
+    try {
         const qr = query(collection(db, "articles"), orderBy("Date"), limit(lim))
         const docSnap = await getDocs(qr);
         const out = []
@@ -11,13 +11,13 @@ export async function getArticleList(lim){
         });
         console.log(out)
         return [true, out];
-    }catch(error){
+    } catch (error) {
         return [false, String(error)]
     }
 }
 
-export async function getProjectList(lim){
-    try{
+export async function getProjectList(lim) {
+    try {
         const qr = query(collection(db, "projects"), orderBy("Date"), limit(lim))
         const docSnap = await getDocs(qr);
         const out = []
@@ -25,13 +25,13 @@ export async function getProjectList(lim){
             out.push([document.id, document.data()])
         });
         return [true, out];
-    }catch(error){
+    } catch (error) {
         return [false, String(error)]
     }
 }
 
-export async function getArticle(id){
-    try{
+export async function getArticle(id) {
+    try {
         const qr = doc(db, "articles", id)
         const docSnap = await getDoc(qr);
         if (docSnap.exists()) {
@@ -39,13 +39,13 @@ export async function getArticle(id){
         } else {
             return [false, "Cannot find the indicated article!"]
         }
-    }catch(error){
+    } catch (error) {
         return [false, String(error)]
     }
 }
 
-export async function getExperiences(lim){
-    try{
+export async function getExperiences(lim) {
+    try {
         const qr = query(collection(db, "experiences"), orderBy("To"), limit(lim))
         const docSnap = await getDocs(qr);
         const out = []
@@ -53,29 +53,21 @@ export async function getExperiences(lim){
             out.push([document.id, document.data()])
         });
         return [true, out];
-    }catch(error){
+    } catch (error) {
         return [false, String(error)]
     }
 }
 
-export async function getSkills(){
-    try{
+export async function getSkills() {
+    try {
         const qr = query(collection(db, "skills"))
-        const out = {
-            All:{
-                skills:[],
-                languages:[]
-            }
-        }
+        const out = []
         const docSnap = await getDocs(qr);
         docSnap.forEach((document) => {
-            const doc = document.data()
-            out.All.skills = out.All.skills.concat(doc.skills)
-            out.All.languages = out.All.languages.concat(doc.languages)
-            out[document.id] = doc
+            out.push(document.data())
         });
         return [true, out];
-    }catch(error){
+    } catch (error) {
         return [false, String(error)]
     }
 }
