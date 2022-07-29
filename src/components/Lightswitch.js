@@ -8,7 +8,7 @@ export default function Lightswitch({darkmode, setDarkMode}) {
     const preferDark = useMediaQuery('(prefers-color-scheme: dark)');
     useEffect(() => {
         setDarkMode(preferDark);
-    }, [setDarkMode]);
+    }, [setDarkMode, preferDark]);
 
     return (
         <IconButton sx={{position:"fixed", bottom:"0", right:"0"}} 

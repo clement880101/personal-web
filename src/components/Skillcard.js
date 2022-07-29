@@ -1,46 +1,50 @@
-import { Paper, Typography, Box, Chip } from "@mui/material"
+import { Card, CardContent, Typography, Chip, Box } from "@mui/material"
+import { useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from "react"
 
-export default function Skillcard({ title }) {
-    var language = []
-    var skills = []
+export default function SkillCard({ data, title }) {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [skills, setSkills] = useState(Array(3).fill(null))
+    const [languages, setLanguages] = useState(Array(3).fill(null))
 
-    if (title === "DevOps") {
-        language = ["Python", "GoLang", "C shell", "SQL", "Perl"]
-        skills = ["Linux", "Jenkins", "InfluxDB", "Grafana", "MongoDB", "TensorFlow",
-            "PostgreSQL", "MySQL", "Docker", "AWS", "Git", "Perforce"]
-    } else if (title === "Fullstack") {
-        language = ["JavaScript", "Python", "Java", "C++", "Typescript", "SQL", "html/CSS", "R"]
-        skills = ["React.js", "Node.js", "MongoDB", "MySQL", "Firebase", "MUI",
-            "SpringBoot", "TensorFlow", "Git", "AWS", "Framer Motion", "Ant Design"]
-    } else if (title === "Blockchain") {
-        language = ["C++", "Python", "GoLang", "Solidity", "Java"]
-        skills = ["Scaffolding-ETH", "Hardhat", "The Graph", "Docker", "React.js",
-            "Metamask", "Wallet Connect"]
-    } else {
-        language = ["English", "Mandarin"]
-        skills = ["Travel", "Fencing", "Geopolitics", "Food", "Clarinet", "Steak",
-            "Experimental Music"]
+    function handleClick(skill){
+        setSearchParams({'skills':skill}, {replace:true})
     }
 
-    return (
-        <Paper sx={{
-            width: 350, height: 500, borderRadius: 10, display: "flex", flexDirection: "column",
-            alignItems: "center", padding: 3, marginY: 2, marginX: 10
-        }} elevation={24}>
-            <Typography variant="h4">{title}</Typography>
-            <Typography variant="body1" sx={{ alignSelf: "flex-start" }}>I know how to speak these languages</Typography>
-            <Box sx={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
-                {language.map((lang, index) => (
-                    <Chip sx={{ margin: 1 }} key={index} label={lang} />
-                ))}
-            </Box>
-            <Typography variant="body1" sx={{ alignSelf: "flex-start" }}>Things that I am interested or skilled in </Typography>
-            <Box sx={{ width: "100%", display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
-                {skills.map((lang, index) => (
-                    <Chip sx={{ margin: 1 }} key={index} label={lang} />
-                ))}
-            </Box>
+    useEffect(() => {
+        if (data !== null) {
+            const ski = []
+            const lang = []
+            for (let i = 0; i < data.length; i++) {
+                if ((title === "All") || (data[i].Tag === title)){
+                    if (data[i].Type === "skills") {
+                        ski.push(data[i])
+                    } else if (data[i].Type === "language") {
+                        lang.push(data[i])
+                    }
+                }
+            }
+            setSkills(ski)
+            setLanguages(lang)
+        }
+    }, [data, title])
 
-        </Paper>
+
+    return (
+        <Card sx={{ width: 400, borderRadius: 4 }}>
+            <CardContent sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Typography variant="h6">{title}</Typography>
+                <Typography variant="subtitle1">I know these languages:</Typography>
+                <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>
+                    {languages.map((item) => <Chip onClick={()=>{handleClick(item.Name)}} 
+                    label={(item === null) ? "languages" : item.Name} />)}
+                </Box>
+                <Typography variant="subtitle1">Things that I am skilled in:</Typography>
+                <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>
+                    {skills.map((item) => <Chip onClick={()=>{handleClick(item.Name)}} 
+                    label={(item === null) ? "skills" : item.Name} />)}
+                </Box>
+            </CardContent>
+        </Card>
     )
 }
