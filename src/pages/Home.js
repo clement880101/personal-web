@@ -48,7 +48,7 @@ export default function Home() {
                 <Typography variant="body2">Feel free to <Link href="/contact">contact</Link> me if you want to connect, exchange ideas, or grab some coffee</Typography>
             </Box>
 
-            <Typography variant="h4">Articles</Typography>
+            <Typography variant="h5">Articles</Typography>
             <Box sx={{flexWrap:"wrap", flexDirection:"row", display:"flex", justifyContent:"center"}}>
                 {article.map((doc) => <ArticleCard doc={doc}/>)}
                 <OtherBtn page="articles"/>
@@ -63,7 +63,7 @@ export default function Home() {
                     onClick={() => { navigate("/contact") }}>Contact</Button>
             </Box>
 
-            <Typography variant="h4">Projects</Typography>
+            <Typography variant="h5">Projects</Typography>
             <Box sx={{flexWrap:"wrap", flexDirection:"row", display:"flex", justifyContent:"center"}}>
                 {project.map((doc) => <ProjectCard doc={doc}/>)}
                 <OtherBtn page="projects"/>

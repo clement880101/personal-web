@@ -28,7 +28,7 @@ export default function Skillmodule() {
                 )}
             </ButtonGroup>
             <Box sx={{width:"100%", display:"flex", flexDirection:"row", flexWrap:"wrap", 
-            justifyContent:"center", gap:2}}>
+            justifyContent:"center", margin:1}}>
                 <SkillCard data={data} title={selected}/>
                 <SkillDesc data={data}/>
             </Box>

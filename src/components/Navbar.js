@@ -43,7 +43,8 @@ export default function Navbar() {
                             <IconButton onClick={() => setOpen(!open)}>
                                 <DensityMediumIcon sx={{ fontSize: 20 }} />
                             </IconButton>
-                            <Drawer PaperProps={{ style: { borderRadius: 30, margin: 20, maxHeight:"90vh"} }}
+                            <Drawer PaperProps={{ style: { borderRadius: 30, marginRight:10,
+                             marginTop:"5vh", height:"90vh"} }}
                                 anchor="right" open={open} onClose={() => setOpen(false)}>
                                 <IconButton sx={{alignSelf:"flex-end", margin:2}} onClick={() => setOpen(!open)}>
                                     <CloseIcon sx={{ fontSize: 20 }} />

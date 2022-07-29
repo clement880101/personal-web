@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material"
+import { Typography, Box} from "@mui/material"
 import { useState, useEffect } from "react"
 import { getArticleList } from "../api/firebaseApi"
 import ArticleCard from "../components/ArticleCard"
@@ -18,7 +18,6 @@ export default function Articles(){
     return(
         <Box sx={{display:"flex", flexDirection:"column", alignItems:"center", width:"100%", paddingX: 5}}>
             <Typography sx={{padding:10}} variant="h4">Articles</Typography>
-
             <Box sx={{flexWrap:"wrap", flexDirection:"row", display:"flex", justifyContent:"center"}}>
                 {article.map((doc) => <ArticleCard doc={doc}/>)}
             </Box>
