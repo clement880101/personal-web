@@ -46,7 +46,7 @@ export async function getArticle(id) {
 
 export async function getExperiences(lim) {
     try {
-        const qr = query(collection(db, "experiences"), orderBy("To"), limit(lim))
+        const qr = query(collection(db, "experiences"), orderBy("From"), limit(lim))
         const docSnap = await getDocs(qr);
         const out = []
         docSnap.forEach((document) => {
