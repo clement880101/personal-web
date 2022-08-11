@@ -6,7 +6,6 @@ import Skillmodule from "../components/Skillmodule"
 
 export default function About() {
     const limit = 3
-
     const [exp, setExp] = useState(Array(limit).fill(null))
     
     useEffect(() => {
