@@ -1,7 +1,9 @@
 import { Box, ButtonGroup, Button} from "@mui/material"
 import { useState, useEffect } from "react"
+
 import SkillCard from "./SkillCard"
 import SkillDesc from "./SkillDesc"
+
 import { getSkills } from "../api/firebaseApi"
 
 

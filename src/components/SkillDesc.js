@@ -3,7 +3,7 @@ import { Box } from '@mui/system'
 import { useSearchParams } from 'react-router-dom';
 
 export default function SkillDesc({ data }) {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     function find(data, title) {
         for (let i = 0; i < data.length; i++) {

@@ -8,6 +8,7 @@ export default function About() {
     const limit = 3
 
     const [exp, setExp] = useState(Array(limit).fill(null))
+    
     useEffect(() => {
         getExperiences(limit).then((document) => {
             // Replace with error banner
