@@ -1,4 +1,4 @@
-import { Typography, Box, Paper, IconButton, TextField, Divider} from "@mui/material";
+import { Typography, Box, Paper, IconButton} from "@mui/material";
 import { Map, Overlay} from 'pigeon-maps'
 import { stamenToner} from 'pigeon-maps/providers'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -26,8 +26,8 @@ export default function Contact() {
     return (
         <Box sx={{ display: "flex", maxWidth: "100vw", minHeight:"100vh"}} 
         flexDirection={(vheight + 200> vwidth) ? "column":"row"}>
-            <Box sx={{ minWidth:"50vw", marginTop:10, alignContent:"center  "}}>
-                <Typography variant="h4">Contact</Typography>
+            <Box sx={{ minWidth:"50vw", display:"flex", alignItems:"center", flexDirection:"column"}}>
+                <Typography  sx={{ padding: 10 }} variant="h4">Contact</Typography>
                 <Box sx={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-evenly"}}>
                     <IconButton  disableRipple component={motion.div} whileTap={{scale:0.95}} 
                     whileHover={{y:-3, transition:{duration:0.1}}}

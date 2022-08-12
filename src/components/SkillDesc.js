@@ -18,7 +18,7 @@ export default function SkillDesc({ data }) {
         <Box sx={{ width: 400, minHeight:200, alignItems:"center", justifyContent:"center", 
         display:"flex", flexDirection:"column", padding:3}}>
             <Typography variant='h6'>{(searchParams.get("skills") === null) ? 
-            "To learn more about my experiences, click on the tags"
+            "To learn more about my experiences and views on each tools/languages, click on the tags"
             :searchParams.get("skills")}</Typography>
             <Typography variant="body1">
                 {((searchParams.get("skills") === null) || (data === null)) ? "" : 

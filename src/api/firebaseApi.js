@@ -9,7 +9,6 @@ export async function getArticleList(lim) {
         docSnap.forEach((document) => {
             out.push([document.id, document.data()])
         });
-        console.log(out)
         return [true, out];
     } catch (error) {
         return [false, String(error)]
@@ -46,7 +45,7 @@ export async function getArticle(id) {
 
 export async function getExperiences(lim) {
     try {
-        const qr = query(collection(db, "experiences"), orderBy("From"), limit(lim))
+        const qr = query(collection(db, "experiences"), orderBy("From", "desc"), limit(lim))
         const docSnap = await getDocs(qr);
         const out = []
         docSnap.forEach((document) => {

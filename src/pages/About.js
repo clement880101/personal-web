@@ -22,7 +22,7 @@ export default function About() {
             <Box sx={{ flexWrap: "wrap", flexDirection: "row", display: "flex", justifyContent: "center" }}>
                 {exp.map((doc) => <ExpCard doc={doc} />)}
             </Box>
-            <Box sx={{height:"20vh"}}/>
+            <Box sx={{height:"10vh"}}/>
             <Typography variant="h5">Skills</Typography>
             <Skillmodule />
         </Box>
