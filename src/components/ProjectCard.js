@@ -36,7 +36,7 @@ export default function ProjectCard(doc) {
                         <Typography>{(doc.doc !== null) ? "Tech Used" : <Skeleton />}</Typography>
                         <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", marginBottom: 3 }}>
                             {(doc.doc !== null) ? doc.doc[1].Tags.map((item) => <Chip
-                                onClick={() => { navigate({ pathname: "/about", search: "?skills=" + item }) }}
+                                onClick={() => { if(item !== "N/A"){navigate({ pathname: "/about", search: "?skills=" + item })} }}
                                 label={item} />) : <Box />}
                         </Box>
                         <Typography>{(doc.doc !== null) ? doc.doc[1].Desc : <Skeleton />}</Typography>

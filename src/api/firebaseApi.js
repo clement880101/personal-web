@@ -3,7 +3,7 @@ import { db } from "./firebaseConfig.js"
 
 export async function getArticleList(lim) {
     try {
-        const qr = query(collection(db, "articles"), orderBy("Date"), limit(lim))
+        const qr = query(collection(db, "articles"), orderBy("Date", "desc"), limit(lim))
         const docSnap = await getDocs(qr);
         const out = []
         docSnap.forEach((document) => {
@@ -17,7 +17,7 @@ export async function getArticleList(lim) {
 
 export async function getProjectList(lim) {
     try {
-        const qr = query(collection(db, "projects"), orderBy("Date"), limit(lim))
+        const qr = query(collection(db, "projects"), orderBy("Date", "desc"), limit(lim))
         const docSnap = await getDocs(qr);
         const out = []
         docSnap.forEach((document) => {

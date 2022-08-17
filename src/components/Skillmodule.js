@@ -6,16 +6,24 @@ import SkillDesc from "./SkillDesc"
 
 import { getSkills } from "../api/firebaseApi"
 
+import { useSearchParams } from 'react-router-dom';
+
 
 export default function Skillmodule() {
     const [selected, setSelected] = useState("DevOps")
     const [data, setData] = useState(null)
+    const [searchParams] = useSearchParams();
+
     const category = ["DevOps", "Frontend", "Backend", "Life", "All"]
 
     useEffect(()=>{
         getSkills().then((document)=>{
             // Replace with error banner
-            document[0] ? setData(document[1]) : console.log(document[1])
+            document[0] ? setData(document[1]) : console.log(document[1]);
+            if (searchParams.get("skills") !== null) {
+                setSelected("All")
+                window.scrollTo(0, 700);
+            }
         })
     }, [])
 

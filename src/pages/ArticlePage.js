@@ -26,7 +26,7 @@ export default function ArticlePage() {
         <Box sx={{ paddingX: "20%", paddingY: 5 }}>
             <Typography variant="h4">{(data === null) ? <Skeleton /> : data.Title}</Typography>
             <Typography variant="subtitle2">{(data === null) ? <Skeleton /> : format.format(data.Date.seconds * 1000)}</Typography>
-            <Typography sx={{ marginBottom: 3 }} variant="subtitle1">{(data === null) ? <Skeleton /> : data.Subtitle}</Typography>
+            <Typography sx={{ marginY: 3 }} variant="subtitle1">{(data === null) ? <Skeleton /> : data.Subtitle}</Typography>
             {(data === null) ? <Skeleton /> :
                 <div dangerouslySetInnerHTML={{__html: data.Content.replaceAll("\\n", "\n")}} />
             }
