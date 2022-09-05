@@ -42,7 +42,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<Contact mobile={mobile}/>} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<About mobile={mobile}/>} />
           <Route path="/articles" element={<Articles />} />

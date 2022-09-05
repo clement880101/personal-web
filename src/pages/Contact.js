@@ -1,61 +1,43 @@
-import { Typography, Box, Paper, IconButton} from "@mui/material";
-import { Map, Overlay} from 'pigeon-maps'
-import { stamenToner} from 'pigeon-maps/providers'
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Typography, Box } from "@mui/material";
+import LinkCard from "../components/LinkCard";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { useState, useEffect } from "react";
 
-export default function Contact() {
-    const [vwidth, setWidth] = useState(window.innerWidth);
-    const [vheight, setHeight] = useState(window.innerHeight);
-
-
-    function handleResize() {
-        setWidth(window.innerWidth);
-        setHeight(window.innerHeight);
-    }
-
-    useEffect(() => {      
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    },[])
-
-    return (
-        <Box sx={{ display: "flex", maxWidth: "100vw", minHeight:"100vh"}} 
-        flexDirection={(vheight + 200> vwidth) ? "column":"row"}>
-            <Box sx={{ minWidth:"50vw", display:"flex", alignItems:"center", flexDirection:"column"}}>
-                <Typography  sx={{ padding: 10 }} variant="h4">Contact</Typography>
-                <Box sx={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-evenly"}}>
-                    <IconButton  disableRipple onClick={()=>{window.open('https://www.linkedin.com/in/clement-chang-815501145/', '_blank')}}>
-                        <LinkedInIcon sx={{fontSize:70, color:"#0077B5"}} />
-                    </IconButton>
-                    <IconButton  disableRipple onClick={()=>{window.open('https://github.com/clement880101', '_blank')}}>
-                        <GitHubIcon sx={{fontSize:70}}/>
-                    </IconButton>
-                    <IconButton  disableRipple onClick={()=>{window.open('https://twitter.com/clement880101', '_blank')}}>
-                        <TwitterIcon sx={{fontSize:70, color:"#1DA1F2"}} />
-                    </IconButton>
+export default function Contact({ mobile }) {
+    if (mobile) {
+        return (
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", paddingX: "10vw" }}>
+                <Typography variant="h4" sx={{ padding: 10 }}>Contact</Typography>
+                <LinkCard link={'https://github.com/clement880101'} bgcolor={"auto"}>
+                    <GitHubIcon sx={{ fontSize: 90, color: "auto" }} />
+                </LinkCard>
+                <LinkCard link={'https://www.linkedin.com/in/clement-chang-815501145/'} bgcolor={"#0077B5"}>
+                    <LinkedInIcon sx={{ fontSize: 90, color: "white" }} />
+                </LinkCard>
+                <LinkCard link={'https://twitter.com/clement880101'} bgcolor={"#1DA1F2"}>
+                    <TwitterIcon sx={{ fontSize: 90, color: "white" }} />
+                </LinkCard>
+            </Box>
+        )
+    } else {
+        return (
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", paddingX: "10vw" }}>
+                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", paddingTop: 5 }}>
+                    <Typography sx={{ marginRight: "15vw" }} variant="h2">Contact</Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <LinkCard link={'https://github.com/clement880101'} bgcolor={"auto"}>
+                            <GitHubIcon sx={{ fontSize: 90, color: "auto" }} />
+                        </LinkCard>
+                        <LinkCard link={'https://www.linkedin.com/in/clement-chang-815501145/'} bgcolor={"#0077B5"}>
+                            <LinkedInIcon sx={{ fontSize: 90, color: "white" }} />
+                        </LinkCard>
+                        <LinkCard link={'https://twitter.com/clement880101'} bgcolor={"#1DA1F2"}>
+                            <TwitterIcon sx={{ fontSize: 90, color: "white" }} />
+                        </LinkCard>
+                    </Box>
                 </Box>
             </Box>
-            <Map
-                provider={stamenToner}
-                dprs={[1, 2]}
-                height={(vheight + 200 > vwidth) ? vheight/2 + 90: vheight}
-                width={(vheight + 200> vwidth) ? vwidth-18: vwidth/2}
-                defaultCenter={[37.40, -122.1]}
-                defaultZoom={9.7}
-                twoFingerDrag={true}
-            >
-                <Overlay anchor={[37.389, -122.081]} offset={[20, 30]} style={{display:"flex", flexDirection:"row"}}>
-                    <LocationOnIcon fontSize="large" style={{color:"black"}}/>
-                    <Paper style={{display:"flex", flexDirection:"column", 
-                    justifyContent:"center", borderRadius:30}} elevation={20}>
-                        <Typography variant="body" style={{padding:6}}>Mountain View</Typography>
-                    </Paper>
-                </Overlay>
-            </Map>
-        </Box>
-    )
+        )
+    }
 }

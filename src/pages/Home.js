@@ -1,4 +1,4 @@
-import { Box, Typography, Link, Button } from "@mui/material"
+import { Box, Typography, Link, Button, Grid } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { getArticleList, getProjectList } from "../api/firebaseApi.js"
@@ -6,12 +6,13 @@ import { getArticleList, getProjectList } from "../api/firebaseApi.js"
 import ArticleCard from "../components/ArticleCard";
 import OtherBtn from "../components/OtherBtn.js";
 import ProjectCard from "../components/ProjectCard.js";
+import TitleCard from "../components/TitleCard.js";
 
 
 export default function Home() {
     const navigate = useNavigate()
-    const artlim = 3
-    const projlim = 3
+    const artlim = 2
+    const projlim = 2
 
     const [article, setArticle] = useState(Array(artlim).fill(null))
     const [project, setProject] = useState(Array(projlim).fill(null))
@@ -30,23 +31,23 @@ export default function Home() {
     }, [artlim, projlim])
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: 5 }}>
-            <Box sx={{
-                display: "flex", flexDirection: "column", flexWrap: "wrap",
-                justifyContent: "center", alignItem: "center", height: "30vh"
-            }}>
-                <Typography variant="h4">Hi, I'm Clement Chang</Typography>
-                <Typography variant="h5">I'm a DevOps & a Fullstack Engineer based in the Bay Area</Typography>
-                <Typography variant="body1">This is a website where I share my thoughts on the world and showcase what I have accomplished</Typography>
-                <Typography variant="body2">Feel free to <Link href="/contact">contact</Link> me if you want to connect, exchange ideas, or grab some coffee</Typography>
-
-            </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: "10vw" }}>
+            <TitleCard image={'yellow.png'}>
+                <Typography variant="h2" color={"#416ef8"}>Clement Chang</Typography>
+                <Typography variant="h4" color={"black"}>DevOps & a Fullstack Engineer based in the Bay Area</Typography>
+            </TitleCard>
 
             <Typography variant="h5">Articles</Typography>
-            <Box sx={{ flexWrap: "wrap", flexDirection: "row", display: "flex", justifyContent: "center" }}>
-                {article.map((doc) => <ArticleCard doc={doc} />)}
-                <OtherBtn page="articles" />
-            </Box>
+            <Grid container spacing={1} sx={{ wrap: "wrap" }}>
+                {article.map((doc) =>
+                    <Grid item xs={"auto"}>
+                        <ArticleCard doc={doc} />
+                    </Grid>
+                )}
+                <Grid item xs={"auto"}>
+                    <OtherBtn page="articles" />
+                </Grid>
+            </Grid>
 
             <Box sx={{
                 height: "30vh", display: "flex", flexDirection: "row", alignItems: "center",
@@ -60,10 +61,16 @@ export default function Home() {
             </Box>
 
             <Typography variant="h5">Projects</Typography>
-            <Box sx={{ flexWrap: "wrap", flexDirection: "row", display: "flex", justifyContent: "center" }}>
-                {project.map((doc) => <ProjectCard doc={doc} />)}
-                <OtherBtn page="projects" />
-            </Box>
+            <Grid container sx={{ wrap: "wrap" }}>
+                {project.map((doc) =>
+                    <Grid item xs={"auto"}>
+                        <ProjectCard doc={doc} />
+                    </Grid>
+                )}
+                <Grid item xs={"auto"}>
+                    <OtherBtn page="projects" />
+                </Grid>
+            </Grid>
         </Box>
     )
 }

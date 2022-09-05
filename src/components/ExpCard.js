@@ -1,8 +1,9 @@
 import { useState } from "react";
 import {
     Card, Box, DialogContent, CardMedia, Skeleton, Typography, Button,
-    Dialog, CardActionArea, DialogTitle, DialogActions
+    Dialog, CardActionArea, DialogTitle, DialogActions, IconButton
 } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function ExpCard({ doc }) {
     const [open, setOpen] = useState(false);
@@ -37,11 +38,14 @@ export default function ExpCard({ doc }) {
                     }
                     <Box sx={{
                         position: "absolute", bottom: 0, left: 0, width: "100%", height: "100%",
-                        bgcolor: "rgba(0, 0, 0, 0.50)", color: "white", padding: 3, display:"flex",
-                        flexDirection:"row", alignItems:"center"
+                        bgcolor: "rgba(0, 0, 0, 0.50)", color: "white", padding: 3, display: "flex",
+                        flexDirection: "row", alignItems: "center"
                     }} >
                         <Typography variant="h5">{(doc !== null) ? doc[1].Name : <Skeleton />}</Typography>
                     </Box>
+                    <IconButton sx={{ position: "absolute", top:3, right:3}} onClick={handleClick}>
+                        <CloseIcon sx={{ fontSize: 30, color:"white"}} />
+                    </IconButton>
                 </DialogTitle>
                 <DialogContent>
                     <Typography variant="h6" sx={{ marginTop: 3 }}>

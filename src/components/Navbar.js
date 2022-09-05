@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
-import { AppBar, Box, Button, Drawer, IconButton, Link, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { useState } from 'react';
+import {
+    AppBar, Box, Button, Drawer, IconButton, Link, List, ListItem, ListItemButton,
+    ListItemText, Toolbar
+} from '@mui/material';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function Navbar({mobile}) {
+export default function Navbar({ mobile }) {
     const [open, setOpen] = useState(false);
 
     const pages = ["Home", "About", "Articles", "Projects", "Contact"];
@@ -18,7 +21,7 @@ export default function Navbar({mobile}) {
         <AppBar color="transparent" sx={{ backdropFilter: "blur(5px)" }}>
             <Toolbar sx={{ display: "flex" }}>
                 <Link href="/home" color="inherit" variant="overline" underline="none">Clement Chang</Link>
-                <Box sx={{ flexGrow: 1 }}/>
+                <Box sx={{ flexGrow: 1 }} />
                 {
                     (!mobile) ?
                         pages.map((page) => (
@@ -33,11 +36,15 @@ export default function Navbar({mobile}) {
                             <IconButton onClick={() => setOpen(!open)}>
                                 <DensityMediumIcon sx={{ fontSize: 20 }} />
                             </IconButton>
-                            <Drawer PaperProps={{ style: { borderRadius: 30, marginRight:10,
-                             marginTop:"5vh", height:"90vh"} }}
+                            <Drawer PaperProps={{
+                                style: {
+                                    borderRadius: 30, marginRight: 10,
+                                    marginTop: "5vh", height: "90vh"
+                                }
+                            }}
                                 anchor="right" open={open} onClose={() => setOpen(false)}>
-                                <IconButton sx={{alignSelf:"flex-end", margin:2}} onClick={() => setOpen(!open)}>
-                                    <CloseIcon sx={{ fontSize: 20 }} />
+                                <IconButton sx={{ alignSelf: "flex-end", margin: 2 }} onClick={() => setOpen(!open)}>
+                                    <CloseIcon sx={{ fontSize: 30 }} />
                                 </IconButton>
                                 <List sx={{ marginTop: "10vh", minWidth: 300 }}>
                                     {
