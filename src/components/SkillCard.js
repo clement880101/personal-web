@@ -1,11 +1,11 @@
-import { Card, CardContent, Typography, Chip, Box } from "@mui/material"
+import { Card, CardContent, Typography, Chip, Box, Skeleton} from "@mui/material"
 import { useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from "react"
 
 export default function SkillCard({ data, title }) {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [skills, setSkills] = useState(Array(1).fill(null))
-    const [languages, setLanguages] = useState(Array(1).fill(null))
+    const [skills, setSkills] = useState(Array(3).fill(null))
+    const [languages, setLanguages] = useState(Array(3).fill(null))
 
     function handleClick(skill) {
         setSearchParams({ 'skills': skill }, { replace: true })
@@ -38,7 +38,7 @@ export default function SkillCard({ data, title }) {
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>
                     {
                         languages.map((item) => <Chip onClick={() => { handleClick(item.Name) }}
-                            label={(item === null) ? "loading..." : item.Name}
+                            label={(item === null) ? <Skeleton width={50}/> : item.Name}
                             variant={((item !== null) && (searchParams.get("skills") === item.Name))
                                 ? "filled" : "outlined"} />)
                     }
@@ -47,7 +47,7 @@ export default function SkillCard({ data, title }) {
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>
                     {
                         skills.map((item) => <Chip onClick={() => { handleClick(item.Name) }}
-                            label={(item === null) ? "loading..." : item.Name}
+                            label={(item === null) ? <Skeleton width={50}/> : item.Name}
                             variant={((item !== null) && (searchParams.get("skills") === item.Name))
                                 ? "filled" : "outlined"} />)
                     }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Toolbar } from '@mui/material';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
@@ -15,24 +15,36 @@ import Endnote from './components/Endnote';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [mobile, setMobile] = useState(window.innerWidth <= 768)
+
+
   const theme = createTheme({
     palette: {
       mode: (darkMode) ? 'dark' : 'light',
     }
   });
 
+  function handleResize() {
+    setMobile(window.innerWidth <= 768)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Navbar />
-        <Toolbar/>
+        <Navbar mobile={mobile} />
+        <Toolbar />
         <Routes>
           <Route exact path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<About mobile={mobile}/>} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:articleID" element={<ArticlePage />} />
           <Route path="*" element={<Notfound />} />

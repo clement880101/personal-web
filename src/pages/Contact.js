@@ -6,7 +6,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useState, useEffect } from "react";
-import { motion } from 'framer-motion';
 
 export default function Contact() {
     const [vwidth, setWidth] = useState(window.innerWidth);
@@ -29,19 +28,13 @@ export default function Contact() {
             <Box sx={{ minWidth:"50vw", display:"flex", alignItems:"center", flexDirection:"column"}}>
                 <Typography  sx={{ padding: 10 }} variant="h4">Contact</Typography>
                 <Box sx={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-evenly"}}>
-                    <IconButton  disableRipple component={motion.div} whileTap={{scale:0.95}} 
-                    whileHover={{y:-3, transition:{duration:0.1}}}
-                    onClick={()=>{window.open('https://www.linkedin.com/in/clement-chang-815501145/', '_blank')}}>
+                    <IconButton  disableRipple onClick={()=>{window.open('https://www.linkedin.com/in/clement-chang-815501145/', '_blank')}}>
                         <LinkedInIcon sx={{fontSize:70, color:"#0077B5"}} />
                     </IconButton>
-                    <IconButton  disableRipple component={motion.div} whileTap={{scale:0.95}} 
-                    whileHover={{y:-3, transition:{duration:0.1}}}
-                    onClick={()=>{window.open('https://github.com/clement880101', '_blank')}}>
+                    <IconButton  disableRipple onClick={()=>{window.open('https://github.com/clement880101', '_blank')}}>
                         <GitHubIcon sx={{fontSize:70}}/>
                     </IconButton>
-                    <IconButton  disableRipple component={motion.div} whileTap={{scale:0.95}} 
-                    whileHover={{y:-3, transition:{duration:0.1}}}
-                    onClick={()=>{window.open('https://twitter.com/clement880101', '_blank')}}>
+                    <IconButton  disableRipple onClick={()=>{window.open('https://twitter.com/clement880101', '_blank')}}>
                         <TwitterIcon sx={{fontSize:70, color:"#1DA1F2"}} />
                     </IconButton>
                 </Box>

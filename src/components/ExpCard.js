@@ -1,55 +1,80 @@
 import { useState } from "react";
 import {
-    Card, Box, CardContent, CardMedia, IconButton, Skeleton, Typography,
-    Collapse, CardActions, Button
+    Card, Box, DialogContent, CardMedia, Skeleton, Typography, Button,
+    Dialog, CardActionArea, DialogTitle, DialogActions
 } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-export default function ExpCard(doc) {
-    const [expanded, setExpanded] = useState(false);
+export default function ExpCard({ doc }) {
+    const [open, setOpen] = useState(false);
     const format = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-    const handleExpandClick = function () {
-        setExpanded(!expanded);
+    const handleClick = function () {
+        setOpen(!open);
     }
 
     return (
         <Box>
-            <Card sx={{ width: 300, margin: 1, borderRadius: 4, height: (expanded) ? "auto" : 200 }}>
-                {
-                    (doc.doc !== null) ? <CardMedia component="img" height="140"
-                        image={require("../assets/" + doc.doc[1].Image)} />
-                        : <Skeleton variant="rectangular" sx={{ height: 140 }} />
-                }
-                <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
-                    <CardContent sx={{ flexGrow: 4 }}>
-                        <Typography variant="h6">{(doc.doc !== null) ? doc.doc[1].Name : <Skeleton />}</Typography>
-                    </CardContent>
-                    <IconButton onClick={handleExpandClick} disableRipple >
-                        {(expanded) ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                    </IconButton>
-                </Box>
-                <Collapse in={expanded} timeout="auto">
-                    <CardContent>
-                        <Typography variant="h6">{(doc.doc !== null) ? doc.doc[1].Title : <Skeleton />}</Typography>
-                        <Typography variant="subtitle2">{(doc.doc !== null) ? doc.doc[1].Location : <Skeleton />}</Typography>
-                        <Box sx={{ display: "flex", flexDirection: "row" }}>
-                            <Typography variant="caption">{(doc.doc !== null) ? format.format(doc.doc[1].From.seconds * 1000) + "~"
-                                : <Skeleton />}</Typography>
-                            <Typography variant="caption">{(doc.doc !== null) ?
-                                ((doc.doc[1].To === undefined) ? "Present" : format.format(doc.doc[1].To.seconds * 1000))
-                                : <Skeleton />}</Typography>
-                        </Box>
-                        <Typography sx={{ marginY: 2 }} variant="subtitle2">{(doc.doc !== null) ? doc.doc[1].Exp : <Skeleton />}</Typography>
-                        <Typography variant="body2">{(doc.doc !== null) ? doc.doc[1].Desc : <Skeleton />}</Typography>
-                    </CardContent>
-                    <CardActions sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end" }}>
-                        {(doc.doc !== null) ? <Button size="small" variant="contained" href={doc.doc[1].Link}>Website</Button>
-                            : <Skeleton />
-                        }
-                    </CardActions>
-                </Collapse>
+            <Card sx={{ width: 300, margin: 1, borderRadius: 4 }}>
+                <CardActionArea onClick={handleClick} sx={{ position: 'relative' }}>
+                    {
+                        (doc !== null) ? <CardMedia component="img" sx={{ height: 150 }}
+                            image={require("../assets/" + doc[1].Image)} />
+                            : <Skeleton variant="rectangular" sx={{ height: 150 }} />
+                    }
+                    <Box sx={{
+                        position: 'absolute', bottom: 0, left: 0, width: '100%',
+                        bgcolor: 'rgba(0, 0, 0, 0.50)', color: 'white', padding: 2
+                    }} >
+                        <Typography variant="h6">{(doc !== null) ? doc[1].Name : <Skeleton />}</Typography>
+                    </Box>
+                </CardActionArea>
             </Card>
-        </Box>
+            <Dialog onClose={handleClick} open={open} PaperProps={{ style: { borderRadius: 30 } }}>
+                <DialogTitle sx={{ position: "relative", padding: 0 }}>
+                    {
+                        (doc !== null) ? <CardMedia component="img" sx={{ height: 150 }}
+                            image={require("../assets/" + doc[1].Image)} />
+                            : <Skeleton variant="rectangular" sx={{ height: 150 }} />
+                    }
+                    <Box sx={{
+                        position: "absolute", bottom: 0, left: 0, width: "100%", height: "100%",
+                        bgcolor: "rgba(0, 0, 0, 0.50)", color: "white", padding: 3, display:"flex",
+                        flexDirection:"row", alignItems:"center"
+                    }} >
+                        <Typography variant="h5">{(doc !== null) ? doc[1].Name : <Skeleton />}</Typography>
+                    </Box>
+                </DialogTitle>
+                <DialogContent>
+                    <Typography variant="h6" sx={{ marginTop: 3 }}>
+                        {(doc !== null) ? doc[1].Title : <Skeleton />}
+                    </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "row" }}>
+                        <Typography variant="caption" sx={{ paddingRight: 2 }}>
+                            {(doc !== null) ? doc[1].Location : <Skeleton />}
+                        </Typography>
+                        <Typography variant="caption">
+                            {(doc !== null) ? format.format(doc[1].From.seconds * 1000) + "~" : <Skeleton />}
+                        </Typography>
+                        <Typography variant="caption">{(doc !== null) ?
+                            ((doc[1].To === undefined) ? "Present" : format.format(doc[1].To.seconds * 1000))
+                            : <Skeleton />}
+                        </Typography>
+                    </Box>
+                    <Typography sx={{ marginY: 2 }} variant="body2">
+                        {(doc !== null) ? doc[1].Exp : <Skeleton />}
+                    </Typography>
+                    <Typography variant="body2">
+                        {(doc !== null) ? doc[1].Desc : <Skeleton />}
+                    </Typography>
+                </DialogContent>
+                <DialogActions sx={{ marginRight: 2, marginBottom: 1 }}>
+                    {(doc !== null) ?
+                        <Button size="small" variant="contained" href={doc[1].Link}>
+                            Website
+                        </Button>
+                        : <Skeleton />
+                    }
+                </DialogActions>
+            </Dialog>
+        </Box >
     )
 }

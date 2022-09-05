@@ -1,4 +1,4 @@
-import { Box, Typography, Link, Button} from "@mui/material"
+import { Box, Typography, Link, Button } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { getArticleList, getProjectList } from "../api/firebaseApi.js"
@@ -6,26 +6,15 @@ import { getArticleList, getProjectList } from "../api/firebaseApi.js"
 import ArticleCard from "../components/ArticleCard";
 import OtherBtn from "../components/OtherBtn.js";
 import ProjectCard from "../components/ProjectCard.js";
-import TitleCard from "../components/TitleCard.js";
 
 
 export default function Home() {
     const navigate = useNavigate()
-    const [artlim, setArtlim] = useState(2)
+    const artlim = 3
+    const projlim = 3
+
     const [article, setArticle] = useState(Array(artlim).fill(null))
-
-    const [projlim, setProjlim] = useState(2)
     const [project, setProject] = useState(Array(projlim).fill(null))
-
-    function handleResize() {
-        setArtlim(~~((window.innerWidth - 10) / 302) - 1)
-        setProjlim(~~((window.innerWidth - 10) / 302) - 1)
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
 
     useEffect(() => {
         getArticleList(artlim).then((document) => {
@@ -42,12 +31,16 @@ export default function Home() {
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: 5 }}>
-            <TitleCard>
+            <Box sx={{
+                display: "flex", flexDirection: "column", flexWrap: "wrap",
+                justifyContent: "center", alignItem: "center", height: "30vh"
+            }}>
                 <Typography variant="h4">Hi, I'm Clement Chang</Typography>
                 <Typography variant="h5">I'm a DevOps & a Fullstack Engineer based in the Bay Area</Typography>
                 <Typography variant="body1">This is a website where I share my thoughts on the world and showcase what I have accomplished</Typography>
                 <Typography variant="body2">Feel free to <Link href="/contact">contact</Link> me if you want to connect, exchange ideas, or grab some coffee</Typography>
-            </TitleCard>
+
+            </Box>
 
             <Typography variant="h5">Articles</Typography>
             <Box sx={{ flexWrap: "wrap", flexDirection: "row", display: "flex", justifyContent: "center" }}>

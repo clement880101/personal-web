@@ -5,9 +5,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({mobile}) {
     const [open, setOpen] = useState(false);
-    const [vwidth, setWidth] = useState(window.innerWidth);
 
     const pages = ["Home", "About", "Articles", "Projects", "Contact"];
 
@@ -15,22 +14,13 @@ export default function Navbar() {
     const pathname = useLocation().pathname;
 
 
-    function handleResize() {
-        setWidth(window.innerWidth);
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
-
     return (
         <AppBar color="transparent" sx={{ backdropFilter: "blur(5px)" }}>
             <Toolbar sx={{ display: "flex" }}>
                 <Link href="/home" color="inherit" variant="overline" underline="none">Clement Chang</Link>
                 <Box sx={{ flexGrow: 1 }}/>
                 {
-                    (vwidth > 768) ?
+                    (!mobile) ?
                         pages.map((page) => (
                             <Button sx={{ borderRadius: 10, marginX: 0.5, padding: 0.7 }}
                                 variant={("/" + page.toLowerCase() === pathname) ? "contained" : "text"}
