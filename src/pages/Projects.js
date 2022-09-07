@@ -1,11 +1,14 @@
-import { Typography, Box, Grid } from "@mui/material"
+import { Typography, Box} from "@mui/material"
+import { Masonry } from "@mui/lab";
+
 import { useEffect, useState } from "react"
 import { getProjectList } from "../api/firebaseApi"
 import ProjectCard from "../components/ProjectCard.js";
+import TitleCard from "../components/TitleCard";
 
-export default function Projects() {
+export default function Projects({ mobile }) {
     const [projlim, setProjlim] = useState(30)
-    const [project, setProject] = useState(Array(projlim).fill(null))
+    const [project, setProject] = useState(Array(6).fill(null))
 
     useEffect(() => {
         getProjectList(projlim).then((document) => {
@@ -17,14 +20,23 @@ export default function Projects() {
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: "10vw" }}>
-            <Typography sx={{ padding: 10 }} variant="h4">Projects</Typography>
-            <Grid container sx={{ wrap: "wrap" }}>
-                {project.map((doc) =>
-                    <Grid item xs={"auto"}>
+
+            <TitleCard image={'yellow.png'}>
+                <Typography variant={(mobile)?"h2":"h1"} color={"black"}>Projects</Typography>
+            </TitleCard>
+            {
+                (mobile) ?
+                    project.map((doc) =>
                         <ProjectCard doc={doc} />
-                    </Grid>
-                )}
-            </Grid>
+                    )
+                    :
+
+                    <Masonry columns={"auto"}>
+                        {project.map((doc) =>
+                            <ProjectCard doc={doc} />)
+                        }
+                    </Masonry>
+            }
         </Box>
     )
 }

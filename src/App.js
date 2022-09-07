@@ -16,6 +16,7 @@ import Endnote from './components/Endnote';
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [mobile, setMobile] = useState(window.innerWidth <= 768)
+  const [height, setHeight] = useState(window.innerHeight)
 
 
   const theme = createTheme({
@@ -26,6 +27,7 @@ function App() {
 
   function handleResize() {
     setMobile(window.innerWidth <= 768)
+    setHeight(window.innerHeight)
   }
 
   useEffect(() => {
@@ -37,16 +39,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Navbar mobile={mobile} />
+        <Navbar mobile={mobile} height={height}/>
         <Toolbar />
         <Routes>
           <Route exact path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Home mobile={mobile}/>} />
           <Route path="/contact" element={<Contact mobile={mobile}/>} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects" element={<Projects mobile={mobile}/>} />
           <Route path="/about" element={<About mobile={mobile}/>} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:articleID" element={<ArticlePage />} />
+          <Route path="/articles" element={<Articles mobile={mobile}/>} />
+          <Route path="/articles/:articleID" element={<ArticlePage mobile={mobile}/>} />
           <Route path="*" element={<Notfound />} />
         </Routes>
         <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />

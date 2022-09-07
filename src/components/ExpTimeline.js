@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import {
     Timeline, TimelineItem, TimelineOppositeContent, TimelineSeparator,
-    TimelineDot, TimelineConnector, TimelineContent, Skeleton
+    TimelineDot, TimelineConnector, TimelineContent
 } from "@mui/lab"
+import { Skeleton } from '@mui/material'
 import { getExperiences } from "../api/firebaseApi"
 import ExpCard from "./ExpCard"
 
 
-export default function ExpTimeline() {
+export default function ExpTimeline({mobile}) {
     const limit = 3
     const [exp, setExp] = useState(Array(limit).fill(null))
     const format = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short' })
@@ -36,7 +37,7 @@ export default function ExpTimeline() {
                             }
                         </TimelineSeparator>
                         <TimelineContent>
-                            <ExpCard doc={doc} />
+                            <ExpCard doc={doc} mobile={mobile}/>
                         </TimelineContent>
                     </TimelineItem>
                 )

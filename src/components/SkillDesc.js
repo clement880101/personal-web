@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { Box } from '@mui/system'
 import { useSearchParams } from 'react-router-dom';
 
-export default function SkillDesc({ data }) {
+export default function SkillDesc({ data}) {
     const [searchParams] = useSearchParams();
 
     function find(data, title) {
@@ -15,12 +15,12 @@ export default function SkillDesc({ data }) {
     }
 
     return (
-        <Box sx={{ width: 400, minHeight:200, alignItems:"center", justifyContent:"center", 
-        display:"flex", flexDirection:"column", padding:3}}>
-            <Typography variant='h6'>{(searchParams.get("skills") === null) ? 
-            "To learn more about my experiences and views on each tools/languages, click on the tags"
+        <Box sx={{minHeight:200, alignItems:"center", justifyContent:"center", 
+        display:"flex", flexDirection:"column", padding:3, maxWidth:500}}>
+            <Typography variant='h5'>{(searchParams.get("skills") === null) ? 
+            "Click on the pills to learn more"
             :searchParams.get("skills")}</Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" sx={{marginTop:2}}>
                 {((searchParams.get("skills") === null) || (data === null)) ? "" : 
                 find(data, searchParams.get("skills"))}
             </Typography>

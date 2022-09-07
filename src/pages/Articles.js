@@ -2,10 +2,11 @@ import { Typography, Box, Grid } from "@mui/material"
 import { useState, useEffect } from "react"
 import { getArticleList } from "../api/firebaseApi"
 import ArticleCard from "../components/ArticleCard"
+import TitleCard from "../components/TitleCard"
 
-export default function Articles() {
+export default function Articles({ mobile }) {
     const [artlim, setArtlim] = useState(30)
-    const [article, setArticle] = useState(Array(artlim).fill(null))
+    const [article, setArticle] = useState(Array(6).fill(null))
 
     useEffect(() => {
         getArticleList(artlim).then((document) => {
@@ -16,15 +17,28 @@ export default function Articles() {
     }, [artlim])
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: "10vw" }}>
-            <Typography sx={{ padding: 10 }} variant="h4">Articles</Typography>
-            <Grid container sx={{ wrap: "wrap" }}>
-                {article.map((doc) =>
-                    <Grid item xs={"auto"}>
+        <Box sx={{
+            display: "flex", flexDirection: "column", alignItems: "center",
+            width: "100%", paddingX: "10vw"
+        }}>
+            <TitleCard image={'yellow.png'} mobile={mobile}>
+                <Typography variant={(mobile)?"h2":"h1"}  color={"black"}>Articles</Typography>
+            </TitleCard>
+
+            {
+                (mobile) ?
+                    article.map((doc) =>
                         <ArticleCard doc={doc} />
+                    )
+                    :
+                    <Grid container sx={{ wrap: "wrap" }}>
+                        {article.map((doc) =>
+                            <Grid item xs={"auto"}>
+                                <ArticleCard doc={doc} />
+                            </Grid>
+                        )}
                     </Grid>
-                )}
-            </Grid>
+            }
         </Box>
     )
 }

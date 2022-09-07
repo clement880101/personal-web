@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function ExpCard({ doc }) {
+export default function ExpCard({ doc, mobile }) {
     const [open, setOpen] = useState(false);
     const format = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
     const handleClick = function () {
@@ -14,7 +14,7 @@ export default function ExpCard({ doc }) {
 
     return (
         <Box>
-            <Card sx={{ width: 300, margin: 1, borderRadius: 4 }}>
+            <Card sx={{ width: (mobile)? 250:300, margin: 1, borderRadius: 4 }}>
                 <CardActionArea onClick={handleClick} sx={{ position: 'relative' }}>
                     {
                         (doc !== null) ? <CardMedia component="img" sx={{ height: 150 }}
@@ -23,7 +23,7 @@ export default function ExpCard({ doc }) {
                     }
                     <Box sx={{
                         position: 'absolute', bottom: 0, left: 0, width: '100%',
-                        bgcolor: 'rgba(0, 0, 0, 0.50)', color: 'white', padding: 2
+                        bgcolor: 'transparent', color: 'white', padding: 2,
                     }} >
                         <Typography variant="h6">{(doc !== null) ? doc[1].Name : <Skeleton />}</Typography>
                     </Box>

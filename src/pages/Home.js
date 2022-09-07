@@ -1,6 +1,6 @@
-import { Box, Typography, Link, Button, Grid } from "@mui/material"
+import { Box, Typography, Grid } from "@mui/material"
+import { Masonry } from "@mui/lab";
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
 import { getArticleList, getProjectList } from "../api/firebaseApi.js"
 
 import ArticleCard from "../components/ArticleCard";
@@ -9,68 +9,90 @@ import ProjectCard from "../components/ProjectCard.js";
 import TitleCard from "../components/TitleCard.js";
 
 
-export default function Home() {
-    const navigate = useNavigate()
-    const artlim = 2
-    const projlim = 2
-
-    const [article, setArticle] = useState(Array(artlim).fill(null))
-    const [project, setProject] = useState(Array(projlim).fill(null))
+export default function Home({ mobile }) {
+    const [article, setArticle] = useState(Array((mobile) ? 2 : 5).fill(null))
+    const [project, setProject] = useState(Array((mobile) ? 2 : 5).fill(null))
 
     useEffect(() => {
-        getArticleList(artlim).then((document) => {
+        getArticleList((mobile) ? 2 : 5).then((document) => {
             // Replace with error banner
             document[0] ? setArticle(document[1]) : console.log(document[1])
         })
 
-        getProjectList(projlim).then((document) => {
+        getProjectList((mobile) ? 2 : 5).then((document) => {
             // Replace with error banner
             document[0] ? setProject(document[1]) : console.log(document[1])
         })
 
-    }, [artlim, projlim])
+    }, [mobile])
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: "10vw" }}>
-            <TitleCard image={'yellow.png'}>
-                <Typography variant="h2" color={"#416ef8"}>Clement Chang</Typography>
-                <Typography variant="h4" color={"black"}>DevOps & a Fullstack Engineer based in the Bay Area</Typography>
+            <TitleCard image={'yellow.png'} mobile={mobile}>
+                <Typography variant={(mobile)?"h2":"h1"} color={"black"}>Clement Chang</Typography>
+                <Typography variant="h5" color={"black"}>DevOps & a Fullstack Engineer based in the Bay Area</Typography>
             </TitleCard>
 
-            <Typography variant="h5">Articles</Typography>
-            <Grid container spacing={1} sx={{ wrap: "wrap" }}>
-                {article.map((doc) =>
-                    <Grid item xs={"auto"}>
-                        <ArticleCard doc={doc} />
-                    </Grid>
-                )}
-                <Grid item xs={"auto"}>
-                    <OtherBtn page="articles" />
-                </Grid>
-            </Grid>
-
             <Box sx={{
-                height: "30vh", display: "flex", flexDirection: "row", alignItems: "center",
-                justifyContent: "center", padding: 5, flexWrap: "wrap"
-            }}>
-                <Typography variant="h6">if you like what you are seeing here, take a look at these </Typography>
-                <Button variant="contained" size="small" disableTouchRipple sx={{ borderRadius: 10, margin: 1 }}
-                    onClick={() => { navigate("/about") }}>About</Button>
-                <Button variant="contained" size="small" disableTouchRipple sx={{ borderRadius: 10, margin: 1 }}
-                    onClick={() => { navigate("/contact") }}>Contact</Button>
+                display: "flex", flexDirection: "column", width: "100%", marginTop: 10, marginBottom: 2
+            }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
+                <Typography sx={{ marginX: 1 }} variant="h3">Articles</Typography>
+                <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">
+                    Sharing my ideas on blockchain, frontend, or any topics I find interesting
+                </Typography>
             </Box>
 
-            <Typography variant="h5">Projects</Typography>
-            <Grid container sx={{ wrap: "wrap" }}>
-                {project.map((doc) =>
-                    <Grid item xs={"auto"}>
-                        <ProjectCard doc={doc} />
+
+            {
+                (mobile) ?
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        {
+                            article.map((doc) =>
+                                <ArticleCard doc={doc} />
+                            )
+                        }
+                        <OtherBtn page="articles" />
+                    </Box>
+                    :
+                    <Grid container sx={{ wrap: "wrap" }}>
+                        {article.map((doc) =>
+                            <Grid item xs={"auto"}>
+                                <ArticleCard doc={doc} />
+                            </Grid>
+                        )}
+                        <Grid item xs={"auto"}>
+                            <OtherBtn page="articles" />
+                        </Grid>
                     </Grid>
-                )}
-                <Grid item xs={"auto"}>
-                    <OtherBtn page="projects" />
-                </Grid>
-            </Grid>
+            }
+
+            <Box sx={{
+                display: "flex", flexDirection: "column", width: "100%", marginTop: 10, marginBottom: 2
+            }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
+                <Typography sx={{ marginX: 1 }} variant="h3">Projects</Typography>
+                <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">
+                    Showcasing what I had made with various technologies
+                </Typography>
+            </Box>
+
+            {
+                (mobile) ?
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        {
+                            project.map((doc) =>
+                                <ProjectCard doc={doc} />
+                            )
+                        }
+                        <OtherBtn page="projects" />
+                    </Box>
+                    :
+                    <Masonry columns={"auto"}>
+                        {project.map((doc) =>
+                            <ProjectCard doc={doc} />)
+                        }
+                        <OtherBtn page="projects" />
+                    </Masonry>
+            }
         </Box>
     )
 }
