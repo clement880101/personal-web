@@ -25,7 +25,7 @@ export default function ArticlePage({ mobile }) {
 
     return (
         <Box sx={{ paddingTop: 2 }} paddingX={(mobile) ? 2 : "20vw"}>
-            <Card variant="outlined" sx={{ width: 200, height: 80, borderRadius: 4 }}>
+            <Card variant="outlined" sx={{ width: 160, height: 60, borderRadius: 4 }}>
                 <CardActionArea sx={{ height: "100%", width: "100%", display:"flex", flexDirection:"row"}}
                     onClick={()=>{navigate("/articles")}}>
                     <ArrowBackIosNewIcon />
