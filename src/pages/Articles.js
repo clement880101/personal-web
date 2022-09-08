@@ -1,20 +1,14 @@
-import { Typography, Box, Grid } from "@mui/material"
-import { useState, useEffect } from "react"
-import { getArticleList } from "../api/firebaseApi"
-import ArticleCard from "../components/ArticleCard"
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch } from 'react-instantsearch-hooks-web';
+
+import { Typography, Box } from "@mui/material"
+
+import SearchBar from "../components/SearchBar"
+import ArticleSearch from '../components/ArticleSearch';
 import TitleCard from "../components/TitleCard"
 
 export default function Articles({ mobile }) {
-    const [artlim, setArtlim] = useState(30)
-    const [article, setArticle] = useState(Array(6).fill(null))
-
-    useEffect(() => {
-        getArticleList(artlim).then((document) => {
-            // Replace with error banner
-            document[0] ? setArticle(document[1]) : console.log(document[1])
-        })
-
-    }, [artlim])
+    const searchClient = algoliasearch('VBRQU0R047', '84b646f50c1b4af83dc8e6ed645e9feb');
 
     return (
         <Box sx={{
@@ -22,23 +16,12 @@ export default function Articles({ mobile }) {
             width: "100%", paddingX: "10vw"
         }}>
             <TitleCard image={'yellow.png'} mobile={mobile}>
-                <Typography variant={(mobile)?"h2":"h1"}  color={"black"}>Articles</Typography>
+                <Typography variant={(mobile) ? "h2" : "h1"} color={"black"}>Articles</Typography>
             </TitleCard>
-
-            {
-                (mobile) ?
-                    article.map((doc) =>
-                        <ArticleCard doc={doc} />
-                    )
-                    :
-                    <Grid container sx={{ wrap: "wrap" }}>
-                        {article.map((doc) =>
-                            <Grid item xs={"auto"}>
-                                <ArticleCard doc={doc} />
-                            </Grid>
-                        )}
-                    </Grid>
-            }
+            <InstantSearch searchClient={searchClient} indexName="article">
+                <SearchBar/>
+                <ArticleSearch mobile={mobile}/>
+            </InstantSearch>
         </Box>
     )
 }
