@@ -14,8 +14,8 @@ export default function ArticleSearch(props) {
 
     if (article.length === 0){
         return (
-            <Box sx={{width:"100%", height:"60vh", display:"flex", flexDirection: "column", 
-            alignItems:"center", justifyContent:"center"}}>
+            <Box sx={{width:"100%", display:"flex", flexDirection: "column", 
+            alignItems:"center", justifyContent:"center", paddingTop:10}}>
                 <ArticleIcon sx={{fontSize:60}}/>
                 <Typography variant="h5">No Results</Typography>
             </Box>

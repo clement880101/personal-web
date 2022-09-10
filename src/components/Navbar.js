@@ -18,7 +18,7 @@ export default function Navbar({ mobile, height }) {
     const pathname = useLocation().pathname;
 
     return (
-        <AppBar color="transparent" sx={{ backdropFilter: "blur(5px)" }}>
+        <AppBar color="transparent" sx={{ backdropFilter: "blur(5px)"}}>
             <Toolbar sx={{ display: "flex" }}>
                 <Link href="/home" color="inherit" variant="overline" underline="none">Clement Chang</Link>
                 <Box sx={{ flexGrow: 1 }} />

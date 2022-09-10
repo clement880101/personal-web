@@ -24,28 +24,36 @@ export default function ProjectCard({ doc }) {
                             image={require("../assets/preview/" + doc[1].Image)} />
                             : <Skeleton variant="rectangular" sx={{ height: 200 }} />
                     }
-                    <CardActionArea sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%',
-                        bgcolor: 'rgba(0, 0, 0, 0.70)', color: 'white', padding: 2, display:"flex",
-                        flexDirection:"row"
-                    }} onClick={()=>{handleExpandClick()}} disableRipple>
+                    <CardActionArea sx={{
+                        position: 'absolute', bottom: 0, left: 0, width: '100%',
+                        bgcolor: 'rgba(0, 0, 0, 0.70)', color: 'white', padding: 2, display: "flex",
+                        flexDirection: "row"
+                    }} onClick={() => { handleExpandClick() }} disableRipple>
 
-                        <Typography variant="h6" sx={{flexGrow:1}}>{(doc !== null) ? doc[1].Title : <Skeleton />}</Typography>
+                        <Typography variant="h6" sx={{ flexGrow: 1 }}>{(doc !== null) ? doc[1].Title : <Skeleton />}</Typography>
                         {(expanded) ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                     </CardActionArea>
                 </Box>
 
-
-
                 <Collapse in={expanded} timeout="auto">
                     <CardContent>
-                        <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", marginBottom: 3 }}>
-                            {(doc !== null) ? doc[1].Tags.map((item) => <Chip
-                                onClick={() => { if (item !== "N/A") { navigate({ pathname: "/about", search: "?skills=" + item }) } }}
-                                label={item} />) : <Box />}
+                        <Box sx={{
+                            display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap",
+                            marginBottom: 3
+                        }}> {(doc !== null) ? doc[1].Tags.map((item) => <Chip
+                            label={item} key={item}
+                            onClick={() => {
+                                if (item !== "N/A") {
+                                    navigate({ pathname: "/about", search: "?skills=" + item })
+                                }
+                            }} />) : <Box />}
                         </Box>
                         <Typography>{(doc !== null) ? doc[1].Desc : <Skeleton />}</Typography>
                     </CardContent>
-                    <CardActions sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-end" }}>
+                    <CardActions sx={{
+                        width: "100%", display: "flex", flexDirection: "row",
+                        justifyContent: "flex-end"
+                    }}>
                         {(doc !== null) ? <Button size="small" href={doc[1].Link}>
                             See More
                         </Button> : <Skeleton />
