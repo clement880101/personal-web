@@ -46,7 +46,7 @@ export default function ArticlePage({ mobile }) {
             </Typography>
 
             {(data === null) ? <Skeleton /> :
-                <div dangerouslySetInnerHTML={{ __html: data.Content.replaceAll("\\n", "\n") }} />
+                <div dangerouslySetInnerHTML={{ __html: data.Content }} />
             }
         </Box>
     )

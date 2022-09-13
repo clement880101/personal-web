@@ -26,7 +26,7 @@ export default function ArticleSearch(props) {
         )
     } else {
         return (
-            <Grid container sx={{ wrap: "wrap" }}>
+            <Grid container sx={{ wrap: "wrap"}}>
                 {article.map((doc) =>
                     <Grid item xs={"auto"}>
                         <ArticleCard doc={(doc === null)? doc:[doc.objectID, doc]}/>
