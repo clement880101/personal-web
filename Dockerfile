@@ -1,4 +1,4 @@
-FROM node:18.5.0
+FROM node:18.9
 
 WORKDIR /docker
 
@@ -15,3 +15,4 @@ EXPOSE 9005
 EXPOSE 3000
 
 CMD [ "npm", "start" ]
+CMD [ "npm", "build" ]

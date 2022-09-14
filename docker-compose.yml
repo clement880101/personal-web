@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  dev:
+    build: .
+    container_name: "personal-web-dev"
+    image: personal-web
+    ports:
+      - 3000:3000
+      - 9005:9005
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    environment:
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    command: npm start
+    tty: true
