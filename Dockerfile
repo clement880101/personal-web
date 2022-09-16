@@ -14,5 +14,4 @@ EXPOSE 9005
 
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
 CMD [ "npm", "build" ]

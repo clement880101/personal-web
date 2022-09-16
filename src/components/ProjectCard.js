@@ -17,7 +17,7 @@ export default function ProjectCard({ doc }) {
 
     return (
         <Box>
-            <Card sx={{ width: 300, margin: 1, borderRadius: 4, transitionDuration: '1s' }}>
+            <Card sx={{ borderRadius: 4, transitionDuration: '1s', width:290 }}>
                 <Box sx={{ position: 'relative' }}>
                     {
                         (doc !== null) ? <CardMedia component="img" height="200"

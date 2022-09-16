@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { Masonry } from "@mui/lab";
 import { useEffect, useState } from "react"
 import { getArticleList, getProjectList } from "../api/firebaseApi.js"
@@ -10,16 +10,16 @@ import TitleCard from "../components/TitleCard.js";
 
 
 export default function Home({ mobile }) {
-    const [article, setArticle] = useState(Array((mobile) ? 2 : 5).fill(null))
-    const [project, setProject] = useState(Array((mobile) ? 2 : 5).fill(null))
+    const [article, setArticle] = useState(Array((mobile) ? 2 : 3).fill(null))
+    const [project, setProject] = useState(Array((mobile) ? 2 : 3).fill(null))
 
     useEffect(() => {
-        getArticleList((mobile) ? 2 : 5).then((document) => {
+        getArticleList((mobile) ? 2 : 3).then((document) => {
             // Replace with error banner
             document[0] ? setArticle(document[1]) : console.log(document[1])
         })
 
-        getProjectList((mobile) ? 2 : 5).then((document) => {
+        getProjectList((mobile) ? 2 : 3).then((document) => {
             // Replace with error banner
             document[0] ? setProject(document[1]) : console.log(document[1])
         })
@@ -27,14 +27,14 @@ export default function Home({ mobile }) {
     }, [mobile])
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: "10vw" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
             <TitleCard image={'yellow.png'} mobile={mobile}>
-                <Typography variant={(mobile)?"h2":"h1"} color={"black"}>Clement Chang</Typography>
+                <Typography variant={(mobile) ? "h2" : "h1"} color={"black"}>Clement Chang</Typography>
                 <Typography variant="h5" color={"black"}>DevOps & a Fullstack Engineer based in the Bay Area</Typography>
             </TitleCard>
 
             <Box sx={{
-                display: "flex", flexDirection: "column", width: "100%", marginTop: 10, marginBottom: 2
+                display: "flex", flexDirection: "column", width: "95vw", marginTop: 10, marginBottom: 2
             }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
                 <Typography sx={{ marginX: 1 }} variant="h3">Articles</Typography>
                 <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">
@@ -54,20 +54,18 @@ export default function Home({ mobile }) {
                         <OtherBtn page="articles" />
                     </Box>
                     :
-                    <Grid container sx={{ wrap: "wrap" }}>
-                        {article.map((doc) =>
-                            <Grid item xs={"auto"}>
+                    <Box sx={{ width: "95vw" }}>
+                        <Masonry columns={"auto"} >
+                            {article.map((doc) =>
                                 <ArticleCard doc={doc} />
-                            </Grid>
-                        )}
-                        <Grid item xs={"auto"}>
+                            )}
                             <OtherBtn page="articles" />
-                        </Grid>
-                    </Grid>
+                        </Masonry>
+                    </Box>
             }
 
             <Box sx={{
-                display: "flex", flexDirection: "column", width: "100%", marginTop: 10, marginBottom: 2
+                display: "flex", flexDirection: "column", width: "95vw", marginTop: 10, marginBottom: 2
             }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
                 <Typography sx={{ marginX: 1 }} variant="h3">Projects</Typography>
                 <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">
@@ -86,12 +84,14 @@ export default function Home({ mobile }) {
                         <OtherBtn page="projects" />
                     </Box>
                     :
-                    <Masonry columns={"auto"}>
-                        {project.map((doc) =>
-                            <ProjectCard doc={doc} />)
-                        }
-                        <OtherBtn page="projects" />
-                    </Masonry>
+                    <Box sx={{ width: "95vw" }}>
+                        <Masonry columns={"auto"} spacing={2}>
+                            {project.map((doc) =>
+                                <ProjectCard doc={doc} />)
+                            }
+                            <OtherBtn page="projects" />
+                        </Masonry>
+                    </Box>
             }
         </Box>
     )

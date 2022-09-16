@@ -12,7 +12,7 @@ export default function Articles({ mobile }) {
     return (
         <Box sx={{
             display: "flex", flexDirection: "column", alignItems: "center",
-            width: "100%", paddingX: "10vw", minHeight:"140vh"
+            width: "100%", minHeight:"140vh"
         }}>
             <TitleCard image={'dark.png'} mobile={mobile}>
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Articles</Typography>
@@ -21,6 +21,7 @@ export default function Articles({ mobile }) {
                 <SearchBar/>
                 <ArticleSearch mobile={mobile}/>
             </InstantSearch>
+            
         </Box>
     )
 }

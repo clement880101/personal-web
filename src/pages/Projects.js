@@ -1,4 +1,4 @@
-import { Typography, Box} from "@mui/material"
+import { Typography, Box } from "@mui/material"
 import { Masonry } from "@mui/lab";
 
 import { useEffect, useState } from "react"
@@ -19,10 +19,10 @@ export default function Projects({ mobile }) {
     }, [projlim])
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", paddingX: "10vw" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
 
             <TitleCard image={'yellow.png'}>
-                <Typography variant={(mobile)?"h2":"h1"} color={"black"}>Projects</Typography>
+                <Typography variant={(mobile) ? "h2" : "h1"} color={"black"}>Projects</Typography>
             </TitleCard>
             {
                 (mobile) ?
@@ -30,12 +30,13 @@ export default function Projects({ mobile }) {
                         <ProjectCard doc={doc} />
                     )
                     :
-
-                    <Masonry columns={"auto"}>
-                        {project.map((doc) =>
-                            <ProjectCard doc={doc} />)
-                        }
-                    </Masonry>
+                    <Box sx={{ width: "95vw" }}>
+                        <Masonry columns={"auto"} spacing={2}>
+                            {project.map((doc) =>
+                                <ProjectCard doc={doc} />)
+                            }
+                        </Masonry>
+                    </Box>
             }
         </Box>
     )

@@ -36,7 +36,7 @@ export default function Skillmodule() {
     }, [searchParams, skillRef, data])
 
     return (
-        <Box sx={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <Box sx={{ width: "95vw", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <ButtonGroup size="small" sx={{ alignSelf: "center", margin: 1 }} disableElevation disableRipple>
                 {category.map((cat) =>
                     <Button variant={selected === cat ? "contained" : "outlined"}
@@ -46,7 +46,7 @@ export default function Skillmodule() {
                 )}
             </ButtonGroup>
             <Box sx={{ width: "100%", display: "flex", flexWrap: "wrap", flexDirection: "row", margin: 1 }}>
-                <SkillLeft data={data} title={selected} />
+                <SkillLeft data={data} title={selected}/>
                 <SkillRight data={data} ref={skillRef} />
             </Box>
         </Box>

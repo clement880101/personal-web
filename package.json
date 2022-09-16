@@ -1,6 +1,6 @@
 {
   "name": "personal-web",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -10,8 +10,8 @@
     "@mui/material": "^5.7.0",
     "algoliasearch": "^4.14.2",
     "firebase": "^9.9.0",
-    "firebase-tools": "^1.2.0",
     "react": "^18.0.0",
+    "react-dom": "^18.2.0",
     "react-instantsearch-hooks-web": "^6.32.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.1"
