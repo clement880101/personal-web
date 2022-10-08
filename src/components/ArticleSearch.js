@@ -7,11 +7,21 @@ import ArticleCard from "./ArticleCard";
 
 export default function ArticleSearch(props) {
     const [article, setArticle] = useState(Array(6).fill(null))
+    const [col, setCol] = useState(Math.floor(window.innerWidth*0.95/290))
     const { hits } = useHits(props);
 
     useEffect(() => {
         setArticle(hits)
     }, [hits])
+
+    function handleResize(){
+        setCol(Math.floor(window.innerWidth*0.95/290))
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     if (article.length === 0) {
         return (
@@ -25,14 +35,14 @@ export default function ArticleSearch(props) {
         )
     } else if (props.mobile) {
         return (
-            article.map((doc) => <ArticleCard doc={(doc === null) ? doc : [doc.objectID, doc]} />)
+            article.map((doc, index) => <ArticleCard key={index} doc={(doc === null) ? doc : [doc.objectID, doc]} />)
         )
     } else {
         return (
             <Box sx={{ width: "95vw" }}>
-                <Masonry columns={"auto"} spacing={2}>
-                    {article.map((doc) =>
-                        <ArticleCard doc={(doc === null) ? doc : [doc.objectID, doc]} />
+                <Masonry columns={col} spacing={2}>
+                    {article.map((doc, index) =>
+                        <ArticleCard key={index} doc={(doc === null) ? doc : [doc.objectID, doc]} />
                     )}
                 </Masonry>
             </Box>

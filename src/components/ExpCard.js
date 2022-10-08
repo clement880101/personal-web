@@ -14,7 +14,7 @@ export default function ExpCard({ doc, mobile }) {
 
     return (
         <Box>
-            <Card sx={{ width: (mobile)? 250:300, margin: 1, borderRadius: 4 }}>
+            <Card sx={{ width: (mobile)? 250:290, margin: 1, borderRadius: 4 }}>
                 <CardActionArea onClick={handleClick} sx={{ position: 'relative' }}>
                     {
                         (doc !== null) ? <CardMedia component="img" sx={{ height: 150 }}

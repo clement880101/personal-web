@@ -5,7 +5,7 @@ export default function ArticleCard({ doc }) {
     const navigate = useNavigate();
     
     return (
-        <Card variant="outlined" sx={{ width: 290, height: 200, borderRadius: 4}}>
+        <Card variant="outlined" sx={{ width: 290, height: 200, borderRadius: 4, marginY:1}}>
             <CardActionArea sx={{ height: "100%", width: "100%", padding:1}} 
                 onClick={() => { if(doc !== null){navigate("/articles/" + doc[0])} }}>
                 <CardContent sx={{ width: "100%", height:"80%", overflow:"hidden"}}>
@@ -18,7 +18,8 @@ export default function ArticleCard({ doc }) {
 
                 </CardContent>
                 <CardActions sx={{ width: "100%", paddingX:2}}>
-                    <Typography variant="overline" color="primary">{(doc !== null)? "Read More" : <Skeleton />}</Typography>
+                    <Typography variant="overline" color="primary">{(doc !== null)? "Read More" : 
+                        <Skeleton sx={{width:80}}/>}</Typography>
                 </CardActions>
             </CardActionArea>
         </Card>

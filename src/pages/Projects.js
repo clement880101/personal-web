@@ -9,6 +9,7 @@ import TitleCard from "../components/TitleCard";
 export default function Projects({ mobile }) {
     const [projlim, setProjlim] = useState(30)
     const [project, setProject] = useState(Array(6).fill(null))
+    const [col, setCol] = useState(Math.floor(window.innerWidth*0.95/290))
 
     useEffect(() => {
         getProjectList(projlim).then((document) => {
@@ -18,22 +19,31 @@ export default function Projects({ mobile }) {
 
     }, [projlim])
 
+    function handleResize(){
+        setCol(Math.floor(window.innerWidth*0.95/290))
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
-
-            <TitleCard image={'yellow.png'}>
-                <Typography variant={(mobile) ? "h2" : "h1"} color={"black"}>Projects</Typography>
+            <TitleCard image={'rocket.png'}>
+                <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Projects</Typography>
             </TitleCard>
             {
                 (mobile) ?
-                    project.map((doc) =>
-                        <ProjectCard doc={doc} />
+                    project.map((doc, index) =>
+                        <ProjectCard doc={doc} key={index}/>
                     )
                     :
                     <Box sx={{ width: "95vw" }}>
-                        <Masonry columns={"auto"} spacing={2}>
-                            {project.map((doc) =>
-                                <ProjectCard doc={doc} />)
+                        <Masonry columns={col} spacing={2}>
+                            {project.map((doc, index) =>
+                                <ProjectCard doc={doc} key={index}/>)
                             }
                         </Masonry>
                     </Box>
