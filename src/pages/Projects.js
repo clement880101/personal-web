@@ -9,7 +9,7 @@ import TitleCard from "../components/TitleCard";
 export default function Projects({ mobile }) {
     const [projlim, setProjlim] = useState(30)
     const [project, setProject] = useState(Array(6).fill(null))
-    const [col, setCol] = useState(Math.floor(window.innerWidth*0.95/290))
+    const [col, setCol] = useState(Math.floor(window.innerWidth * 0.95 / 290))
 
     useEffect(() => {
         getProjectList(projlim).then((document) => {
@@ -19,8 +19,8 @@ export default function Projects({ mobile }) {
 
     }, [projlim])
 
-    function handleResize(){
-        setCol(Math.floor(window.innerWidth*0.95/290))
+    function handleResize() {
+        setCol(Math.floor(window.innerWidth * 0.95 / 290))
     }
 
     useEffect(() => {
@@ -37,13 +37,13 @@ export default function Projects({ mobile }) {
             {
                 (mobile) ?
                     project.map((doc, index) =>
-                        <ProjectCard doc={doc} key={index}/>
+                        <ProjectCard doc={doc} key={index} />
                     )
                     :
                     <Box sx={{ width: "95vw" }}>
                         <Masonry columns={col} spacing={2}>
                             {project.map((doc, index) =>
-                                <ProjectCard doc={doc} key={index}/>)
+                                <ProjectCard doc={doc} key={index} />)
                             }
                         </Masonry>
                     </Box>

@@ -6,7 +6,7 @@ export default function OtherBtn({page}){
     const navigate = useNavigate();
 
     return(
-        <Box sx={{width: 300, height:200, margin:1, flexDirection:"column", display:"flex", 
+        <Box sx={{width: 290, height:200, margin:1, flexDirection:"column", display:"flex", 
         justifyContent:"center", alignItems:"center"}}>
             <Box sx={{flexDirection:"column", display:"flex", justifyContent:"center", 
             alignItems:"center", cursor:"pointer"}}onClick={()=>{(page === "articles") ? 

@@ -7,15 +7,15 @@ import ArticleCard from "./ArticleCard";
 
 export default function ArticleSearch(props) {
     const [article, setArticle] = useState(Array(6).fill(null))
-    const [col, setCol] = useState(Math.floor(window.innerWidth*0.95/290))
+    const [col, setCol] = useState(Math.floor(window.innerWidth * 0.95 / 290))
     const { hits } = useHits(props);
 
     useEffect(() => {
         setArticle(hits)
     }, [hits])
 
-    function handleResize(){
-        setCol(Math.floor(window.innerWidth*0.95/290))
+    function handleResize() {
+        setCol(Math.floor(window.innerWidth * 0.95 / 290))
     }
 
     useEffect(() => {

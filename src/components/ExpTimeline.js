@@ -3,12 +3,13 @@ import {
     Timeline, TimelineItem, TimelineOppositeContent, TimelineSeparator,
     TimelineDot, TimelineConnector, TimelineContent
 } from "@mui/lab"
+import { Box } from "@mui/system"
 import { Skeleton } from '@mui/material'
 import { getExperiences } from "../api/firebaseApi"
 import ExpCard from "./ExpCard"
 
 
-export default function ExpTimeline({mobile}) {
+export default function ExpTimeline({ mobile }) {
     const limit = 3
     const [exp, setExp] = useState(Array(limit).fill(null))
     const format = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short' })
@@ -26,18 +27,23 @@ export default function ExpTimeline({mobile}) {
                 exp.map((doc, i) =>
                     <TimelineItem>
                         <TimelineOppositeContent sx={{ transform: "translateY(50%)" }}>
-                            {(doc !== null) ? format.format(doc[1].From.seconds * 1000) : <Skeleton width={70}/>}
+                            {(doc !== null) ? format.format(doc[1].From.seconds * 1000) :
+                                <Box sx={{alignItems:"end"}}>
+                                    <Skeleton width={30} />
+                                    <Skeleton width={70} />
+                                </Box>
+                            }
                         </TimelineOppositeContent>
                         <TimelineSeparator sx={{ transform: "translateY(50%)" }} >
                             <TimelineDot />
                             {
-                                (i === exp.length - 1)?
-                                    <div/>
-                                    : <TimelineConnector/>
+                                (i === exp.length - 1) ?
+                                    <div />
+                                    : <TimelineConnector />
                             }
                         </TimelineSeparator>
                         <TimelineContent>
-                            <ExpCard doc={doc} mobile={mobile}/>
+                            <ExpCard doc={doc} mobile={mobile} />
                         </TimelineContent>
                     </TimelineItem>
                 )

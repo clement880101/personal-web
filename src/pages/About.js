@@ -13,7 +13,8 @@ export default function About({ mobile }) {
             </TitleCard>
 
             <Box sx={{ display: "flex", alignItems: "center", width:"95vw" }} flexDirection={(mobile) ? "column" : "row"}>
-                <Box sx={{ display: "flex", flexDirection: "column", width: "90%", marginTop: 10, marginBottom:2}} alignItems={(mobile) ? "center" : "start"} >
+                <Box sx={{ display: "flex", flexDirection: "column", width: "90%", marginTop: 10, 
+                marginBottom:2}} alignItems={(mobile) ? "center" : "start"} >
                     <Typography sx={{ marginX: 1 }} variant="h3">The Journey</Typography>
                     <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">
                         How I plunged head first into the rabbit hole that is the tech industry

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
     AppBar, Box, Button, Drawer, IconButton, Link, List, ListItem, ListItemButton,
-    ListItemText, Toolbar
+    ListItemText, Toolbar, Typography
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -59,7 +59,7 @@ export default function Navbar({ mobile, height }) {
                             pages.map((page) => (
                                 <ListItem selected={"/" + page.toLowerCase() === pathname} disablePadding>
                                     <ListItemButton onClick={() => { navigate("/" + page.toLowerCase()); setOpen(false) }}>
-                                        <ListItemText disableTypography={true} primary={page} />
+                                        <ListItemText primary={<Typography variant="h6">{page}</Typography>}/>
                                     </ListItemButton>
                                 </ListItem>
                             ))

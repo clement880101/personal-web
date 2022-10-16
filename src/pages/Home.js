@@ -10,7 +10,7 @@ import TitleCard from "../components/TitleCard.js";
 
 
 export default function Home({ mobile }) {
-    const [numItem, setNumItem] = useState(Math.floor(window.innerWidth*0.95/290) - 1)
+    const [numItem, setNumItem] = useState(Math.floor(window.innerWidth * 0.95 / 290) - 1)
     const [article, setArticle] = useState(Array((mobile) ? 2 : numItem).fill(null))
     const [project, setProject] = useState(Array((mobile) ? 2 : numItem).fill(null))
 
@@ -27,8 +27,8 @@ export default function Home({ mobile }) {
 
     }, [mobile, numItem])
 
-    function handleResize(){
-        setNumItem(Math.floor(window.innerWidth*0.95/290) - 1)
+    function handleResize() {
+        setNumItem(Math.floor(window.innerWidth * 0.95 / 290) - 1)
     }
 
     useEffect(() => {
@@ -58,7 +58,7 @@ export default function Home({ mobile }) {
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                         {
                             article.map((doc, index) =>
-                                <ArticleCard doc={doc} key={index}/>
+                                <ArticleCard doc={doc} key={index} />
                             )
                         }
                         <OtherBtn page="articles" />
@@ -67,7 +67,7 @@ export default function Home({ mobile }) {
                     <Box sx={{ width: "95vw" }}>
                         <Masonry columns={"auto"} >
                             {article.map((doc, index) =>
-                                <ArticleCard doc={doc} key={index}/>
+                                <ArticleCard doc={doc} key={index} />
                             )}
                             <OtherBtn page="articles" />
                         </Masonry>
@@ -88,16 +88,16 @@ export default function Home({ mobile }) {
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                         {
                             project.map((doc, index) =>
-                                <ProjectCard doc={doc} key={index}/>
+                                <ProjectCard doc={doc} key={index} />
                             )
                         }
                         <OtherBtn page="projects" />
                     </Box>
                     :
                     <Box sx={{ width: "95vw" }}>
-                        <Masonry columns={"auto"} spacing={2}>
+                        <Masonry columns={"auto"}>
                             {project.map((doc, index) =>
-                                <ProjectCard doc={doc} key={index}/>)
+                                <ProjectCard doc={doc} key={index} />)
                             }
                             <OtherBtn page="projects" />
                         </Masonry>
