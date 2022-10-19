@@ -14,7 +14,7 @@ export default function Articles({ mobile }) {
             display: "flex", flexDirection: "column", alignItems: "center",
             width: "100%", minHeight:"140vh"
         }}>
-            <TitleCard image={'dark.png'} mobile={mobile}>
+            <TitleCard image={'block.jpg'} mobile={mobile}>
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Articles</Typography>
             </TitleCard>
             <InstantSearch searchClient={searchClient} indexName="article">

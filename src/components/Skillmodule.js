@@ -45,7 +45,7 @@ export default function Skillmodule() {
                     </Button>
                 )}
             </ButtonGroup>
-            <Box sx={{ width: "100%", display: "flex", flexWrap: "wrap", flexDirection: "row", margin: 1 }}>
+            <Box sx={{ width: "95vw", display: "flex", flexWrap: "wrap", flexDirection: "row", marginTop:2 }}>
                 <SkillLeft data={data} title={selected}/>
                 <SkillRight data={data} ref={skillRef} />
             </Box>

@@ -16,7 +16,7 @@ export default function SkillRight({ data }) {
     return (
         <Card sx={{
             minHeight: 200, alignItems: "center", justifyContent: "center",
-            display: "flex", flexDirection: "column", padding: 3, width:500,
+            display: "flex", flexDirection: "column", padding: 3, maxWidth:500,
             borderRadius:4
         }}>
             <CardContent>

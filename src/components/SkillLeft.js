@@ -31,7 +31,7 @@ export default function SkillLeft({ data, title }) {
 
 
     return (
-        <Box sx={{ maxWidth: 500, display: "flex", flexDirection: "column", padding:2}}>
+        <Box sx={{ display: "flex", flexDirection: "column", padding:2, flexGrow:1}}>
             <Typography variant="h6">{title}</Typography>
             <Typography variant="h5">...speak these languages</Typography>
             <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>
