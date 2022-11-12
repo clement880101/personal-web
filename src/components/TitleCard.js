@@ -14,8 +14,8 @@ export default function TitleCard({ children, image, mobile }) {
                 }
                 {
                     (mobile) ?
-                        <img height="100%" src={require("../assets/" + image)} alt="Banner" onLoad={() => { setLoading(false) }} />
-                        : <img width="100%" src={require("../assets/" + image)} alt="Banner" onLoad={() => { setLoading(false) }} />
+                        <img height="100%" src={require("../assets/banner/" + image)} alt="Banner" onLoad={() => { setLoading(false) }} />
+                        : <img width="100%" src={require("../assets/banner/" + image)} alt="Banner" onLoad={() => { setLoading(false) }} />
                 }
             </CardMedia>
             {

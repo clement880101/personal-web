@@ -20,7 +20,7 @@ export default function Navbar({ mobile, height }) {
     return (
         <AppBar color="transparent" sx={{ backdropFilter: "blur(5px)"}}>
             <Toolbar sx={{ display: "flex" }}>
-                <Link href="/home" color="inherit" variant="overline" underline="none">ClementC</Link>
+                <Link href="/home" color="inherit" variant="overline" underline="none">Clementc.dev</Link>
                 <Box sx={{ flexGrow: 1 }} />
                 {
                     (!mobile) ?

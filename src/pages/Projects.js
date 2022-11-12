@@ -8,7 +8,7 @@ import TitleCard from "../components/TitleCard";
 
 export default function Projects({ mobile }) {
     const [projlim, setProjlim] = useState(30)
-    const [project, setProject] = useState(Array(6).fill(null))
+    const [project, setProject] = useState(Array(5).fill(null))
     const [col, setCol] = useState(Math.floor(window.innerWidth * 0.95 / 290))
 
     useEffect(() => {
