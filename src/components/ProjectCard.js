@@ -25,12 +25,13 @@ export default function ProjectCard({ doc }) {
                             : <Skeleton variant="rectangular" sx={{ height: 200 }} />
                     }
                     <Box sx={{
-                        position: 'absolute', bottom: 0, left: 0, width: '100%',
-                        bgcolor: 'rgba(0, 0, 0, 0.50)', color: 'white', padding: 2, display: "flex",
-                        flexDirection: "row"
+                        position: 'absolute', top: 0, left: 0, width: '100%', height:"100%",
+                        background: 'linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 1))',
+                        color: 'white', padding: 2, display: "flex",
+                        flexDirection: "column", justifyContent:"flex-end"
                     }}  disableRipple>
 
-                        <Typography variant="h6" sx={{ flexGrow: 1 }}>{
+                        <Typography variant="h6">{
                             (doc !== null) ? doc[1].Title : <Skeleton />
                         }</Typography>
                     </Box>
@@ -68,7 +69,7 @@ export default function ProjectCard({ doc }) {
                                 }
                             }} />) : <Box />}
                         </Box>
-                        <Typography variant="body2">
+                        <Typography color="text.secondary" variant="body2">
                             {(doc !== null) ? doc[1].Desc : <Skeleton />}
                         </Typography>
                     </DialogContent>

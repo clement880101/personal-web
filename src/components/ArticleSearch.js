@@ -12,6 +12,7 @@ export default function ArticleSearch(props) {
 
     useEffect(() => {
         setArticle(hits)
+        console.log(hits)
     }, [hits])
 
     function handleResize() {

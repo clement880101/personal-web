@@ -26,15 +26,22 @@ export default function ArticlePage({ mobile }) {
     return (
         <Box sx={{ paddingTop: 2 }} paddingX={(mobile) ? 2 : "20vw"}>
             <Card variant="outlined" sx={{ width: 160, height: 60, borderRadius: 4 }}>
-                <CardActionArea sx={{ height: "100%", width: "100%", display:"flex", flexDirection:"row"}}
-                    onClick={()=>{navigate("/articles")}}>
+                <CardActionArea sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "row" }}
+                    onClick={() => { navigate("/articles") }}>
                     <ArrowBackIosNewIcon />
                     <Typography>
                         Back to Articles
                     </Typography>
                 </CardActionArea>
             </Card>
-            <Typography variant={(mobile) ? "h4" : "h3"} sx={{ marginBottom: 2, marginTop: 5 }}>
+            <Card sx={{height:300, overflow:"hidden", marginY:2,  borderRadius: 4}}>
+            {
+                (data === null) ? <Skeleton variant="rectangular" sx={{ width: "100%" }} /> :
+                    <Box component="img" sx={{ width: "100%"}}
+                        src={require("../assets/article/" + data.Image)} />
+            }
+            </Card>
+            <Typography variant={(mobile) ? "h4" : "h3"} sx={{  marginTop: 2 }}>
                 {(data === null) ? <Skeleton /> : data.Title}
             </Typography>
             <Typography color="text.secondary" variant="subtitle2">
