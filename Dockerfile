@@ -16,4 +16,4 @@ EXPOSE 3000
 
 RUN npm run build
 
-CMD [ "node", "./build/index.html" ]
+CMD [ "npm", "start" ]
