@@ -38,7 +38,7 @@ export default function Home({ mobile }) {
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
-            <TitleCard image={'rocket.png'} mobile={mobile}>
+            <TitleCard image={'city.jpg'} mobile={mobile}>
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Clement</Typography>
                 <Typography variant="h5" color={"white"}>DevOps & Fullstack Engineer based in the Bay Area</Typography>
             </TitleCard>

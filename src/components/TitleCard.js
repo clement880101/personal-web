@@ -7,17 +7,16 @@ export default function TitleCard({ children, image, mobile }) {
     const width = "95vw"
 
     return (
-        <Card sx={{ margin: 1, borderRadius: 4, height: height, position: "relative" }} elevation={0}>
-            <CardMedia sx={{ width: width }}>
-                {
-                    (loading) && <Skeleton variant="rectangular" height={height} />
-                }
-                {
-                    (mobile) ?
-                        <img height="100%" src={require("../assets/banner/" + image)} alt="Banner" onLoad={() => { setLoading(false) }} />
-                        : <img width="100%" src={require("../assets/banner/" + image)} alt="Banner" onLoad={() => { setLoading(false) }} />
-                }
-            </CardMedia>
+        <Card sx={{ margin: 1, borderRadius: 4, height: height, width: width, position: "relative" }} elevation={0}>
+            {
+                (loading) && <Skeleton variant="rectangular" height={height} width={width} />
+
+            }
+
+            <CardMedia sx={{ height: height }} component="img"
+                image={require("../assets/banner/" + image)} onLoad={() => { setLoading(false) }} />
+
+
             {
                 (!loading) &&
                 <Box sx={{
