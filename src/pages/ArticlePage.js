@@ -52,7 +52,15 @@ export default function ArticlePage({ mobile }) {
                 {(data === null) ? <Skeleton /> : data.Subtitle}
             </Typography>
 
-            {(data === null) ? <Skeleton /> :
+            {(data === null) ? 
+                <Box sx={{margin:0, padding:0}}>
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                </Box>
+                :
                 <div dangerouslySetInnerHTML={{ __html: data.Content }} />
             }
         </Box>

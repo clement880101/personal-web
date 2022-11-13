@@ -31,7 +31,7 @@ export default function Projects({ mobile }) {
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
-            <TitleCard image={'cross.jpg'}>
+            <TitleCard image={'lake.png'}>
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Projects</Typography>
             </TitleCard>
             {

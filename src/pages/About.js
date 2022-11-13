@@ -7,7 +7,7 @@ import TitleCard from "../components/TitleCard"
 export default function About({ mobile }) {
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%"}}>
-            <TitleCard image={'plant.jpg'} mobile={mobile}>
+            <TitleCard image={'green.png'} mobile={mobile}>
                 <Typography sx={{ color: "white" }} variant={(mobile)?"h2":"h1"} >About</Typography>
                 <Typography variant="h5" color={"white"}>The paths that I had taken and who I am now</Typography>
             </TitleCard>
