@@ -10,15 +10,17 @@ export default function ArticleCard({ doc }) {
     return (
         <Box sx={{ padding: 0, margin: 1 }}>
             <Card variant="outlined" sx={{ width: 290, borderRadius: 4 }}>
-                <CardActionArea sx={{ height: "100%", width: "100%", minHeight:310, 
-                display:"flex", flexDirection:"column"}}
+                <CardActionArea sx={{
+                    height: "100%", width: "100%", minHeight: 310,
+                    display: "flex", flexDirection: "column"
+                }}
                     onClick={() => { if (doc !== null) { navigate("/articles/" + doc[0]) } }}>
                     {
                         (doc !== null) ? <CardMedia component="img" sx={{ height: 100 }}
                             image={require("../assets/article/" + doc[1].Image)} />
                             : <Skeleton variant="rectangular" sx={{ height: 100 }} />
                     }
-                    <CardContent sx={{ width: "100%", overflow: "hidden", flexGrow:1}}>
+                    <CardContent sx={{ width: "100%", overflow: "hidden", flexGrow: 1 }}>
                         <Typography variant="h6" gutterBottom>
                             {(doc !== null) ? doc[1].Title : <Skeleton />}
                         </Typography>

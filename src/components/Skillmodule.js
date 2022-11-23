@@ -1,4 +1,4 @@
-import { Box, ButtonGroup, Button } from "@mui/material"
+import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import { useState, useEffect, createRef } from "react"
 
 import SkillLeft from "./SkillLeft"
@@ -28,25 +28,28 @@ export default function Skillmodule() {
         })
     }, [])
 
-    useEffect(()=>{
-        if (((skillRef.current !== undefined)&&(skillRef.current !== null))&&
-        ((searchParams.get("skills") !== null)&&(data !== null))) {
+    useEffect(() => {
+        if (((skillRef.current !== undefined) && (skillRef.current !== null)) &&
+            ((searchParams.get("skills") !== null) && (data !== null))) {
             setTimeout(() => { skillRef.current.scrollIntoView(false) }, 1000);
         }
     }, [searchParams, skillRef, data])
 
+    const handleChange = (event, newAlignment) => {
+        setSelected(newAlignment)
+    };
+
     return (
         <Box sx={{ width: "95vw", display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <ButtonGroup size="small" sx={{ alignSelf: "center", margin: 1 }} disableElevation disableRipple>
+            <ToggleButtonGroup sx={{ alignSelf: "center", margin: 1 }} value={selected} 
+            exclusive onChange={handleChange} color="primary" size="small">
                 {category.map((cat) =>
-                    <Button variant={selected === cat ? "contained" : "outlined"}
-                        onClick={() => setSelected(cat)} sx={{ borderRadius: 10 }}>
-                        {cat}
-                    </Button>
-                )}
-            </ButtonGroup>
-            <Box sx={{ width: "95vw", display: "flex", flexWrap: "wrap", flexDirection: "row", marginTop:2 }}>
-                <SkillLeft data={data} title={selected}/>
+                    <ToggleButton value={cat}>{cat}</ToggleButton>
+                )}   
+            </ToggleButtonGroup>
+
+            <Box sx={{ width: "95vw", display: "flex", flexWrap: "wrap", flexDirection: "row", marginTop: 2 }}>
+                <SkillLeft data={data} title={selected} />
                 <SkillRight data={data} ref={skillRef} />
             </Box>
         </Box>
