@@ -26,12 +26,12 @@ export default function About({ mobile }) {
             <Box sx={{
                 display: "flex", flexDirection: "column", width:"95vw", marginTop: 10, marginBottom: 2
             }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
-                <Typography sx={{ marginX: 1 }} variant="h3">Now I Can...</Typography>
+                <Typography sx={{ marginX: 1 }} variant="h3">Skills</Typography>
                 <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">
-                    The skills, interests, and aspirations that makes me, me
+                    Now I can do all these things...
                 </Typography>
             </Box>
-            <Skillmodule />
+            <Skillmodule mobile={mobile} />
         </Box>
     )
 }

@@ -2,7 +2,7 @@ import { Typography, Chip, Box, Skeleton } from "@mui/material"
 import { useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from "react"
 
-export default function SkillLeft({ data, title }) {
+export default function SkillLeft({ data, title, mobile}) {
     const [searchParams, setSearchParams] = useSearchParams();
     const [skills, setSkills] = useState(Array(3).fill(null))
     const [languages, setLanguages] = useState(Array(6).fill(null))
@@ -31,7 +31,7 @@ export default function SkillLeft({ data, title }) {
 
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", padding:2, flexGrow:1}}>
+        <Box sx={{ display: "flex", flexDirection: "column", padding:2, width: (mobile)? "100%": "50%" }}>
             <Typography variant="h6">{title}</Typography>
             <Typography variant="h5">...speak these languages</Typography>
             <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>

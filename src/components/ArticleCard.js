@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 export default function ArticleCard({ doc }) {
     const [imageUrl, setImageUrl] = useState(undefined);
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,11 +29,14 @@ export default function ArticleCard({ doc }) {
                     display: "flex", flexDirection: "column"
                 }}
                     onClick={() => { if (doc !== null) { navigate("/articles/" + doc[0]) } }}>
-                    {
-                        (doc !== null) ? <CardMedia component="img" sx={{ height: 100 }}
-                            image={imageUrl} />
-                            : <Skeleton variant="rectangular" sx={{ height: 100 }} />
-                    }
+                    <Box sx={{height: 100, width:"100%", overflow:"hidden"}}>
+                        {
+                            (loading) && <Skeleton variant="rectangular" sx={{ height: "100%", width: "100%" }} />
+                        }
+                        <CardMedia sx={{ width: "100%", height: "100%" }} component="img"
+                            image={imageUrl} onLoad={() => { setLoading(false) }} />
+                    </Box>
+
                     <CardContent sx={{ width: "100%", overflow: "hidden", flexGrow: 1 }}>
                         <Typography variant="h6" gutterBottom>
                             {(doc !== null) ? doc[1].Title : <Skeleton />}

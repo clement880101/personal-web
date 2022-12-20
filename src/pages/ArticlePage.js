@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Skeleton, Typography, Card, CardActionArea } from "@mui/material";
+import { Box, Skeleton, Typography, Card, CardActionArea, CardMedia } from "@mui/material";
 import { getArticle } from "../api/firebaseApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { ref, getDownloadURL } from "firebase/storage"
@@ -9,6 +9,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export default function ArticlePage({ mobile }) {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true)
     const [imageUrl, setImageUrl] = useState(undefined);
 
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function ArticlePage({ mobile }) {
         })
     }, [articleID, navigate]);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (data !== null) {
             getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/article/' +
                 data.Image)).then((url) => {
@@ -48,16 +49,18 @@ export default function ArticlePage({ mobile }) {
             </Card>
             <Card sx={{ height: 300, overflow: "hidden", marginY: 2, borderRadius: 4 }}>
                 {
-                    (data === null) ? <Skeleton variant="rectangular" sx={{ width: "100%" }} /> :
-                        <Box component="img" sx={{ width: "100%" }}
-                            src={imageUrl} />
+                    (loading) && <Skeleton variant="rectangular" height="100%" width="100%" />
+
                 }
+                <CardMedia sx={{ width: "100%", height: "100%" }} component="img"
+                    image={imageUrl} onLoad={() => { setLoading(false) }} />
             </Card>
             <Typography variant={(mobile) ? "h4" : "h3"} sx={{ marginTop: 2 }}>
                 {(data === null) ? <Skeleton /> : data.Title}
             </Typography>
             <Typography color="text.secondary" variant="subtitle2">
-                {(data === null) ? <Skeleton /> : "Last Modified " + String(format.format(data.Date.seconds * 1000))}
+                {(data === null) ? <Skeleton /> :
+                    "Last Modified " + String(format.format(data.Date.seconds * 1000))}
             </Typography>
             <Typography color="text.secondary" sx={{ marginBottom: 5, marginTop: 2, fontStyle: 'italic' }}
                 variant="subtitle1">

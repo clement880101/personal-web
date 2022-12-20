@@ -1,7 +1,7 @@
 import { Typography, Card, CardContent } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
-export default function SkillRight({ data }) {
+export default function SkillRight({ data, mobile}) {
     const [searchParams] = useSearchParams();
 
     function find(data, title) {
@@ -16,8 +16,8 @@ export default function SkillRight({ data }) {
     return (
         <Card sx={{
             minHeight: 200, alignItems: "center", justifyContent: "center",
-            display: "flex", flexDirection: "column", padding: 3, maxWidth:500,
-            borderRadius:4
+            display: "flex", flexDirection: "column", padding: 3,
+            borderRadius:4, width: (mobile)? "100%": "50%" 
         }}>
             <CardContent>
                 <Typography variant='h5'>{(searchParams.get("skills") === null) ?
