@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import {
     Card, Box, DialogContent, CardMedia, Skeleton, Typography, Button,
     Dialog, CardActionArea, DialogTitle, DialogActions, IconButton
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { ref, getDownloadURL } from "firebase/storage"
+import { storage } from "../api/firebaseConfig"
 
 export default function ExpCard({ doc, mobile }) {
     const [open, setOpen] = useState(false);
+    const [imageUrl, setImageUrl] = useState(undefined);
     const format = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
     const handleClick = function () {
         setOpen(!open);
     }
+
+    useEffect(()=>{
+        if (doc !== null) {
+            getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/about/' +
+                doc[1].Image)).then((url) => {
+                    setImageUrl(url);
+                });
+
+        }
+    }, [doc])
 
     return (
         <Box>
@@ -18,7 +31,7 @@ export default function ExpCard({ doc, mobile }) {
                 <CardActionArea onClick={handleClick} sx={{ position: 'relative' }}>
                     {
                         (doc !== null) ? <CardMedia component="img" sx={{ height: 150 }}
-                            image={require("../assets/" + doc[1].Image)} />
+                            image={imageUrl} />
                             : <Skeleton variant="rectangular" sx={{ height: 150 }} />
                     }
                     <Box sx={{
@@ -33,7 +46,7 @@ export default function ExpCard({ doc, mobile }) {
                 <DialogTitle sx={{ position: "relative", padding: 0 }}>
                     {
                         (doc !== null) ? <CardMedia component="img" sx={{ height: 150 }}
-                            image={require("../assets/" + doc[1].Image)} />
+                            image={imageUrl} />
                             : <Skeleton variant="rectangular" sx={{ height: 150 }} />
                     }
                     <Box sx={{

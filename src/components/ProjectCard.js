@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Card, Box, CardMedia, Skeleton, Typography,
     Button, Chip, CardActionArea, Dialog, DialogTitle, 
@@ -6,14 +6,27 @@ import {
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom";
+import { ref, getDownloadURL } from "firebase/storage"
+import { storage } from "../api/firebaseConfig"
 
 export default function ProjectCard({ doc }) {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const [imageUrl, setImageUrl] = useState(undefined);
 
     const handleClick = function () {
         setOpen(!open);
     }
+
+    useEffect(()=>{
+        if (doc !== null) {
+            getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/project/' +
+                doc[1].Image)).then((url) => {
+                    setImageUrl(url);
+                });
+
+        }
+    }, [doc])
 
     return (
         <Box sx={{ padding: 0, margin: 1 }}>
@@ -21,7 +34,7 @@ export default function ProjectCard({ doc }) {
                 <CardActionArea onClick={() => { handleClick() }} sx={{ position: 'relative' }}>
                     {
                         (doc !== null) ? <CardMedia component="img" height="200"
-                            image={require("../assets/project/" + doc[1].Image)} />
+                            image={imageUrl} />
                             : <Skeleton variant="rectangular" sx={{ height: 200 }} />
                     }
                     <Box sx={{
@@ -40,7 +53,7 @@ export default function ProjectCard({ doc }) {
                     <DialogTitle sx={{ position: "relative", padding: 0 }}>
                         {
                             (doc !== null) ? <CardMedia component="img" sx={{ height: 150 }}
-                                image={require("../assets/project/" + doc[1].Image)} />
+                                image={imageUrl} />
                                 : <Skeleton variant="rectangular" sx={{ height: 150 }} />
                         }
                         <Box sx={{

@@ -1,10 +1,19 @@
 import { Card, CardMedia, Box, Skeleton } from "@mui/material"
-import { useState } from "react"
+import { ref, getDownloadURL} from "firebase/storage"
+import { storage } from "../api/firebaseConfig"
+import { useEffect, useState } from "react"
 
 export default function TitleCard({ children, image, mobile }) {
+    const [imageUrl, setImageUrl] = useState(undefined);
     const [loading, setLoading] = useState(true)
     const height = 360
     const width = "95vw"
+
+    useEffect(() => {
+        getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/banner/' + image)).then((url) => {
+            setImageUrl(url);
+        });
+    }, [])
 
     return (
         <Card sx={{ margin: 1, borderRadius: 4, height: height, width: width, position: "relative" }} elevation={0}>
@@ -14,7 +23,7 @@ export default function TitleCard({ children, image, mobile }) {
             }
 
             <CardMedia sx={{ height: height }} component="img"
-                image={require("../assets/banner/" + image)} onLoad={() => { setLoading(false) }} />
+                image={imageUrl} onLoad={() => { setLoading(false) }} />
 
 
             {

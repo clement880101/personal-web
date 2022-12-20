@@ -42,7 +42,6 @@ export default function Home({ mobile }) {
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Clement</Typography>
                 <Typography variant="h5" color={"white"}>DevOps & Fullstack Engineer based in the Bay Area</Typography>
             </TitleCard>
-
             <Box sx={{
                 display: "flex", flexDirection: "column", width: "95vw", marginTop: 10, marginBottom: 2
             }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>

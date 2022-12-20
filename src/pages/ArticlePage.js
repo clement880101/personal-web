@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { Box, Skeleton, Typography, Card, CardActionArea } from "@mui/material";
 import { getArticle } from "../api/firebaseApi";
 import { useNavigate, useParams } from "react-router-dom";
+import { ref, getDownloadURL } from "firebase/storage"
+import { storage } from "../api/firebaseConfig"
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export default function ArticlePage({ mobile }) {
     const [data, setData] = useState(null);
+    const [imageUrl, setImageUrl] = useState(undefined);
 
     const navigate = useNavigate();
     const { articleID } = useParams()
@@ -22,6 +25,15 @@ export default function ArticlePage({ mobile }) {
         })
     }, [articleID, navigate]);
 
+    useEffect(()=>{
+        if (data !== null) {
+            getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/article/' +
+                data.Image)).then((url) => {
+                    setImageUrl(url);
+                });
+
+        }
+    }, [data])
 
     return (
         <Box sx={{ paddingTop: 2 }} paddingX={(mobile) ? 2 : "20vw"}>
@@ -34,14 +46,14 @@ export default function ArticlePage({ mobile }) {
                     </Typography>
                 </CardActionArea>
             </Card>
-            <Card sx={{height:300, overflow:"hidden", marginY:2,  borderRadius: 4}}>
-            {
-                (data === null) ? <Skeleton variant="rectangular" sx={{ width: "100%" }} /> :
-                    <Box component="img" sx={{ width: "100%"}}
-                        src={require("../assets/article/" + data.Image)} />
-            }
+            <Card sx={{ height: 300, overflow: "hidden", marginY: 2, borderRadius: 4 }}>
+                {
+                    (data === null) ? <Skeleton variant="rectangular" sx={{ width: "100%" }} /> :
+                        <Box component="img" sx={{ width: "100%" }}
+                            src={imageUrl} />
+                }
             </Card>
-            <Typography variant={(mobile) ? "h4" : "h3"} sx={{  marginTop: 2 }}>
+            <Typography variant={(mobile) ? "h4" : "h3"} sx={{ marginTop: 2 }}>
                 {(data === null) ? <Skeleton /> : data.Title}
             </Typography>
             <Typography color="text.secondary" variant="subtitle2">
@@ -52,8 +64,8 @@ export default function ArticlePage({ mobile }) {
                 {(data === null) ? <Skeleton /> : data.Subtitle}
             </Typography>
 
-            {(data === null) ? 
-                <Box sx={{margin:0, padding:0}}>
+            {(data === null) ?
+                <Box sx={{ margin: 0, padding: 0 }}>
                     <Skeleton />
                     <Skeleton />
                     <Skeleton />

@@ -2,10 +2,23 @@ import {
     CardContent, Card, Typography, Skeleton, CardActionArea,
     CardActions, Box, CardMedia
 } from "@mui/material"
+import { ref, getDownloadURL } from "firebase/storage"
+import { storage } from "../api/firebaseConfig"
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function ArticleCard({ doc }) {
+    const [imageUrl, setImageUrl] = useState(undefined);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (doc !== null) {
+            getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/article/' +
+                doc[1].Image)).then((url) => {
+                    setImageUrl(url);
+                });
+        }
+    }, [doc])
 
     return (
         <Box sx={{ padding: 0, margin: 1 }}>
@@ -17,7 +30,7 @@ export default function ArticleCard({ doc }) {
                     onClick={() => { if (doc !== null) { navigate("/articles/" + doc[0]) } }}>
                     {
                         (doc !== null) ? <CardMedia component="img" sx={{ height: 100 }}
-                            image={require("../assets/article/" + doc[1].Image)} />
+                            image={imageUrl} />
                             : <Skeleton variant="rectangular" sx={{ height: 100 }} />
                     }
                     <CardContent sx={{ width: "100%", overflow: "hidden", flexGrow: 1 }}>
