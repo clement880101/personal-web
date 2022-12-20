@@ -23,7 +23,7 @@ export default function ArticleCard({ doc }) {
 
     return (
         <Box sx={{ padding: 0, margin: 1 }}>
-            <Card variant="outlined" sx={{ width: 290, borderRadius: 4 }}>
+            <Card variant="outlined" sx={{ width: 290, borderRadius: 4}}>
                 <CardActionArea sx={{
                     height: "100%", width: "100%", minHeight: 310,
                     display: "flex", flexDirection: "column"

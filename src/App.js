@@ -39,7 +39,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Navbar mobile={mobile} height={height}/>
+        <Navbar mobile={mobile} height={height} darkMode={darkMode}/>
         <Toolbar />
         <Routes>
           <Route exact path="/" element={<Navigate to="/home" />} />
