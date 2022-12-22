@@ -26,14 +26,11 @@ export default function Skillmodule({ mobile}) {
                 setSelected("All")
             }
         })
-    }, [])
-
-    useEffect(() => {
         if (((skillRef.current !== undefined) && (skillRef.current !== null)) &&
             ((searchParams.get("skills") !== null) && (data !== null))) {
             setTimeout(() => { skillRef.current.scrollIntoView(false) }, 1000);
         }
-    }, [searchParams, skillRef, data])
+    }, [])
 
     const handleChange = (event, newAlignment) => {
         setSelected(newAlignment)
