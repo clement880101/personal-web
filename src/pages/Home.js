@@ -43,7 +43,7 @@ export default function Home({ mobile }) {
                 <Typography variant="h5" color={"white"}>DevOps & Fullstack Engineer based in the Bay Area</Typography>
             </TitleCard>
             <Box sx={{
-                display: "flex", flexDirection: "column", width: "95vw", marginTop: 10, marginBottom: 2
+                display: "flex", flexDirection: "column", width: "95vw", marginTop: 7, marginBottom: 2
             }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
                 <Typography sx={{ marginX: 1 }} variant="h3">Articles</Typography>
                 <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">
@@ -74,7 +74,7 @@ export default function Home({ mobile }) {
             }
 
             <Box sx={{
-                display: "flex", flexDirection: "column", width: "95vw", marginTop: 10, marginBottom: 2
+                display: "flex", flexDirection: "column", width: "95vw", marginTop: 7, marginBottom: 2
             }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
                 <Typography sx={{ marginX: 1 }} variant="h3">Projects</Typography>
                 <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">

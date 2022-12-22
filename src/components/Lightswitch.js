@@ -12,13 +12,13 @@ export default function Lightswitch({ darkmode, setDarkMode }) {
     return (
         <Fab sx={{
             position: "fixed", bottom: "0", right: "0", margin: 2, backdropFilter: "blur(5px)",
-            color:"white", background: (darkmode) ? "rgb(0,0,0, 0.3)" : "rgb(0,0,0,0.7)",
+            color:"white", background: (darkmode) ? "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)",
             "&.MuiButtonBase-root:hover": {
-                bgcolor: (darkmode) ? "rgb(0,0,0,0.7)" : "rgb(0,0,0, 0.3)"
+                bgcolor: (darkmode) ? "rgb(255,255,255,1)" : "rgb(0,0,0,1)"
             }
         }}
             size="small" onClick={() => setDarkMode(!darkmode)}>
-            {darkmode ? <LightModeIcon /> : <NightlightIcon />}
+            {darkmode ? <LightModeIcon sx={{color:"black"}}/> : <NightlightIcon sx={{color:"white"}}/>}
         </Fab>
 
     );

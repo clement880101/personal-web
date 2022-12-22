@@ -8,6 +8,8 @@ RUN npm install
 
 RUN npm install -g firebase-tools
 
+RUN npm install -g serve
+
 COPY . .
 
 EXPOSE 9005

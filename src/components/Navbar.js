@@ -25,10 +25,10 @@ export default function Navbar({ mobile, height, darkMode }) {
         <AppBar sx={{ background: "transparent", boxShadow: 'none' }}>
             <Toolbar sx={{ display: "flex" }}>
                 <Box sx={{
-                    background: (darkMode) ? "rgb(0,0,0,0.3)" : "rgb(0,0,0,0.7)", height: "100%", borderRadius: 10,
-                    padding: 1, backdropFilter: "blur(5px)"
+                    background: (darkMode) ?  "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)", 
+                    height: "100%", borderRadius: 10, padding: 1, backdropFilter: "blur(5px)"
                 }}>
-                    <Link href="/home" color="inherit" variant="overline" underline="none">Clementc.dev</Link>
+                    <Link href="/home" color={(darkMode) ? "black":"white"} variant="overline" underline="none">Clementc.dev</Link>
                 </Box>
 
 
@@ -36,12 +36,13 @@ export default function Navbar({ mobile, height, darkMode }) {
                 {
                     (!mobile) ?
                         <Box sx={{
-                            background: (darkMode) ? "rgb(1,1,1, 0.3)" : "rgb(0,0,0,0.7)", height: "100%", borderRadius: 10,
-                            padding: 1, backdropFilter: "blur(5px)"
+                            background: (darkMode) ? "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)", 
+                            height: "100%", borderRadius: 10, padding: 1, backdropFilter: "blur(5px)"
                         }}>
                             {
                                 pages.map((page) => (
-                                    <Button sx={{ borderRadius: 10, marginX: 0.5, padding: 0.7, color: "white" }}
+                                    <Button sx={{ borderRadius: 10, marginX: 0.5, padding: 0.7, 
+                                        color: (darkMode) ? "black":"white" }}
                                         variant={(page.toLowerCase() === pathname.split("/")[1])
                                             ? "contained" : "text"}
                                         size="small" onClick={() => {
@@ -54,14 +55,14 @@ export default function Navbar({ mobile, height, darkMode }) {
 
                         <IconButton onClick={() => setOpen(!open)} sx={{
                             backdropFilter: "blur(5px)",
-                            background: (darkMode) ? "rgb(0,0,0, 0.3)" : "rgb(0,0,0,0.7)",
+                            background: (darkMode) ? "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)",
                             "&.MuiButtonBase-root:hover": {
-                                bgcolor: (darkMode) ? "rgb(0,0,0,0.7)" : "rgb(0,0,0, 0.3)"
+                                bgcolor: (darkMode) ? "rgb(255,255,255,1)" : "rgb(0,0,0,1)"
                             }
                         }}>
                             {
-                                (open) ? <MenuOpenIcon sx={{ fontSize: 25, color: "white" }} />
-                                    : <MenuIcon sx={{ fontSize: 25, color: "white" }} />
+                                (open) ? <MenuOpenIcon sx={{ fontSize: 25, color:(darkMode) ? "black":"white" }} />
+                                    : <MenuIcon sx={{ fontSize: 25, color: (darkMode)?"black":"white" }} />
                             }
 
                         </IconButton>

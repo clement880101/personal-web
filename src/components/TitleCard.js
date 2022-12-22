@@ -1,9 +1,11 @@
 import { Card, CardMedia, Box, Skeleton } from "@mui/material"
-import { ref, getDownloadURL} from "firebase/storage"
+import { ref, getDownloadURL } from "firebase/storage"
 import { storage } from "../api/firebaseConfig"
 import { useEffect, useState } from "react"
 
-export default function TitleCard({ children, image, mobile }) {
+export default function TitleCard({ children, image }) {
+
+
     const [imageUrl, setImageUrl] = useState(undefined);
     const [loading, setLoading] = useState(true)
     const height = 360
@@ -16,7 +18,8 @@ export default function TitleCard({ children, image, mobile }) {
     }, [])
 
     return (
-        <Card sx={{ margin: 1, borderRadius: 4, height: height, width: width, position: "relative" }} elevation={0}>
+        <Card sx={{ margin: 1, borderRadius: 4, height: height, width: width, position: "relative" }}
+            elevation={0}>
             {
                 (loading) && <Skeleton variant="rectangular" height={height} width={width} />
 
@@ -24,7 +27,6 @@ export default function TitleCard({ children, image, mobile }) {
 
             <CardMedia sx={{ height: height }} component="img"
                 image={imageUrl} onLoad={() => { setLoading(false) }} />
-
 
             {
                 (!loading) &&
