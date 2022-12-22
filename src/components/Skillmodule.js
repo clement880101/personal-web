@@ -9,7 +9,7 @@ import { getSkills } from "../api/firebaseApi"
 import { useSearchParams } from 'react-router-dom';
 
 
-export default function Skillmodule({ mobile}) {
+export default function Skillmodule({ mobile }) {
     const [selected, setSelected] = useState("DevOps")
     const [data, setData] = useState(null)
     const [searchParams] = useSearchParams();
@@ -26,9 +26,13 @@ export default function Skillmodule({ mobile}) {
                 setSelected("All")
             }
         })
-        if (((skillRef.current !== undefined) && (skillRef.current !== null)) &&
-            ((searchParams.get("skills") !== null) && (data !== null))) {
-            setTimeout(() => { skillRef.current.scrollIntoView(false) }, 1000);
+
+
+    }, [])
+
+    useEffect(() => {
+        if (searchParams.get("skills") !== null) {
+            skillRef.current.scrollIntoView(true)
         }
     }, [])
 
@@ -45,7 +49,7 @@ export default function Skillmodule({ mobile}) {
                 )}
             </ToggleButtonGroup>
 
-            <Box sx={{ width: "95vw", display: "flex", flexDirection: (mobile)?"column":"row", marginTop: 2 }}>
+            <Box sx={{ width: "95vw", display: "flex", flexDirection: (mobile) ? "column" : "row", marginTop: 2 }}>
                 <SkillLeft data={data} title={selected} mobile={mobile} />
                 <SkillRight data={data} ref={skillRef} mobile={mobile} />
             </Box>
