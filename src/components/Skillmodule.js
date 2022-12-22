@@ -37,23 +37,27 @@ export default function Skillmodule({ mobile }) {
     }, [])
 
     const handleChange = (event, newAlignment) => {
-        setSelected(newAlignment)
+        if (newAlignment != null) {
+            setSelected(newAlignment)
+        }
     };
 
     return (
-        <Box sx={{ width: "95vw", display: "flex", flexDirection: "column", alignItems: "center" }} ref={skillRef}>
-            <ToggleButtonGroup sx={{ alignSelf: "center", margin: 1 }} value={selected}
-                exclusive onChange={handleChange} color="primary" size="small">
-                {category.map((cat) =>
-                    <ToggleButton value={cat}>{cat}</ToggleButton>
-                )}
-            </ToggleButtonGroup>
-
-            <Box sx={{ width: "95vw", display: "flex", flexDirection: (mobile) ? "column" : "row", marginTop: 2 }}>
+        <Box sx={{
+            width: "95vw", display: "flex", flexDirection: (mobile) ? "column" : "row"
+        }} ref={skillRef}>
+            <Box sx={{display: "flex", flexDirection:"column", width: (mobile)? "100%": "50%",
+            alignItems:(mobile)?"center":"flex-start"}}>
+                <ToggleButtonGroup value={selected}
+                    exclusive onChange={handleChange} color="primary" size="small">
+                    {category.map((cat) =>
+                        <ToggleButton value={cat}>{cat}</ToggleButton>
+                    )}
+                </ToggleButtonGroup>
                 <SkillLeft data={data} title={selected} mobile={mobile} />
-                <SkillRight data={data} ref={skillRef} mobile={mobile} />
             </Box>
 
+            <SkillRight data={data} ref={skillRef} mobile={mobile} />
         </Box>
     )
 }

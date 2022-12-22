@@ -4,8 +4,6 @@ import { storage } from "../api/firebaseConfig"
 import { useEffect, useState } from "react"
 
 export default function TitleCard({ children, image }) {
-
-
     const [imageUrl, setImageUrl] = useState(undefined);
     const [loading, setLoading] = useState(true)
     const height = 360
