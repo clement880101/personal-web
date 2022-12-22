@@ -1,10 +1,11 @@
-import { useMediaQuery, Fab } from "@mui/material";
+import { useMediaQuery, Fab, useTheme } from "@mui/material";
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { useEffect } from "react";
 
 export default function Lightswitch({ darkmode, setDarkMode }) {
     const preferDark = useMediaQuery('(prefers-color-scheme: dark)');
+    const theme = useTheme()
     useEffect(() => {
         setDarkMode(preferDark);
     }, [setDarkMode, preferDark]);
@@ -18,7 +19,8 @@ export default function Lightswitch({ darkmode, setDarkMode }) {
             }
         }}
             size="small" onClick={() => setDarkMode(!darkmode)}>
-            {darkmode ? <LightModeIcon sx={{color:"black"}}/> : <NightlightIcon sx={{color:"white"}}/>}
+            {darkmode ? <LightModeIcon sx={{color:theme.palette.background.default}}/> 
+            : <NightlightIcon sx={{color:theme.palette.background.default}}/>}
         </Fab>
 
     );
