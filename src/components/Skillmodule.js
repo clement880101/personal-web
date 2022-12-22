@@ -9,7 +9,7 @@ import { getSkills } from "../api/firebaseApi"
 import { useSearchParams } from 'react-router-dom';
 
 
-export default function Skillmodule({ mobile }) {
+export default function Skillmodule({ mobile}) {
     const [selected, setSelected] = useState("DevOps")
     const [data, setData] = useState(null)
     const [searchParams] = useSearchParams();
@@ -40,7 +40,7 @@ export default function Skillmodule({ mobile }) {
     };
 
     return (
-        <Box sx={{ width: "95vw", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <Box sx={{ width: "95vw", display: "flex", flexDirection: "column", alignItems: "center" }} ref={skillRef}>
             <ToggleButtonGroup sx={{ alignSelf: "center", margin: 1 }} value={selected}
                 exclusive onChange={handleChange} color="primary" size="small">
                 {category.map((cat) =>

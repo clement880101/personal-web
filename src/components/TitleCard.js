@@ -25,7 +25,7 @@ export default function TitleCard({ children, image }) {
 
             }
 
-            <CardMedia sx={{ height: height }} component="img"
+            <CardMedia sx={{ height: height * 1.1 }} component="img"
                 image={imageUrl} onLoad={() => { setLoading(false) }} />
 
             {

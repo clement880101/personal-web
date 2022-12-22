@@ -5,6 +5,7 @@ import Skillmodule from "../components/Skillmodule"
 import TitleCard from "../components/TitleCard"
 
 export default function About({ mobile }) {
+
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%"}}>
             <TitleCard image={'green.png'} mobile={mobile}>
@@ -31,7 +32,7 @@ export default function About({ mobile }) {
                     Now I can do all these things...
                 </Typography>
             </Box>
-            <Skillmodule mobile={mobile} />
+            <Skillmodule mobile={mobile}/>
         </Box>
     )
 }
