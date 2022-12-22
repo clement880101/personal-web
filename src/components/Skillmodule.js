@@ -10,7 +10,7 @@ import { useSearchParams } from 'react-router-dom';
 
 
 export default function Skillmodule({ mobile }) {
-    const [selected, setSelected] = useState("DevOps")
+    const [selected, setSelected] = useState("All")
     const [data, setData] = useState(null)
     const [searchParams] = useSearchParams();
 
