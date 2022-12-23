@@ -33,10 +33,10 @@ export default function SkillRight({ data, mobile }) {
                  display: "flex", flexDirection: "column", justifyContent: "center", 
                  bgcolor:"rgba(0, 0, 0, 0.70)", backdropFilter: "blur(5px)", color:"white"
             }}>
-                <Typography variant='h5'>{(searchParams.get("skills") === null) ?
+                <Typography variant='h6'>{(searchParams.get("skills") === null) ?
                     "Click on the pills to learn more"
                     : searchParams.get("skills")}</Typography>
-                <Typography variant="h6" sx={{ marginTop: 2 , color:"Gainsboro"}}>
+                <Typography variant="body" sx={{ marginTop: 2 , color:"Gainsboro"}}>
                     {((searchParams.get("skills") === null) || (data === null)) ? "" :
                         find(data, searchParams.get("skills"))}
                 </Typography>
