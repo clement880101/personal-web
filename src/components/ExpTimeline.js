@@ -28,9 +28,9 @@ export default function ExpTimeline({ mobile }) {
                     <TimelineItem>
                         <TimelineOppositeContent sx={{ transform: "translateY(50%)" }}>
                             {(doc !== null) ? format.format(doc[1].From.seconds * 1000) :
-                                <Box sx={{alignItems:"end"}}>
-                                    <Skeleton width={30} />
-                                    <Skeleton width={70} />
+                                <Box sx={{display:"flex", flexDirection:"column", alignItems:"end"}}>
+                                    <Skeleton width={30} height={25}/>
+                                    <Skeleton width={40} height={25}/>
                                 </Box>
                             }
                         </TimelineOppositeContent>

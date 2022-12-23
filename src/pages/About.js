@@ -16,17 +16,19 @@ export default function About({ mobile }) {
             </TitleCard>
 
             <Box sx={{ display: "flex", alignItems: "center", width: "95vw" }}
-                flexDirection={(mobile) ? "column" : "row"}>
-                <Card sx={{ margin: 1, borderRadius: 4, position: "relative", overflow: "hidden", height: (mobile) ? 200 : 500 }}
+                flexDirection={(!mobile) ? "row":"column" }>
+                <Card sx={{ margin: 1, borderRadius: 4, position: "relative", overflow: "hidden", 
+                height: (mobile) ? 200 : 500 }}
                     elevation={0}>
                     {
                         (loading) && <Skeleton variant="rectangular" height="100%" width="100%" />
 
                     }
 
-                    <CardMedia component="img" width="100%" sx={{ transform: "translateY(-200px)" }}
+                    <CardMedia component="img" sx={{minWidth:"100%", minHeight:"100%"}}
                         image={"https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/about%2Fmountain.jpg?alt=media&token=9df30b79-96a3-435b-9cd2-65adab2e4f40"}
                         onLoad={() => { setLoading(false) }} />
+
                     <Box sx={{
                         position: 'absolute', bottom: 0, left: 0, width: "100%", height: "100%", padding: 5,
                         display: "flex", flexDirection: "column", justifyContent: "center", 
