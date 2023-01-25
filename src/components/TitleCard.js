@@ -15,7 +15,7 @@ export default function TitleCard({ children, image }) {
     }, [])
 
     return (
-        <Card sx={{borderRadius: 4, height: height, width: "100%", position: "relative" }}
+        <Card sx={{borderRadius: 4, height: height, width: "100%", position: "relative", overflow:"hidden" }}
             elevation={0}>
             {
                 (loading) && <Skeleton variant="rectangular" height={height} width="100%" />

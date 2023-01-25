@@ -38,7 +38,7 @@ export default function Projects({ mobile }) {
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", padding:2}}
             ref={projRef}>
-            <TitleCard image={'lake.png'}>
+            <TitleCard image={'project.png'}>
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Projects</Typography>
             </TitleCard>
             <Grid container spacing={1} sx={{ width: "100%", marginTop:2}} ref={projRef}>

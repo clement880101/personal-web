@@ -9,16 +9,16 @@ export default function About({ mobile }) {
     const theme = useTheme()
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
-            <TitleCard image={'green.png'} mobile={mobile}>
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", padding: 2}}>
+            <TitleCard image={'about.png'} mobile={mobile}>
                 <Typography sx={{ color: "white" }} variant={(mobile) ? "h2" : "h1"} >About</Typography>
                 <Typography variant="h5" color={"white"}>The paths that I had taken and who I am now</Typography>
             </TitleCard>
 
-            <Box sx={{ display: "flex", alignItems: "center", width: "95vw" }}
+            <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}
                 flexDirection={(!mobile) ? "row":"column" }>
-                <Card sx={{ margin: 1, borderRadius: 4, position: "relative", overflow: "hidden", 
-                height: (mobile) ? 200 : 500, minWidth: "60%" }}
+                <Card sx={{ borderRadius: 4, position: "relative", overflow: "hidden", 
+                height: (mobile) ? 200 : 500, minWidth: "63%" }}
                     elevation={0}>
                     {
                         (loading) && <Skeleton variant="rectangular" height="100%" width="100%" />
@@ -45,7 +45,7 @@ export default function About({ mobile }) {
             </Box>
 
             <Box sx={{
-                display: "flex", flexDirection: "column", width: "95vw", marginTop: 10, marginBottom: 2
+                display: "flex", flexDirection: "column", width: "100%", marginTop: 5, marginBottom: 2
             }} alignItems={(mobile) ? "center" : "start"} paddingRight={(mobile) ? 0 : "30%"}>
                 <Typography sx={{ marginX: 1 }} variant="h3">Skills</Typography>
                 <Typography sx={{ marginX: 1 }} variant="h6" color="text.secondary">

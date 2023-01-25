@@ -1,5 +1,4 @@
 import { Box, Grid, Typography } from "@mui/material"
-import { Masonry } from "@mui/lab";
 import { useEffect, useState, useRef } from "react"
 import { getArticleList, getProjectList } from "../api/firebaseApi.js"
 
@@ -67,7 +66,7 @@ export default function Home({mobile}) {
                 <Typography variant="h5" color={"white"}>DevOps & Fullstack Engineer based in the Bay Area</Typography>
             </TitleCard>
             <Typography sx={{ marginTop: 5 }} variant="h3">Articles</Typography>
-            <Typography variant="h6" color="text.secondary">
+            <Typography sx={{ marginBottom: 1 }} variant="h6" color="text.secondary">
                 Sharing my ideas on DevOps, blockchain, or any topics I find interesting
             </Typography>
 
@@ -86,7 +85,7 @@ export default function Home({mobile}) {
 
 
             <Typography sx={{ marginTop: 5 }} variant="h3">Projects</Typography>
-            <Typography variant="h6" color="text.secondary">
+            <Typography sx={{ marginBottom: 1 }} variant="h6" color="text.secondary">
                 Showcasing what I had made with various technologies
             </Typography>
             <Grid container spacing={1} sx={{ width: "100%" }}>

@@ -13,7 +13,7 @@ export default function Articles({ mobile }) {
         <Box sx={{
             display: "flex", flexDirection: "column", width: "100%", padding:2
         }}>
-            <TitleCard image={'block.jpg'} mobile={mobile}>
+            <TitleCard image={'article.png'} mobile={mobile}>
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Articles</Typography>
             </TitleCard>
             <InstantSearch searchClient={searchClient} indexName="article">
