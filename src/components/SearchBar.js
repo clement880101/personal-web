@@ -13,7 +13,7 @@ export default function SearchBar(props) {
 
     return (
         <TextField label="Search in Articles" variant="outlined" value={text}
-            sx={{ width: "95vw", marginY: 2, '& fieldset': { borderRadius: 4 } }}
+            sx={{ width: "100%", marginY: 2, '& fieldset': { borderRadius: 4 } }}
             onChange={(event) => { setText(event.target.value) }} InputProps={
                 (text.length!==0)?
                 {endAdornment:

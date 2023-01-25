@@ -18,7 +18,7 @@ export default function About({ mobile }) {
             <Box sx={{ display: "flex", alignItems: "center", width: "95vw" }}
                 flexDirection={(!mobile) ? "row":"column" }>
                 <Card sx={{ margin: 1, borderRadius: 4, position: "relative", overflow: "hidden", 
-                height: (mobile) ? 200 : 500 }}
+                height: (mobile) ? 200 : 500, minWidth: "60%" }}
                     elevation={0}>
                     {
                         (loading) && <Skeleton variant="rectangular" height="100%" width="100%" />

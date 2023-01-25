@@ -22,11 +22,9 @@ export default function ArticleCard({ doc }) {
     }, [doc])
 
     return (
-        <Box sx={{ padding: 0, margin: 1 }}>
-            <Card variant="outlined" sx={{ width: 290, borderRadius: 4}}>
+        <Card variant="outlined" sx={{borderRadius: 4, height:"100%"}}>
                 <CardActionArea sx={{
-                    height: "100%", width: "100%", minHeight: 310,
-                    display: "flex", flexDirection: "column"
+                    height: "100%", width: "100%", display: "flex", flexDirection: "column"
                 }}
                     onClick={() => { if (doc !== null) { navigate("/articles/" + doc[0]) } }}>
                     <Box sx={{height: 100, width:"100%", overflow:"hidden"}}>
@@ -57,6 +55,5 @@ export default function ArticleCard({ doc }) {
                     </CardActions>
                 </CardActionArea>
             </Card>
-        </Box>
     )
 }

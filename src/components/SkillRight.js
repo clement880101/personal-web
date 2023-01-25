@@ -18,7 +18,7 @@ export default function SkillRight({ data, mobile }) {
     return (
         <Card sx={{
             position: "relative", borderRadius: 4, width: (mobile) ? "100%" : "50%", 
-            overflow:"hidden"
+            overflow:"hidden", minHeight:"100%"
         }}>
             {
                 (loading) && <Skeleton variant="rectangular" height="100%" width="100%" />

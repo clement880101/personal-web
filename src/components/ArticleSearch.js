@@ -1,25 +1,32 @@
 import { useHits } from 'react-instantsearch-hooks-web';
-import { Box, Typography } from '@mui/material';
-import { Masonry } from '@mui/lab';
-import { useState, useEffect } from 'react';
+import { Box, Typography, Grid } from '@mui/material';
+import { useState, useEffect, useRef } from 'react';
 import ArticleIcon from '@mui/icons-material/Article';
 import ArticleCard from "./ArticleCard";
 
 export default function ArticleSearch(props) {
-    const [article, setArticle] = useState(Array(6).fill(null))
-    const [col, setCol] = useState(Math.floor(window.innerWidth * 0.95 / 290))
+    const articleRef = useRef()
+    const [xs, setXs] = useState(3)
+    const [article, setArticle] = useState(Array(12/xs).fill(null))
     const { hits } = useHits(props);
 
     useEffect(() => {
         setArticle(hits)
-        console.log(hits)
     }, [hits])
 
     function handleResize() {
-        setCol(Math.floor(window.innerWidth * 0.95 / 290))
+        var col = Math.floor(articleRef.current.clientWidth / 290)
+        if (col <= 0) {
+            setXs(12)
+        } else if (col > 12) {
+            setXs(1)
+        } else {
+            setXs(Math.floor(12 / col))
+        }
     }
 
     useEffect(() => {
+        handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
@@ -27,26 +34,25 @@ export default function ArticleSearch(props) {
     if (article.length === 0) {
         return (
             <Box sx={{
-                width: "95vw", display: "flex", flexDirection: "column",
-                alignItems: "center", justifyContent: "center", paddingTop: 10
+                width: "100%", display: "flex", flexDirection: "column", height:300,
+                alignItems: "center", justifyContent: "center"
             }}>
                 <ArticleIcon sx={{ fontSize: 60 }} />
                 <Typography variant="h5">No Results</Typography>
             </Box>
         )
-    } else if (props.mobile) {
-        return (
-            article.map((doc, index) => <ArticleCard key={index} doc={(doc === null) ? doc : [doc.objectID, doc]} />)
-        )
     } else {
         return (
-            <Box sx={{ width: "95vw" }}>
-                <Masonry columns={col} spacing={2}>
-                    {article.map((doc, index) =>
-                        <ArticleCard key={index} doc={(doc === null) ? doc : [doc.objectID, doc]} />
-                    )}
-                </Masonry>
-            </Box>
+
+            <Grid container spacing={1} sx={{ width: "100%" }} ref={articleRef}>
+                {
+                    article.map((doc, index) =>
+                        <Grid item xs={xs}>
+                            <ArticleCard key={index} doc={(doc === null) ? doc : [doc.objectID, doc]} />
+                        </Grid>
+                    )
+                }
+            </Grid>
         )
     }
 }

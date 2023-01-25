@@ -11,15 +11,14 @@ export default function Articles({ mobile }) {
 
     return (
         <Box sx={{
-            display: "flex", flexDirection: "column", alignItems: "center",
-            width: "100%", minHeight:"140vh"
+            display: "flex", flexDirection: "column", width: "100%", padding:2
         }}>
             <TitleCard image={'block.jpg'} mobile={mobile}>
                 <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Articles</Typography>
             </TitleCard>
             <InstantSearch searchClient={searchClient} indexName="article">
                 <SearchBar/>
-                <ArticleSearch mobile={mobile}/>
+                <ArticleSearch/>
             </InstantSearch>
             
         </Box>

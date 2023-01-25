@@ -23,7 +23,7 @@ export default function Navbar({ mobile, darkMode }) {
     const pathname = useLocation().pathname;
 
     return (
-        <AppBar sx={{ background: "transparent", boxShadow: 'none' }}>
+        <AppBar sx={{ background: "transparent", boxShadow: 'none'}}>
             <Toolbar sx={{ display: "flex" }}>
                 <Box sx={{
                     background: (darkMode) ?  "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)", 
@@ -34,7 +34,7 @@ export default function Navbar({ mobile, darkMode }) {
                 </Box>
 
 
-                <Box sx={{ flexGrow: 1 }} />
+                <Box sx={{ flexGrow: 1}} />
                 {
                     (!mobile) ?
                         <Box sx={{

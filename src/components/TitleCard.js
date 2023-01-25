@@ -7,7 +7,6 @@ export default function TitleCard({ children, image }) {
     const [imageUrl, setImageUrl] = useState(undefined);
     const [loading, setLoading] = useState(true)
     const height = 360
-    const width = "95vw"
 
     useEffect(() => {
         getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/banner/' + image)).then((url) => {
@@ -16,14 +15,14 @@ export default function TitleCard({ children, image }) {
     }, [])
 
     return (
-        <Card sx={{ margin: 1, borderRadius: 4, height: height, width: width, position: "relative" }}
+        <Card sx={{borderRadius: 4, height: height, width: "100%", position: "relative" }}
             elevation={0}>
             {
-                (loading) && <Skeleton variant="rectangular" height={height} width={width} />
+                (loading) && <Skeleton variant="rectangular" height={height} width="100%" />
 
             }
 
-            <CardMedia sx={{ height: height * 1.1 }} component="img"
+            <CardMedia sx={{ height: height }} component="img"
                 image={imageUrl} onLoad={() => { setLoading(false) }} />
 
             {
