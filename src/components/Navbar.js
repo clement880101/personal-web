@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react';
+import { useState, forwardRef, useEffect } from 'react';
 import {
     AppBar, Box, Button, Dialog, IconButton, Link, List, ListItemButton,
     ListItemText, Toolbar, Typography, Slide, useTheme
@@ -7,48 +7,60 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
-  });
+});
 
-export default function Navbar({ mobile, darkMode }) {
-    const theme = useTheme()
+export default function Navbar({ darkMode }) {
+    const [mobile, setMobile] = useState(false)
     const [open, setOpen] = useState(false);
+    const theme = useTheme()
+    const router = useRouter()
 
     const pages = ["Home", "About", "Articles", "Projects", "Contact"];
+    
+    function handleResize() {
+        setMobile(window.innerWidth <= 768)
+    }
 
-    const navigate = useNavigate();
-    const pathname = useLocation().pathname;
+    useEffect(() => {
+        handleResize()
+        console.log(router.pathname)
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     return (
-        <AppBar sx={{ background: "transparent", boxShadow: 'none'}}>
+        <AppBar sx={{ background: "transparent", boxShadow: 'none' }}>
             <Toolbar sx={{ display: "flex" }}>
                 <Box sx={{
-                    background: (darkMode) ?  "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)", 
+                    background: (darkMode) ? "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)",
                     height: "100%", borderRadius: 10, padding: 1, backdropFilter: "blur(5px)"
                 }}>
-                    <Link href="/home" color={theme.palette.background.default}            
-                    variant="overline" underline="none">Clementc.dev</Link>
+                    <Link href="/home" color={theme.palette.background.default}
+                        variant="overline" underline="none">Clementc.dev</Link>
                 </Box>
 
 
-                <Box sx={{ flexGrow: 1}} />
+                <Box sx={{ flexGrow: 1 }} />
                 {
                     (!mobile) ?
                         <Box sx={{
-                            background: (darkMode) ? "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)", 
+                            background: (darkMode) ? "rgb(255,255,255,0.5)" : "rgb(0,0,0,0.5)",
                             height: "100%", borderRadius: 10, padding: 1, backdropFilter: "blur(5px)"
                         }}>
                             {
-                                pages.map((page) => (
-                                    <Button sx={{ borderRadius: 10, marginX: 0.5, padding: 0.7, 
-                                        color:theme.palette.background.default }}
-                                        variant={(page.toLowerCase() === pathname.split("/")[1])
+                                pages.map((page, index) => (
+                                    <Button sx={{
+                                        borderRadius: 10, marginX: 0.5, padding: 0.7,
+                                        color: theme.palette.background.default
+                                    }} key={index}
+                                        variant={(page.toLowerCase() === router.pathname.split("/")[1])
                                             ? "contained" : "text"}
                                         size="small" onClick={() => {
-                                            navigate("/" + page.toLowerCase()); setOpen(false)
+                                            router.push("/" + page.toLowerCase()); setOpen(false)
                                         }}>{page}</Button>
                                 ))
                             }
@@ -63,8 +75,8 @@ export default function Navbar({ mobile, darkMode }) {
                             }
                         }}>
                             {
-                                (open) ? <MenuOpenIcon sx={{ fontSize: 25, color:theme.palette.background.default}} />
-                                    : <MenuIcon sx={{ fontSize: 25, color: theme.palette.background.default}} />
+                                (open) ? <MenuOpenIcon sx={{ fontSize: 25, color: theme.palette.background.default }} />
+                                    : <MenuIcon sx={{ fontSize: 25, color: theme.palette.background.default }} />
                             }
 
                         </IconButton>
@@ -84,13 +96,13 @@ export default function Navbar({ mobile, darkMode }) {
                     flexDirection: "column"
                 }}>
                     {
-                        pages.map((page) => (
+                        pages.map((page, index) => (
 
                             <ListItemButton sx={{
                                 width: "100%", display: "flex", alignItems: "center",
                                 flexDirection: "column", justifyContent: "center"
-                            }} selected={"/" + page.toLowerCase() === pathname}
-                                onClick={() => { navigate("/" + page.toLowerCase()); setOpen(false) }}>
+                            }} key={index} selected={"/" + page.toLowerCase() === router.pathname}
+                                onClick={() => { router.push("/" + page.toLowerCase()); setOpen(false) }}>
                                 <ListItemText sx={{ marginY: 2 }} primary={<Typography variant="h5">{page}</Typography>} />
                             </ListItemButton>
 

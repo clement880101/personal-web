@@ -47,8 +47,8 @@ export default function ArticleSearch(props) {
             <Grid container spacing={1} sx={{ width: "100%" }} ref={articleRef}>
                 {
                     article.map((doc, index) =>
-                        <Grid item xs={xs}>
-                            <ArticleCard key={index} doc={(doc === null) ? doc : [doc.objectID, doc]} />
+                        <Grid item xs={xs} key={index}>
+                            <ArticleCard doc={(doc === null) ? doc : [doc.objectID, doc]} />
                         </Grid>
                     )
                 }

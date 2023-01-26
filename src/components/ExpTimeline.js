@@ -24,8 +24,8 @@ export default function ExpTimeline({ mobile }) {
     return (
         <Timeline>
             {
-                exp.map((doc, i) =>
-                    <TimelineItem>
+                exp.map((doc, index) =>
+                    <TimelineItem key={index}>
                         <TimelineOppositeContent sx={{ transform: "translateY(50%)" }}>
                             {(doc !== null) ? format.format(doc[1].From.seconds * 1000) :
                                 <Box sx={{display:"flex", flexDirection:"column", alignItems:"end"}}>
@@ -37,7 +37,7 @@ export default function ExpTimeline({ mobile }) {
                         <TimelineSeparator sx={{ transform: "translateY(50%)" }} >
                             <TimelineDot />
                             {
-                                (i === exp.length - 1) ?
+                                (index === exp.length - 1) ?
                                     <div />
                                     : <TimelineConnector />
                             }

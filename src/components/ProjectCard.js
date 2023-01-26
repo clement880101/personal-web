@@ -5,12 +5,12 @@ import {
     IconButton, DialogContent, DialogActions
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import { ref, getDownloadURL } from "firebase/storage"
 import { storage } from "../api/firebaseConfig"
 
 export default function ProjectCard({ doc }) {
-    const navigate = useNavigate();
+    const router = useRouter()
     const [open, setOpen] = useState(false);
     const [imageUrl, setImageUrl] = useState(undefined);
     const [loading, setLoading] = useState(true)
@@ -44,7 +44,7 @@ export default function ProjectCard({ doc }) {
                     background: 'linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 1))',
                     color: 'white', padding: 2, display: "flex",
                     flexDirection: "column", justifyContent: "flex-end"
-                }} disableRipple>
+                }}>
 
                     <Typography variant="h6">{
                         (doc !== null) ? doc[1].Title : <Skeleton />
@@ -82,7 +82,7 @@ export default function ProjectCard({ doc }) {
                         label={item} key={item}
                         onClick={() => {
                             if (item !== "N/A") {
-                                navigate({ pathname: "/about", search: "?skills=" + item })
+                                router.push({ pathname: "/about", search: "?skills=" + item, scroll:false})
                             }
                         }} />) : <Box />}
                     </Box>

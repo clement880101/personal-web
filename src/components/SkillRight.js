@@ -1,9 +1,10 @@
 import { Typography, Card, CardContent, CardMedia, Skeleton} from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
-export default function SkillRight({ data, mobile }) {
-    const [searchParams] = useSearchParams();
+export default function SkillRight({ data }) {
+    const router = useRouter()
+    const {skills} = router.query
     const [loading, setLoading] = useState(true)
 
     function find(data, title) {
@@ -17,8 +18,8 @@ export default function SkillRight({ data, mobile }) {
 
     return (
         <Card sx={{
-            position: "relative", borderRadius: 4, width: (mobile) ? "100%" : "50%", 
-            overflow:"hidden", minHeight:"100%"
+            position: "relative", borderRadius: 4, width: "100%", 
+            overflow:"hidden", height:"100%"
         }}>
             {
                 (loading) && <Skeleton variant="rectangular" height="100%" width="100%" />
@@ -33,12 +34,12 @@ export default function SkillRight({ data, mobile }) {
                  display: "flex", flexDirection: "column", justifyContent: "center", 
                  bgcolor:"rgba(0, 0, 0, 0.70)", backdropFilter: "blur(5px)", color:"white"
             }}>
-                <Typography variant='h6'>{(searchParams.get("skills") === null) ?
+                <Typography variant='h6'>{(skills === undefined) ?
                     "Click on the pills to learn more"
-                    : searchParams.get("skills")}</Typography>
+                    : skills}</Typography>
                 <Typography variant="body" sx={{ marginTop: 2 , color:"Gainsboro"}}>
-                    {((searchParams.get("skills") === null) || (data === null)) ? "" :
-                        find(data, searchParams.get("skills"))}
+                    {((skills === undefined) || (data === null)) ? "" :
+                        find(data, skills)}
                 </Typography>
             </CardContent>
         </Card>

@@ -4,14 +4,13 @@ import {
 } from "@mui/material"
 import { ref, getDownloadURL } from "firebase/storage"
 import { storage } from "../api/firebaseConfig"
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router"
 import { useState, useEffect } from "react";
 
 export default function ArticleCard({ doc }) {
     const [imageUrl, setImageUrl] = useState(undefined);
     const [loading, setLoading] = useState(true)
-    const navigate = useNavigate();
-
+    const router = useRouter()
     useEffect(() => {
         if (doc !== null) {
             getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/article/' +
@@ -26,7 +25,7 @@ export default function ArticleCard({ doc }) {
                 <CardActionArea sx={{
                     height: "100%", width: "100%", display: "flex", flexDirection: "column"
                 }}
-                    onClick={() => { if (doc !== null) { navigate("/articles/" + doc[0]) } }}>
+                    onClick={() => { if (doc !== null) { router.push("/articles/" + doc[0]) } }}>
                     <Box sx={{height: 100, width:"100%", overflow:"hidden"}}>
                         {
                             (loading) && <Skeleton variant="rectangular" sx={{ height: "100%", width: "100%" }} />

@@ -1,4 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material"
+import Head from "next/head.js";
 import { useEffect, useState, useRef } from "react"
 import { getArticleList, getProjectList } from "../api/firebaseApi.js"
 
@@ -8,7 +9,7 @@ import ProjectCard from "../components/ProjectCard.js";
 import TitleCard from "../components/TitleCard.js";
 
 
-export default function Home({mobile}) {
+export default function home() {
     const homeRef = useRef()
     const [xs, setXs] = useState(3)
     const [article, setArticle] = useState(Array(handleNum()).fill(null))
@@ -39,18 +40,19 @@ export default function Home({mobile}) {
 
 
 
-    function handleResize() {
-        var col = Math.floor(homeRef.current.clientWidth / 290)
-        if (col <= 0) {
-            setXs(12)
-        } else if (col > 12) {
-            setXs(1)
-        } else {
-            setXs(Math.floor(12 / col))
-        }
-    }
+
 
     useEffect(() => {
+        function handleResize() {
+            var col = Math.floor(homeRef.current.clientWidth / 290)
+            if (col <= 0) {
+                setXs(12)
+            } else if (col > 12) {
+                setXs(1)
+            } else {
+                setXs(Math.floor(12 / col))
+            }
+        }
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
@@ -58,14 +60,22 @@ export default function Home({mobile}) {
 
     return (
         <Box sx={{
-            display: "flex", flexDirection: "column", alignItems: (mobile) ? "center" : "start",
+            display: "flex", flexDirection: "column", alignItems: "start",
             width: "100%", padding: 2
         }} ref={homeRef}>
-            <TitleCard image={'home.png'} mobile={mobile}>
-                <Typography variant={(mobile) ? "h2" : "h1"} color={"white"}>Clement</Typography>
+            <Head>
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="home|clementc.dev" />
+                <meta property="og:description" content="portfolio and blog by clement" />
+                <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/thumbnail%2Fpersonalweb.PNG?alt=media&token=dece4229-f941-4f15-b24e-eb7d6abe1c98" />
+                <meta property="og:url" content="https://clementc.dev/home" />
+                <title>home|clementc.dev</title>
+            </Head>
+            <TitleCard image={'home.png'}>
+                <Typography variant={"h2"} color={"white"}>clement</Typography>
                 <Typography variant="h5" color={"white"}>DevOps & Fullstack Engineer based in the Bay Area</Typography>
             </TitleCard>
-            <Typography sx={{ marginTop: 5 }} variant="h3">Articles</Typography>
+            <Typography sx={{ marginTop: 8 }} variant="h3">Articles</Typography>
             <Typography sx={{ marginBottom: 1 }} variant="h6" color="text.secondary">
                 Sharing my ideas on DevOps, blockchain, or any topics I find interesting
             </Typography>
@@ -73,8 +83,8 @@ export default function Home({mobile}) {
             <Grid container spacing={1} sx={{ width: "100%" }}>
                 {
                     article.map((doc, index) =>
-                        <Grid item xs={xs}>
-                            <ArticleCard doc={doc} key={index} />
+                        <Grid item xs={xs} key={index} >
+                            <ArticleCard doc={doc} />
                         </Grid>
                     )
                 }
@@ -84,15 +94,15 @@ export default function Home({mobile}) {
             </Grid>
 
 
-            <Typography sx={{ marginTop: 5 }} variant="h3">Projects</Typography>
+            <Typography sx={{ marginTop: 8 }} variant="h3">Projects</Typography>
             <Typography sx={{ marginBottom: 1 }} variant="h6" color="text.secondary">
                 Showcasing what I had made with various technologies
             </Typography>
             <Grid container spacing={1} sx={{ width: "100%" }}>
                 {
                     project.map((doc, index) =>
-                        <Grid item xs={xs}>
-                            <ProjectCard doc={doc} key={index} />
+                        <Grid item xs={xs} key={index} >
+                            <ProjectCard doc={doc}/>
                         </Grid>
                     )
                 }
