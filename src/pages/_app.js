@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { ThemeProvider, createTheme, CssBaseline, Toolbar } from '@mui/material';
+import { ThemeProvider, createTheme, CssBaseline} from '@mui/material';
 import createEmotionCache from "../utils/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
 
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
-import Lightswitch from "../components/Lightswitch"
 
 export default function MyApp({ Component, pageProps }) {
     const [darkMode, setDarkMode] = useState(true);
@@ -28,10 +27,8 @@ export default function MyApp({ Component, pageProps }) {
 
                 <CssBaseline />
 
-                <Navbar darkMode={darkMode} />
-                <Toolbar/>
+                <Navbar darkMode={darkMode} setDarkMode={setDarkMode}/>
                 <Component {...pageProps} />
-                <Lightswitch darkmode={darkMode} setDarkMode={setDarkMode} />
             </ThemeProvider>
         </CacheProvider>
     )

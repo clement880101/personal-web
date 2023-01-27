@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useEffect, useState, useRef } from "react"
 import { getProjectList } from "../api/firebaseApi"
 import ProjectCard from "../components/ProjectCard.js";
-import TitleCard from "../components/TitleCard";
+import TitleBanner from "../components/TitleBanner";
 
 export default function projects(props) {
     const { project = Array(4).fill(null) } = props
@@ -29,21 +29,21 @@ export default function projects(props) {
 
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", padding: 2 }}
-            ref={projRef}>
+        <Box sx={{width:"100%"}}  ref={projRef}>
             <Head>
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content="projects|clementc.dev" />
+                <meta property="og:title" content="projects | clementc.dev" />
                 <meta property="og:description" content="projects by clement" />
                 <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/banner%2Fproject.png?alt=media&token=4d196260-8ed5-450f-8237-4a9a4859164e" />
                 <meta property="og:url" content="https://clementc.dev/projects" />
-                <title>projects|clementc.dev</title>
+                <title>projects | clementc.dev</title>
             </Head>
 
-            <TitleCard image={'project.png'}>
-                <Typography variant={"h2"} color={"white"}>projects</Typography>
-            </TitleCard>
-            <Grid container spacing={1} sx={{ width: "100%", marginTop: 2 }} ref={projRef}>
+            <TitleBanner darkColor={"#c08552"} whiteColor={"#dab49d"}>
+                <Typography variant="h2" sx={{ transition: "color 1s ease-in-out" }}>projects</Typography>    
+            </TitleBanner>
+            <Box sx={{padding:2}}>
+            <Grid container spacing={1} sx={{ width: "100%" }} ref={projRef}>
                 {
                     project.map((data, index) =>
                         <Grid item xs={xs} key={index}>
@@ -52,6 +52,7 @@ export default function projects(props) {
                     )
                 }
             </Grid>
+            </Box>
         </Box>
     )
 }

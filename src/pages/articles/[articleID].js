@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Skeleton, Typography, Card, CardActionArea, CardMedia } from "@mui/material";
+import { Box, Skeleton, Typography, Card, CardActionArea, CardMedia, Toolbar } from "@mui/material";
 import { getArticle } from "../../api/firebaseApi";
 import { ref, getDownloadURL } from "firebase/storage"
 import { storage } from "../../api/firebaseConfig"
@@ -21,16 +21,17 @@ export default function ArticlePage(props) {
                 (!router.isFallback) && <>
                     <Head>
                         <meta property="og:type" content="website" />
-                        <meta property="og:title" content={data.doc.Title + "|clementc.dev"} />
+                        <meta property="og:title" content={data.doc.Title + " | clementc.dev"} />
                         <meta property="og:description" content={data.doc.Desc} />
                         <meta property="og:image" content={data.doc.Image} />
                         <meta property="og:url" content={"https://clementc.dev/articles/" + data.id} />
-                        <title>{data.doc.Title + "|clementc.dev"}</title>
+                        <title>{data.doc.Title + " | clementc.dev"}</title>
                     </Head>
                 </>
             }
 
             <Box sx={{ minWidth: 300, maxWidth: 800, width: "80vw" }}>
+                <Toolbar/>
                 <Card variant="outlined" sx={{ width: 160, height: 60, borderRadius: 4 }}>
                     <CardActionArea sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "row" }}
                         onClick={() => { router.push("/articles",undefined, {scroll: false}) }}>

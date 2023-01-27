@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
                 <link rel="manifest" href="manifest.json" />
                 {this.props.emotionStyleTags}
             </Head>
-            <body>
+            <body style={{transition:"background-color 1s ease-in-out"}}>
                 <Main />
                 <NextScript />
             </body>

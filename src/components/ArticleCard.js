@@ -13,7 +13,8 @@ export default function ArticleCard({ doc }) {
     const router = useRouter()
 
     return (
-        <Card variant="outlined" sx={{ borderRadius: 4, height: "100%" }}>
+        <Card variant="outlined" sx={{ borderRadius: 4, height: "100%", 
+        transition:"background-color 1s ease-in-out"}}>
             <CardActionArea sx={{
                 height: "100%", width: "100%", display: "flex", flexDirection: "column"
             }}
@@ -30,12 +31,13 @@ export default function ArticleCard({ doc }) {
                 </Box>
 
                 <CardContent sx={{ width: "100%", overflow: "hidden", flexGrow: 1 }}>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant="h6" gutterBottom sx={{transition: "color 1s ease-in-out"}}>
                         {(doc !== null) ? doc[1].Title : <Skeleton />}
                     </Typography>
 
                     {(doc !== null) ?
-                        <Typography color="text.secondary" variant="body2">{doc[1].Subtitle}</Typography>
+                        <Typography color="text.secondary" variant="body2"
+                        sx={{transition: "color 1s ease-in-out"}}>{doc[1].Subtitle}</Typography>
                         :
                         <Box>
                             <Skeleton />
@@ -46,7 +48,8 @@ export default function ArticleCard({ doc }) {
 
                 </CardContent>
                 <CardActions sx={{ width: "100%", paddingX: 2 }}>
-                    <Typography variant="overline" color="primary">{(doc !== null) ? "Read More" :
+                    <Typography variant="overline" color="primary" 
+                    sx={{transition: "color 1s ease-in-out"}}>{(doc !== null) ? "Read More" :
                         <Skeleton sx={{ width: 80 }} />}</Typography>
                 </CardActions>
             </CardActionArea>

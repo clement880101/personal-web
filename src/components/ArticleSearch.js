@@ -37,8 +37,8 @@ export default function ArticleSearch(props) {
                 width: "100%", display: "flex", flexDirection: "column", height:300,
                 alignItems: "center", justifyContent: "center"
             }}>
-                <ArticleIcon sx={{ fontSize: 60 }} />
-                <Typography variant="h5">No Results</Typography>
+                <ArticleIcon sx={{ fontSize: 60, transition: "color 1s ease-in-out"}} />
+                <Typography variant="h5" sx={{transition: "color 1s ease-in-out"}}>No Results</Typography>
             </Box>
         )
     } else {

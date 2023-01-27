@@ -29,8 +29,8 @@ export default function ProjectCard({ data }) {
     }, [data])
 
     return (
-        <Card sx={{ borderRadius: 4}}>
-            <CardActionArea onClick={() => { handleClick() }} sx={{ position: 'relative' }}>
+        <Card sx={{ borderRadius: 4, transition:"background-color 1s ease-in-out"}}>
+            <CardActionArea onClick={() => { handleClick() }} sx={{ position: 'relative'}}>
                 <Box sx={{ height: 200, width: "100%", overflow: "hidden" }}>
                     {
                         (loading) && <Skeleton variant="rectangular" sx={{ height: "100%", width: "100%" }} />
@@ -51,7 +51,8 @@ export default function ProjectCard({ data }) {
                 </Box>
             </CardActionArea>
             <Dialog onClose={handleClick} open={open} 
-                PaperProps={{ style: { borderRadius: 30, minWidth: 300, maxWidth: "90vw"} }}>
+                PaperProps={{ style: { borderRadius: 30, minWidth: 300, maxWidth: 600, 
+                transition:"all 1s ease-in-out"} }}>
                 <DialogTitle sx={{ position: "relative", padding: 0 }}>
                     <Box sx={{ height: 150, width: "100%", overflow: "hidden" }}>
                         {
@@ -83,7 +84,7 @@ export default function ProjectCard({ data }) {
                         label={item} key={item}
                         onClick={() => {
                             if (item !== "N/A") {
-                                router.push({ pathname: "/about", search: "?skills=" + item}, 
+                                router.push({ pathname: "/about", query:{skill:item,other:true}}, 
                                 undefined, {scroll: false})
                             }
                         }} />) : <Box />}
