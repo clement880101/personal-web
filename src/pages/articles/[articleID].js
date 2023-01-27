@@ -8,52 +8,32 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-export default function ArticlePage({ mobile }) {
-    const [data, setData] = useState(null);
-    const [title, setTitle] = useState(undefined);
-    const [desc, setDesc] = useState(undefined);
+export default function ArticlePage(props) {
+    const { data = null } = props
     const [loading, setLoading] = useState(true)
     const [imageUrl, setImageUrl] = useState(undefined);
 
     const router = useRouter()
-    const { articleID } = router.query
-    const format = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })
-
-    useEffect(() => {
-        getArticle(articleID).then((document) => {
-            if (document[0]) {
-                setData(document[1])
-                setTitle(document[1].Title)
-                setDesc(document[1].Subtitle)
-            } else {
-                router.push("/articles")
-            }
-        })
-    }, [articleID]);
-
-    useEffect(() => {
-        if (data !== null) {
-            getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/article/' +
-                data.Image)).then((url) => {
-                    setImageUrl(url);
-                });
-        }
-    }, [data])
 
     return (
         <Box sx={{ paddingTop: 2, display: "flex", flexDirection: "row", justifyContent: "center" }}>
-            <Head>
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content={title + "|clementc.dev"} />
-                <meta property="og:description" content={desc} />
-                <meta property="og:image" content={imageUrl} />
-                <meta property="og:url" content={"https://clementc.dev/articles/" + articleID} />
-                <title>{title + "|clementc.dev"}</title>
-            </Head>
-            <Box sx={{minWidth:300, maxWidth:800, width:"80vw"}}>
+            {
+                (!router.isFallback) && <>
+                    <Head>
+                        <meta property="og:type" content="website" />
+                        <meta property="og:title" content={data.doc.Title + "|clementc.dev"} />
+                        <meta property="og:description" content={data.doc.Desc} />
+                        <meta property="og:image" content={data.doc.Image} />
+                        <meta property="og:url" content={"https://clementc.dev/articles/" + data.id} />
+                        <title>{data.doc.Title + "|clementc.dev"}</title>
+                    </Head>
+                </>
+            }
+
+            <Box sx={{ minWidth: 300, maxWidth: 800, width: "80vw" }}>
                 <Card variant="outlined" sx={{ width: 160, height: 60, borderRadius: 4 }}>
                     <CardActionArea sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "row" }}
-                        onClick={() => { router.push("/articles") }}>
+                        onClick={() => { router.push("/articles",undefined, {scroll: false}) }}>
                         <ArrowBackIosNewIcon />
                         <Typography>
                             Back to Articles
@@ -65,19 +45,21 @@ export default function ArticlePage({ mobile }) {
                         (loading) && <Skeleton variant="rectangular" height="100%" width="100%" />
 
                     }
-                    <CardMedia sx={{ width: "100%", height: "100%" }} component="img"
-                        image={imageUrl} onLoad={() => { setLoading(false) }} />
+                    {
+                        (!router.isFallback) && <CardMedia sx={{ width: "100%", height: "100%" }} component="img"
+                        image={data.doc.Image} onLoad={() => { setLoading(false) }} />
+                    }
                 </Card>
-                <Typography variant={(mobile) ? "h4" : "h3"} sx={{ marginTop: 2 }}>
-                    {(data === null) ? <Skeleton /> : title}
+                <Typography variant={"h3"} sx={{ marginTop: 2 }}>
+                    {(data === null) ? <Skeleton /> : data.doc.Title}
                 </Typography>
                 <Typography color="text.secondary" variant="subtitle2">
                     {(data === null) ? <Skeleton /> :
-                        "Last Modified " + String(format.format(data.Date.seconds * 1000))}
+                        "Last Modified " + data.doc.Date}
                 </Typography>
                 <Typography color="text.secondary" sx={{ marginBottom: 5, marginTop: 2, fontStyle: 'italic' }}
                     variant="subtitle1">
-                    {(data === null) ? <Skeleton /> : desc}
+                    {(data === null) ? <Skeleton /> : data.doc.Desc}
                 </Typography>
 
                 {(data === null) ?
@@ -89,9 +71,35 @@ export default function ArticlePage({ mobile }) {
                         <Skeleton />
                     </Box>
                     :
-                    <div dangerouslySetInnerHTML={{ __html: data.Content }} />
+                    <div dangerouslySetInnerHTML={{ __html: data.doc.Content }} />
                 }
             </Box>
         </Box>
     )
+}
+
+export async function getStaticProps({ params }) {
+    var data = null
+    const document = await getArticle(`${params.articleID}`)
+    if (document.success) {
+        data = document.data
+    } else {
+        console.log(document.err)
+    }
+
+    return {
+        props: {
+            data,
+        },
+        revalidate: 432000,
+    }
+}
+
+export async function getStaticPaths() {
+    return {
+        paths: [{ params: { articleID: '8j6u5yw7Rn06sZ8XFFtr' } },
+        { params: { articleID: 'KvCX1GBZvwmHKyWMml3m' } },
+        { params: { articleID: 'l4OZm6YxYmOi5H7wCAeM' } }],
+        fallback: true,
+    };
 }

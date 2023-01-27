@@ -5,18 +5,10 @@ import { getProjectList } from "../api/firebaseApi"
 import ProjectCard from "../components/ProjectCard.js";
 import TitleCard from "../components/TitleCard";
 
-export default function projects({ }) {
+export default function projects(props) {
+    const { project = Array(4).fill(null) } = props
     const projRef = useRef()
     const [xs, setXs] = useState(3)
-    const [project, setProject] = useState(Array(12 / xs).fill(null))
-
-
-    useEffect(() => {
-        getProjectList(20).then((document) => {
-            // Replace with error banner
-            document[0] ? setProject(document[1]) : console.log(document[1])
-        })
-    }, [])
 
     function handleResize() {
         var col = Math.floor(projRef.current.clientWidth / 290)
@@ -39,7 +31,7 @@ export default function projects({ }) {
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", padding: 2 }}
             ref={projRef}>
-           <Head>
+            <Head>
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="projects|clementc.dev" />
                 <meta property="og:description" content="projects by clement" />
@@ -53,13 +45,30 @@ export default function projects({ }) {
             </TitleCard>
             <Grid container spacing={1} sx={{ width: "100%", marginTop: 2 }} ref={projRef}>
                 {
-                    project.map((doc, index) =>
+                    project.map((data, index) =>
                         <Grid item xs={xs} key={index}>
-                            <ProjectCard doc={doc}  />
+                            <ProjectCard data={data} />
                         </Grid>
                     )
                 }
             </Grid>
         </Box>
     )
+}
+
+export async function getStaticProps() {
+    var project = Array(4).fill(null)
+    const document = await getProjectList(20)
+    if (document.success) {
+        project = document.data
+    } else {
+        console.log(document.err)
+    }
+
+    return {
+        props: {
+            project,
+        },
+        revalidate: 432000,
+    }
 }

@@ -7,7 +7,7 @@ import ArticleSearch from '../components/ArticleSearch';
 import TitleCard from "../components/TitleCard"
 import Head from 'next/head';
 
-export default function articles({ mobile }) {
+export default function articles() {
 
     return (
         <Box sx={{

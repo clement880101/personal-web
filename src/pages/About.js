@@ -49,10 +49,9 @@ export default function about() {
             document[0] ? setData(document[1]) : console.log(document[1]);
         })
 
-        if ((skills !== undefined) &&(skillRef !== undefined)){
-            console.log("XBHSG*******************")
-            skillRef.current.scrollIntoView({block: "end", inline: "nearest"})
-        }
+        // if ((skills !== undefined) &&(skillRef !== undefined)){
+        //     skillRef.current.scrollIntoView({block: "end", inline: "nearest"})
+        // }
 
         return () => window.removeEventListener('resize', handleResize)
     }, [])

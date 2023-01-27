@@ -60,7 +60,7 @@ export default function Navbar({ darkMode }) {
                                         variant={(page.toLowerCase() === router.pathname.split("/")[1])
                                             ? "contained" : "text"}
                                         size="small" onClick={() => {
-                                            router.push("/" + page.toLowerCase()); setOpen(false)
+                                            router.push("/" + page.toLowerCase(), undefined, {scroll: false}); setOpen(false)
                                         }}>{page}</Button>
                                 ))
                             }

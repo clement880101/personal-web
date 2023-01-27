@@ -33,7 +33,7 @@ export default function home() {
 
         getProjectList(handleNum()).then((document) => {
             // Replace with error banner
-            document[0] ? setProject(document[1]) : console.log(document[1])
+            (document.success) ? setProject(document.data) : console.log(document.err)
         })
 
     }, [xs])
@@ -73,9 +73,11 @@ export default function home() {
             </Head>
             <TitleCard image={'home.png'}>
                 <Typography variant={"h2"} color={"white"}>clement</Typography>
-                <Typography variant="h5" color={"white"}>DevOps & Fullstack Engineer based in the Bay Area</Typography>
+                <Typography variant="h5" color={"white"}>
+                    DevOps & Fullstack Engineer based in the Bay Area
+                </Typography>
             </TitleCard>
-            <Typography sx={{ marginTop: 8 }} variant="h3">Articles</Typography>
+            <Typography sx={{ marginTop: 8 }} variant="h4">articles</Typography>
             <Typography sx={{ marginBottom: 1 }} variant="h6" color="text.secondary">
                 Sharing my ideas on DevOps, blockchain, or any topics I find interesting
             </Typography>
@@ -94,15 +96,15 @@ export default function home() {
             </Grid>
 
 
-            <Typography sx={{ marginTop: 8 }} variant="h3">Projects</Typography>
+            <Typography sx={{ marginTop: 8 }} variant="h4">projects</Typography>
             <Typography sx={{ marginBottom: 1 }} variant="h6" color="text.secondary">
                 Showcasing what I had made with various technologies
             </Typography>
             <Grid container spacing={1} sx={{ width: "100%" }}>
                 {
-                    project.map((doc, index) =>
+                    project.map((data, index) =>
                         <Grid item xs={xs} key={index} >
-                            <ProjectCard doc={doc}/>
+                            <ProjectCard data={data}/>
                         </Grid>
                     )
                 }
