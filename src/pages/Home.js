@@ -64,9 +64,16 @@ export default function home() {
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="home | clementc.dev" />
                 <meta property="og:description" content="portfolio and blog by clement" />
-                <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/thumbnail%2Fpersonalweb.PNG?alt=media&token=dece4229-f941-4f15-b24e-eb7d6abe1c98" />
+                <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/thumbnail%2Fhome.jpeg?alt=media&token=db985b70-ca85-4f61-91f1-63c06ba30d32" />
                 <meta property="og:url" content="https://clementc.dev/home" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:domain" content="clementc.dev" />
+                <meta property="twitter:url" content="https://clementc.dev/home" />
+                <meta name="twitter:title" content="home | clementc.dev" />
+                <meta name="twitter:description" content="portfolio and blog by clement" />
+                <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/thumbnail%2Fhome.jpeg?alt=media&token=db985b70-ca85-4f61-91f1-63c06ba30d32" />
                 <title>home | clementc.dev</title>
+                <meta name="description" content="portfolio and blog by clement"/>
             </Head>
             <TitleBanner darkColor={"#ff8811"} whiteColor={"#E2C044"}>
                 <Typography variant="h2" sx={{ transition: "color 1s ease-in-out" }}>clement</Typography>

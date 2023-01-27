@@ -26,15 +26,22 @@ export default function ArticlePage(props) {
                         <meta property="og:image" content={data.doc.Image} />
                         <meta property="og:url" content={"https://clementc.dev/articles/" + data.id} />
                         <title>{data.doc.Title + " | clementc.dev"}</title>
+                        <meta name="description" content={data.doc.Desc} />
+                        <meta name="twitter:card" content="summary_large_image" />
+                        <meta property="twitter:domain" content="clementc.dev" />
+                        <meta property="twitter:url" content={"https://clementc.dev/articles/" + data.id} />
+                        <meta name="twitter:title" content={data.doc.Title + " | clementc.dev"} />
+                        <meta name="twitter:description" content={data.doc.Desc} />
+                        <meta name="twitter:image" content={data.doc.Image} />
                     </Head>
                 </>
             }
 
             <Box sx={{ minWidth: 300, maxWidth: 800, width: "80vw" }}>
-                <Toolbar/>
+                <Toolbar />
                 <Card variant="outlined" sx={{ width: 160, height: 60, borderRadius: 4 }}>
                     <CardActionArea sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "row" }}
-                        onClick={() => { router.push("/articles",undefined, {scroll: false}) }}>
+                        onClick={() => { router.push("/articles", undefined, { scroll: false }) }}>
                         <ArrowBackIosNewIcon />
                         <Typography>
                             Back to Articles
@@ -48,7 +55,7 @@ export default function ArticlePage(props) {
                     }
                     {
                         (!router.isFallback) && <CardMedia sx={{ width: "100%", height: "100%" }} component="img"
-                        image={data.doc.Image} onLoad={() => { setLoading(false) }} />
+                            image={data.doc.Image} onLoad={() => { setLoading(false) }} />
                     }
                 </Card>
                 <Typography variant={"h3"} sx={{ marginTop: 2 }}>

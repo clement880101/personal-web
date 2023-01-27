@@ -29,7 +29,7 @@ export default function projects(props) {
 
 
     return (
-        <Box sx={{width:"100%"}}  ref={projRef}>
+        <Box sx={{ width: "100%" }} ref={projRef}>
             <Head>
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="projects | clementc.dev" />
@@ -37,21 +37,29 @@ export default function projects(props) {
                 <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/banner%2Fproject.png?alt=media&token=4d196260-8ed5-450f-8237-4a9a4859164e" />
                 <meta property="og:url" content="https://clementc.dev/projects" />
                 <title>projects | clementc.dev</title>
+                <meta name="description" content="projects by clement" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:domain" content="clementc.dev" />
+                <meta property="twitter:url" content="https://clementc.dev/projects" />
+                <meta name="twitter:title" content="projects | clementc.dev" />
+                <meta name="twitter:description" content="projects by clement" />
+                <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/banner%2Fproject.png?alt=media&token=4d196260-8ed5-450f-8237-4a9a4859164e" />
+
             </Head>
 
             <TitleBanner darkColor={"#c08552"} whiteColor={"#dab49d"}>
-                <Typography variant="h2" sx={{ transition: "color 1s ease-in-out" }}>projects</Typography>    
+                <Typography variant="h2" sx={{ transition: "color 1s ease-in-out" }}>projects</Typography>
             </TitleBanner>
-            <Box sx={{padding:2}}>
-            <Grid container spacing={1} sx={{ width: "100%" }} ref={projRef}>
-                {
-                    project.map((data, index) =>
-                        <Grid item xs={xs} key={index}>
-                            <ProjectCard data={data} />
-                        </Grid>
-                    )
-                }
-            </Grid>
+            <Box sx={{ padding: 2 }}>
+                <Grid container spacing={1} sx={{ width: "100%" }} ref={projRef}>
+                    {
+                        project.map((data, index) =>
+                            <Grid item xs={xs} key={index}>
+                                <ProjectCard data={data} />
+                            </Grid>
+                        )
+                    }
+                </Grid>
             </Box>
         </Box>
     )

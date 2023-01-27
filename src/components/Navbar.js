@@ -2,7 +2,7 @@ import { useState, forwardRef, useEffect, useCallback } from 'react';
 import {
     AppBar, Box, Dialog, IconButton, List, ListItemButton, Button,
     ListItemText, Toolbar, Typography, Slide, useTheme, Fab, Link,
-    useMediaQuery, darken, lighten, styled, Switch
+    useMediaQuery, darken, lighten
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -18,7 +18,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export default function Navbar({ darkMode, setDarkMode }) {
     const [scrollY, setScrollY] = useState(0);
-    const [mobile, setMobile] = useState(false)
+    const [mobile, setMobile] = useState(true)
     const [open, setOpen] = useState(false);
     const theme = useTheme()
     const router = useRouter()
@@ -156,7 +156,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
             }
             <Dialog open={open} onClose={() => setOpen(false)} fullScreen TransitionComponent={Transition}
                 PaperProps={{ style: { backgroundColor: setColor(), 
-                transition:"background-color 1s ease-in-out" } }} sx={{ height: "100vh" }}>
+                transition:"background-color 1s ease-in-out" } }} sx={{ height: "100%" }}>
                 <Toolbar sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
                     <Link href="/home" underline="none" variant="subtitle1"
                         color={theme.palette.text.primary} sx={{ transition: "all 1s ease-in-out" }}>

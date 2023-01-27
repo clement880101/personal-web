@@ -17,7 +17,7 @@ export default function about() {
     const [loading, setLoading] = useState(true)
     const [xs, setXs] = useState(6)
     const aboutRef = useRef()
-    
+
     const category = ["DevOps", "Frontend", "Backend", "Life", "All"]
 
     const handleChange = (event, newAlignment) => {
@@ -54,6 +54,13 @@ export default function about() {
                 <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/banner%2Fabout.png?alt=media&token=565a5c5c-165a-4702-8631-a7754dd97e04" />
                 <meta property="og:url" content="https://clementc.dev/about" />
                 <title>about | clementc.dev</title>
+                <meta name="description" content="about clement" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:domain" content="clementc.dev" />
+                <meta property="twitter:url" content="https://clementc.dev/about" />
+                <meta name="twitter:title" content="about | clementc.dev" />
+                <meta name="twitter:description" content="about clement" />
+                <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/personalwebsite-4b72f.appspot.com/o/banner%2Fabout.png?alt=media&token=565a5c5c-165a-4702-8631-a7754dd97e04" />
             </Head>
             <TitleBanner darkColor={"#df2935"} whiteColor={"#fc7a57"}>
                 <Typography variant="h2" sx={{ transition: "color 1s ease-in-out" }}>about</Typography>
@@ -61,7 +68,7 @@ export default function about() {
             </TitleBanner>
 
             <Grid container spacing={2} sx={{ width: "100%", padding: 2 }}>
-                <Grid item xs={xs} sx={{minHeight:550}}>
+                <Grid item xs={xs} sx={{ minHeight: 550 }}>
                     <Card sx={{
                         borderRadius: 4, position: "relative", overflow: "hidden", width: "100%", height: 550,
                         marginTop: 4
@@ -88,18 +95,18 @@ export default function about() {
                         </Box>
                     </Card>
                 </Grid>
-                <Grid item xs={xs} sx={{minHeight:550}}>
+                <Grid item xs={xs} sx={{ minHeight: 550 }}>
                     <ExpTimeline />
                 </Grid>
                 <Grid item xs={xs}>
-                    <Typography sx={{transition:"color 1s ease-in-out"}} variant="h3">skills</Typography>
-                    <Typography sx={{transition:"color 1s ease-in-out"}} variant="h6" color="text.secondary">
+                    <Typography sx={{ transition: "color 1s ease-in-out" }} variant="h3">skills</Typography>
+                    <Typography sx={{ transition: "color 1s ease-in-out" }} variant="h6" color="text.secondary">
                         Now I can do all these things...
                     </Typography>
                     <ToggleButtonGroup value={selected}
                         exclusive onChange={handleChange} color="primary" size="small">
                         {category.map((cat, index) =>
-                            <ToggleButton sx={{transition:"color 1s ease-in-out"}} key={index} value={cat}>{cat}</ToggleButton>
+                            <ToggleButton sx={{ transition: "color 1s ease-in-out" }} key={index} value={cat}>{cat}</ToggleButton>
                         )}
                     </ToggleButtonGroup>
                     <SkillLeft data={data} title={selected} />
