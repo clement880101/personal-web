@@ -3,13 +3,17 @@
 # dependencies
 /node_modules
 /.pnp
+/.next
+/.firebase
 .pnp.js
+
 
 # testing
 /coverage
 
 # production
 /build
+/out
 
 # misc
 .DS_Store
@@ -19,5 +23,6 @@
 .env.production.local
 
 npm-debug.log*
+ui-debug.log*
 yarn-debug.log*
 yarn-error.log*

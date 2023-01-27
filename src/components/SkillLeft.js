@@ -1,14 +1,16 @@
 import { Typography, Chip, Box, Skeleton } from "@mui/material"
-import { useSearchParams } from 'react-router-dom'
-import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { useEffect, useState} from "react"
 
-export default function SkillLeft({ data, title, mobile}) {
-    const [searchParams, setSearchParams] = useSearchParams();
+export default function SkillLeft({ data, title}) {
+    const router = useRouter()
     const [skills, setSkills] = useState(Array(3).fill(null))
     const [languages, setLanguages] = useState(Array(6).fill(null))
 
     function handleClick(skill) {
-        setSearchParams({ 'skills': skill }, { replace: true })
+        router.replace({
+            query: { ...router.query, 'skill': skill, 'other': false},
+         }, undefined, {scroll:false});
     }
 
     useEffect(() => {
@@ -26,27 +28,30 @@ export default function SkillLeft({ data, title, mobile}) {
             }
             setSkills(ski)
             setLanguages(lang)
+
         }
     }, [data, title])
 
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", padding:2, width:"100%",justifyContent:"center"}}>
-            <Typography variant="h5">...speak these languages</Typography>
+            <Typography sx={{transition:"color 1s ease-in-out"}} variant="h5">...speak these languages</Typography>
             <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>
                 {
-                    languages.map((item) => <Chip onClick={() => { handleClick(item.Name) }}
+                    languages.map((item, index) => <Chip key={index} sx={{transition:"color 1s ease-in-out"}}
+                    onClick={() => { handleClick(item.Name) }}
                         label={(item === null) ? <Skeleton width={50} /> : item.Name}
-                        variant={((item !== null) && (searchParams.get("skills") === item.Name))
+                        variant={((item !== null) && (router.query.skill === item.Name))
                             ? "filled" : "outlined"} />)
                 }
             </Box>
-            <Typography variant="h5">...talk about and use</Typography>
+            <Typography sx={{transition:"color 1s ease-in-out"}} variant="h5">...talk about and use</Typography>
             <Box sx={{ display: "flex", flexDirection: "row", gap: 1, flexWrap: "wrap", padding: 2 }}>
                 {
-                    skills.map((item) => <Chip onClick={() => { handleClick(item.Name) }}
+                    skills.map((item, index) => <Chip key={index} sx={{transition:"color 1s ease-in-out"}} 
+                    onClick={() => { handleClick(item.Name) }}
                         label={(item === null) ? <Skeleton width={50} /> : item.Name}
-                        variant={((item !== null) && (searchParams.get("skills") === item.Name))
+                        variant={((item !== null) && (router.query.skill === item.Name))
                             ? "filled" : "outlined"} />)
                 }
             </Box>

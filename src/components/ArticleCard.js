@@ -4,56 +4,55 @@ import {
 } from "@mui/material"
 import { ref, getDownloadURL } from "firebase/storage"
 import { storage } from "../api/firebaseConfig"
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router"
 import { useState, useEffect } from "react";
 
 export default function ArticleCard({ doc }) {
     const [imageUrl, setImageUrl] = useState(undefined);
     const [loading, setLoading] = useState(true)
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (doc !== null) {
-            getDownloadURL(ref(storage, 'gs://personalwebsite-4b72f.appspot.com/article/' +
-                doc[1].Image)).then((url) => {
-                    setImageUrl(url);
-                });
-        }
-    }, [doc])
+    const router = useRouter()
 
     return (
-        <Card variant="outlined" sx={{borderRadius: 4, height:"100%"}}>
-                <CardActionArea sx={{
-                    height: "100%", width: "100%", display: "flex", flexDirection: "column"
-                }}
-                    onClick={() => { if (doc !== null) { navigate("/articles/" + doc[0]) } }}>
-                    <Box sx={{height: 100, width:"100%", overflow:"hidden"}}>
-                        {
-                            (loading) && <Skeleton variant="rectangular" sx={{ height: "100%", width: "100%" }} />
-                        }
-                        <CardMedia sx={{ width: "100%", height: "100%" }} component="img"
-                            image={imageUrl} onLoad={() => { setLoading(false) }} />
-                    </Box>
+        <Card variant="outlined" sx={{ borderRadius: 4, height: "100%", 
+        transition:"background-color 1s ease-in-out"}}>
+            <CardActionArea sx={{
+                height: "100%", width: "100%", display: "flex", flexDirection: "column"
+            }}
+                onClick={() => { if (doc !== null) { router.push("/articles/" + doc[0]) } }}>
+                <Box sx={{ height: 100, width: "100%", overflow: "hidden" }}>
+                    {
+                        (loading) && <Skeleton variant="rectangular" sx={{ height: "100%", width: "100%" }} />
+                    }
+                    {
+                        (doc !== null) && <CardMedia sx={{ width: "100%", height: "100%" }} component="img"
+                            image={doc[1].Image} onLoad={() => { setLoading(false) }} />
+                    }
 
-                    <CardContent sx={{ width: "100%", overflow: "hidden", flexGrow: 1 }}>
-                        <Typography variant="h6" gutterBottom>
-                            {(doc !== null) ? doc[1].Title : <Skeleton />}
-                        </Typography>
-                        <Typography color="text.secondary" variant="body2">
-                            {(doc !== null) ? doc[1].Subtitle :
-                                <Box>
-                                    <Skeleton />
-                                    <Skeleton />
-                                    <Skeleton />
-                                </Box>
-                            }
-                        </Typography>
-                    </CardContent>
-                    <CardActions sx={{ width: "100%", paddingX: 2 }}>
-                        <Typography variant="overline" color="primary">{(doc !== null) ? "Read More" :
-                            <Skeleton sx={{ width: 80 }} />}</Typography>
-                    </CardActions>
-                </CardActionArea>
-            </Card>
+                </Box>
+
+                <CardContent sx={{ width: "100%", overflow: "hidden", flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom sx={{transition: "color 1s ease-in-out"}}>
+                        {(doc !== null) ? doc[1].Title : <Skeleton />}
+                    </Typography>
+
+                    {(doc !== null) ?
+                        <Typography color="text.secondary" variant="body2"
+                        sx={{transition: "color 1s ease-in-out"}}>{doc[1].Subtitle}</Typography>
+                        :
+                        <Box>
+                            <Skeleton />
+                            <Skeleton />
+                            <Skeleton />
+                        </Box>
+                    }
+
+                </CardContent>
+                <CardActions sx={{ width: "100%", paddingX: 2 }}>
+                    <Typography variant="overline" color="primary" 
+                    sx={{transition: "color 1s ease-in-out"}}>{(doc !== null) ? "Read More" :
+                        <Skeleton sx={{ width: 80 }} />}</Typography>
+                </CardActions>
+            </CardActionArea>
+        </Card>
     )
 }
