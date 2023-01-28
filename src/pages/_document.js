@@ -2,29 +2,29 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../utils/createEmotionCache";
 
-export default class MyDocument extends Document {
-    render(){
-        return(
+export default class newDocument extends Document {
+    render() {
+        return (
             <Html lang="en">
-            <Head>
-                <link rel="icon" href="favicon.ico" />
-                <link rel="apple-touch-icon" href="logo192.png" />
-                <link rel="manifest" href="manifest.json" />
-                {this.props.emotionStyleTags}
-            </Head>
-            <body style={{transition:"background-color 1s ease-in-out"}}>
-                <Main />
-                <NextScript />
-            </body>
-            <noscript>
-                You need JS to run this website
-            </noscript>
-        </Html>
+                <Head>
+                    <link rel="icon" href="favicon.ico" />
+                    <link rel="apple-touch-icon" href="logo192.png" />
+                    <link rel="manifest" href="manifest.json" />
+                    {this.props.emotionStyleTags}
+                </Head>
+                <body style={{ transition: "background-color 1s ease-in-out" }}>
+                    <Main />
+                    <NextScript />
+                </body>
+                <noscript>
+                    You need JS to run this website
+                </noscript>
+            </Html>
         )
     }
 }
 
-MyDocument.getInitialProps = async (ctx) => {
+newDocument.getInitialProps = async (ctx) => {
     const originalRenderPage = ctx.renderPage;
 
     const cache = createEmotionCache();
