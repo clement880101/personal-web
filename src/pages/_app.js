@@ -6,7 +6,7 @@ import { CacheProvider } from "@emotion/react";
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 
-export default function MyApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
     const [darkMode, setDarkMode] = useState(true);
     const emotionCache = createEmotionCache();
 

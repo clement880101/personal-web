@@ -44,7 +44,7 @@ export default function home() {
 
     useEffect(() => {
         function handleResize() {
-            var col = Math.floor(homeRef.current.clientWidth / 290)
+            var col = Math.floor(homeRef.current.clientWidth / 310)
             if (col <= 0) {
                 setXs(12)
             } else if (col > 12) {
