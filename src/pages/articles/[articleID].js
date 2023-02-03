@@ -92,7 +92,11 @@ export async function getStaticProps({ params }) {
     if (document.success) {
         data = document.data
     } else {
-        console.log(document.err)
+        return {
+            redirect: {
+                destination: "/404",
+            },
+        }
     }
 
     return {
