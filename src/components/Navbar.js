@@ -57,7 +57,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
     useEffect(() => {
         handleResize()
         window.addEventListener("scroll", onScroll, { passive: true })
-        console.log(pages[router.pathname.split("/")[1]])
         window.addEventListener('resize', handleResize)
         return () => {
             window.removeEventListener('resize', handleResize)
