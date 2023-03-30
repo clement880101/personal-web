@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../utils/createEmotionCache";
+import * as React from 'react'
 
 export default class newDocument extends Document {
     render() {
@@ -10,7 +11,6 @@ export default class newDocument extends Document {
                     <link rel="icon" href="favicon.ico" />
                     <link rel="apple-touch-icon" href="logo192.png" />
                     <link rel="manifest" href="manifest.json" />
-                    {this.props.emotionStyleTags}
                 </Head>
                 <body style={{ transition: "background-color 1s ease-in-out" }}>
                     <Main />
@@ -51,6 +51,9 @@ newDocument.getInitialProps = async (ctx) => {
 
     return {
         ...initialProps,
-        emotionStyleTags,
+        styles: [
+            ...React.Children.toArray(initialProps.styles),
+            ...emotionStyleTags,
+        ],
     };
 };
