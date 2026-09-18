@@ -335,15 +335,25 @@
     <article class="card reveal">
       <div class="card__top">
         <span class="tag tag--signal">open source</span>
-        <span class="card__status mono">tooling</span>
+        <span class="card__status mono">self-hosted</span>
       </div>
       <h3 class="card__title">secret-manager</h3>
+      <p class="card__meta mono">Apache-2.0 &nbsp;&middot;&nbsp; Python</p>
       <p class="card__desc">
-        Small utility for handling secrets in local and CI environments without
-        scattering credentials across a dozen config files.
+        A lightweight, distributed secret manager you run in your own cloud &mdash;
+        AWS, GCP, a VPS, Kubernetes, anywhere that runs a container. It brings its
+        own database and issues its own tokens, so there is nothing to register and
+        nothing external to connect.
       </p>
+      <ul class="card__facts">
+        <li><span class="mono">ghcr.io</span> one stateless container</li>
+        <li><span class="mono">secretmgr</span> CLI under 10 MB, no runtime</li>
+        <li>scales to N replicas, no state in process memory</li>
+      </ul>
       <div class="card__links">
+        <a href="https://clement880101.github.io/secret-manager/" target="_blank" rel="noopener">Site <span aria-hidden="true">&#8599;</span></a>
         <a href="https://github.com/clement880101/secret-manager" target="_blank" rel="noopener">Source <span aria-hidden="true">&#8599;</span></a>
+        <a href="https://github.com/clement880101/secret-manager/releases/latest" target="_blank" rel="noopener">Download <span aria-hidden="true">&#8599;</span></a>
       </div>
     </article>
 
