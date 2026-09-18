@@ -298,11 +298,14 @@
       </div>
       <h3 class="card__title">Real-time infra monitoring</h3>
       <p class="card__desc">
-        Replaced scattered, slow alerting with one centralized hub on InfluxDB,
-        Python and Grafana &mdash; dropping incident alert latency to roughly
-        <b>five minutes</b> across three product families.
+        A <b>relogger</b>: it picks up logs already being written across the fleet,
+        re-emits them as structured metrics into InfluxDB, and surfaces them through
+        Grafana. Nothing upstream had to be rewritten to be observable &mdash; and
+        incident alert latency fell to roughly <b>five minutes</b> across three
+        product families.
       </p>
       <ul class="card__facts">
+        <li><span class="mono">relogger</span> logs &rarr; structured metrics</li>
         <li><span class="mono">influxdb</span> + Grafana + Python</li>
         <li>hundreds of pipelines, one pane of glass</li>
       </ul>
