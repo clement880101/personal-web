@@ -16,6 +16,7 @@ assets/css/style.css    all styling
 assets/js/main.js       scroll reveals, counters, nav state — progressive, nothing required
 assets/img/favicon.svg
 scripts/check.mjs       pre-deploy validation, no dependencies
+sitemap.xml             one entry; lastmod is stamped at deploy time
 .github/workflows/deploy.yml
 ```
 
@@ -37,7 +38,8 @@ Then open <http://localhost:4319>.
 - every local `href`/`src` resolves to a real file,
 - every `#anchor` has a matching `id`,
 - each page has a `<title>`, a meta description and a `lang` attribute,
-- `url()` references in the CSS point at real assets.
+- `url()` references in the CSS point at real assets,
+- `sitemap.xml` parses, and every `<loc>` is an absolute URL inside this site.
 
 ```sh
 node scripts/check.mjs
@@ -50,6 +52,18 @@ a dead third-party link should not block a deploy.
 
 Content lives directly in `index.html`; there is no data file or templating layer.
 Colors, fonts and spacing are CSS custom properties at the top of `style.css`.
+
+## Sitemap
+
+`sitemap.xml` holds a single entry for the homepage; the anchors on it are not
+separate URLs. The workflow rewrites `<lastmod>` to the commit date on each
+deploy, so it cannot drift.
+
+There is no `robots.txt`. This is a project page, so it is served under
+`/personal-web/`, and crawlers only read `robots.txt` from the host root
+(`clement880101.github.io/robots.txt`), which belongs to a user-page repo that
+does not exist. A `robots.txt` committed here would simply be ignored. Submit
+the sitemap directly in Google Search Console instead.
 
 ## Custom domain
 

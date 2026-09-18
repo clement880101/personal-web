@@ -13,6 +13,7 @@ import { join, dirname, resolve, extname } from 'node:path';
 
 const ROOT = resolve(process.cwd());
 const BASE_PATH = '/personal-web';           // GitHub Pages project subpath
+const SITE_URL  = 'https://clement880101.github.io/personal-web/';
 const errors = [];
 const notes = [];
 
@@ -22,6 +23,7 @@ const REQUIRED = [
   'assets/css/style.css',
   'assets/js/main.js',
   'assets/img/favicon.svg',
+  'sitemap.xml',
 ];
 
 for (const f of REQUIRED) {
@@ -79,6 +81,25 @@ for (const page of pages) {
 
   notes.push(`${rel}: ${refs.length} refs, ${ids.size} ids — ok`);
 }
+
+// the sitemap has to parse, and every <loc> must be an absolute URL that
+// actually points at this site
+const sitemap = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
+if (!/<urlset[^>]+xmlns=["']http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9["']/.test(sitemap)) {
+  errors.push('sitemap.xml: missing or wrong urlset namespace');
+}
+const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].trim());
+if (locs.length === 0) errors.push('sitemap.xml: no <loc> entries');
+for (const loc of locs) {
+  if (!/^https:\/\//.test(loc)) errors.push(`sitemap.xml: <loc> must be an absolute https URL: ${loc}`);
+  if (!loc.startsWith(SITE_URL)) errors.push(`sitemap.xml: <loc> outside the site: ${loc}`);
+}
+for (const m of sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) {
+  if (!/^\d{4}-\d{2}-\d{2}(T|$)/.test(m[1].trim())) {
+    errors.push(`sitemap.xml: lastmod is not W3C date format: ${m[1]}`);
+  }
+}
+notes.push(`sitemap.xml: ${locs.length} url(s) — ok`);
 
 // CSS must not reference missing local assets either
 const css = readFileSync(join(ROOT, 'assets/css/style.css'), 'utf8')

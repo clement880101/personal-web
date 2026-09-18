@@ -65,6 +65,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Stamp sitemap lastmod with the commit date
+        run: |
+          set -euo pipefail
+          d=$(git log -1 --format=%cs)     # commit date, YYYY-MM-DD
+          sed -i "s#<lastmod>[^<]*</lastmod>#<lastmod>${d}</lastmod>#" sitemap.xml
+          echo "lastmod set to ${d}"
+          grep -o '<lastmod>[^<]*</lastmod>' sitemap.xml
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
