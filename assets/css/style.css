@@ -1,7 +1,7 @@
 /* =========================================================
    Clement Chang — personal site
-   Aesthetic: instrumentation. Dark control-panel surfaces,
-   phosphor signal accent, editorial serif against plex mono.
+   Aesthetic: dark, quiet surfaces with a phosphor signal accent;
+   editorial serif set against plex mono.
    ========================================================= */
 
 :root{
@@ -187,95 +187,24 @@ body{
 .btn--primary{ background:var(--signal); border-color:var(--signal); color:#0a0b0a; font-weight:500; }
 .btn--primary:hover{ background:#d6ff74; border-color:#d6ff74; color:#0a0b0a; }
 
-/* ---------- instrumentation panel ---------- */
-.panel{
-  background:linear-gradient(170deg,var(--panel),var(--ink-2));
+/* ---------- generative flow field (decorative) ---------- */
+.field{
+  margin:0; position:relative; overflow:hidden;
   border:1px solid var(--line); border-radius:4px;
+  background:var(--ink-2);
+  aspect-ratio:1 / 1.02;
   box-shadow:0 30px 70px -30px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.03);
-  overflow:hidden;
 }
-.panel__bar{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:11px 16px; border-bottom:1px solid var(--line);
-  font-family:var(--mono); font-size:11.5px; letter-spacing:.05em;
-  color:var(--dim); background:rgba(255,255,255,.012);
-}
-.panel__live{ color:var(--signal); display:flex; align-items:center; }
-.panel__live .pulse{ margin-right:7px; }
+.field__canvas{ display:block; width:100%; height:100%; }
 
-.panel__viz{ padding:14px 10px 4px; }
-.mesh{ width:100%; height:auto; display:block; overflow:visible; }
-
-/* links between services */
-.mesh__edges line{ stroke:#39434a; stroke-width:1; opacity:.95; }
-.mesh__ring line{ stroke:var(--line); stroke-width:1; stroke-dasharray:2 6; opacity:.7; }
-.panel.is-live .mesh__ring line{ animation:drift 9s linear infinite; }
-@keyframes drift{ to{ stroke-dashoffset:-32 } }
-
-.mesh__glow{ opacity:0; transition:opacity .8s var(--ease); }
-.panel.is-live .mesh__glow{ opacity:.9; }
-
-/* the agent at the centre */
-.agent__well{ fill:var(--ink); opacity:.82; }
-.agent__core{
-  fill:var(--signal);
-  stroke:var(--ink-2); stroke-width:1.5;
-  filter:drop-shadow(0 0 5px rgba(201,247,90,.55));
-}
-.agent__pulse{ fill:none; stroke:var(--signal); stroke-width:1; opacity:0; }
-.panel.is-live .agent__pulse{ animation:agentRing 3.2s var(--ease) infinite; }
-@keyframes agentRing{
-  0%{ r:11; opacity:.5 } 70%{ r:30; opacity:0 } 100%{ r:30; opacity:0 }
-}
-.agent__label{
-  font-family:var(--mono); font-size:8.5px; letter-spacing:.14em;
-  fill:var(--muted); text-transform:uppercase;
-  paint-order:stroke; stroke:var(--ink); stroke-width:3px; stroke-linejoin:round;
-}
-
-/* services */
-.node__dot{
-  fill:var(--ink);
-  stroke:var(--signal); stroke-width:1.7;
-  transition:stroke .45s var(--ease), fill .45s var(--ease);
-}
-.node__ripple{ fill:none; stroke:var(--amber); stroke-width:1.2; opacity:0; }
-
-.node.is-degraded .node__dot{ stroke:var(--amber); fill:rgba(255,169,77,.16); }
-.node.is-degraded .node__ripple{ animation:nodeRing 1.5s var(--ease) infinite; }
-@keyframes nodeRing{
-  0%{ r:6; opacity:.75 } 80%{ r:19; opacity:0 } 100%{ r:19; opacity:0 }
-}
-.node.is-healed .node__dot{
-  fill:var(--signal); stroke:var(--signal);
-  filter:drop-shadow(0 0 7px rgba(201,247,90,.8));
-}
-
-/* the agent's probe travelling out to a degraded service */
-.mesh__probe{ opacity:0; }
-.mesh__probe circle{
-  fill:var(--signal);
-  filter:drop-shadow(0 0 6px rgba(201,247,90,.9));
-}
-.mesh__probe.is-running{ opacity:1; }
-
-/* legend */
-.panel__legend{
-  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
-  padding:12px 16px; border-top:1px solid var(--line);
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.05em;
-  color:var(--dim); background:rgba(255,255,255,.012);
-}
-.key{ display:inline-flex; align-items:center; gap:7px; }
-.key__dot{
-  width:7px; height:7px; border-radius:50%; flex:none;
-  border:1.5px solid var(--signal); background:transparent;
-}
-.key__dot--warn{ border-color:var(--amber); background:rgba(255,169,77,.2); }
-.key--tally{ margin-left:auto; color:var(--muted); }
-.key--tally b{
-  color:var(--signal); font-weight:500; font-variant-numeric:tabular-nums;
-  margin-left:6px;
+/* soft vignette so the motion dissolves into the frame instead of
+   stopping dead at the edges */
+.field__edge{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(115% 96% at 50% 50%, transparent 34%, rgba(8,9,10,.55) 76%, rgba(8,9,10,.94) 100%),
+    linear-gradient(180deg, rgba(8,9,10,.66), transparent 18%, transparent 82%, rgba(8,9,10,.66)),
+    linear-gradient(90deg, rgba(8,9,10,.6), transparent 14%, transparent 86%, rgba(8,9,10,.6));
 }
 
 /* ---------- marquee ---------- */
@@ -595,7 +524,7 @@ body{
    ========================================================= */
 @media (max-width:1000px){
   .hero__grid{ grid-template-columns:1fr; gap:44px; }
-  .panel{ max-width:460px; }
+  .field{ max-width:440px; }
   .creed__proof{ grid-template-columns:1fr; }
 }
 @media (max-width:820px){
@@ -634,8 +563,7 @@ body{
     transition-duration:.001ms !important;
   }
   .reveal{ opacity:1; transform:none; }
-  .mesh__glow{ opacity:1; }
-  .mesh__probe{ opacity:0; }
+
   .grain{ display:none; }
 }
 
@@ -644,7 +572,7 @@ body{
    ========================================================= */
 @media print{
   body{ background:#fff; color:#000; }
-  .nav,.grain,.marquee,.hero__actions,.panel__live{ display:none; }
+  .nav,.grain,.marquee,.hero__actions,.field{ display:none; }
   .reveal{ opacity:1; transform:none; }
   a{ color:#000; }
 }

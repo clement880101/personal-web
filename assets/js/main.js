@@ -34,103 +34,184 @@
     revealables.forEach(function (el) { revealer.observe(el); });
   }
 
-  /* ---- self-healing topology ----
-     A service degrades at random; the agent sends a probe out to it and the
-     service recovers. Loops forever, pauses when the panel is off-screen. */
-  var panel = document.querySelector('.panel');
+  /* ---- generative flow field ----
+     Particles drift through a slowly evolving vector field and leave fading
+     trails. Decorative only: the canvas is aria-hidden and the page loses
+     nothing without it. */
+  var field = document.querySelector('.field');
 
-  function startMesh() {
-    var svg = panel.querySelector('.mesh');
-    var nodes = Array.prototype.slice.call(svg.querySelectorAll('.node'));
-    var probe = svg.querySelector('.mesh__probe');
-    var tally = panel.querySelector('.tally');
-    if (!nodes.length || !probe) return;
+  function startField() {
+    var canvas = field.querySelector('.field__canvas');
+    var ctx = canvas.getContext && canvas.getContext('2d');
+    if (!ctx) return;
 
-    var AGENT = { x: 180, y: 150 };
-    var healed = 0;
-    var last = -1;
-    var timer = null;
+    var INK = '8,9,10';
+    var w = 0, h = 0, dpr = 1;
+    var particles = [];
+    var t = 0;
+    var vel = { x: 0, y: 0 };
+    var raf = null;
     var running = false;
 
-    function pick() {
-      var i;
-      do { i = Math.floor(Math.random() * nodes.length); } while (nodes.length > 1 && i === last);
-      last = i;
-      return nodes[i];
+    function resize() {
+      var rect = field.getBoundingClientRect();
+      if (!rect.width || !rect.height) return false;
+
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = rect.width;
+      h = rect.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      ctx.fillStyle = 'rgb(' + INK + ')';
+      ctx.fillRect(0, 0, w, h);
+
+      seed();
+      return true;
     }
 
-    function cycle() {
-      var node = pick();
-      var x = parseFloat(node.getAttribute('data-x'));
-      var y = parseFloat(node.getAttribute('data-y'));
+    function spawn() {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        life: 0,
+        max: 140 + Math.random() * 260,
+        speed: 0.34 + Math.random() * 0.72,
+        weight: Math.random() < 0.22 ? 1.9 : 1.1,
+        warm: Math.random() < 0.22
+      };
+    }
 
-      node.classList.add('is-degraded');
+    function seed() {
+      var area = w * h;
+      var count = Math.round(Math.min(430, Math.max(150, area / 560)));
+      particles = [];
+      for (var i = 0; i < count; i++) {
+        var p = spawn();
+        p.life = Math.random() * p.max;   // stagger so nothing pulses in unison
+        particles.push(p);
+      }
+    }
 
-      // agent notices, then dispatches
-      timer = setTimeout(function () {
-        probe.classList.add('is-running');
-        probe.style.transform = 'translate(' + AGENT.x + 'px,' + AGENT.y + 'px)';
+    // A scalar potential built from layered sines. Taking its perpendicular
+    // gradient (the curl) gives a divergence-free field, so the flow
+    // circulates inside the frame instead of sweeping everything into one
+    // corner and leaving the rest bare.
+    function potential(x, y, time) {
+      var s = 0.0041;
+      return (
+        Math.sin(x * s + time * 0.19) * Math.cos(y * s * 1.12 - time * 0.15) +
+        Math.sin((x + y) * s * 0.58 + time * 0.11) * 0.62 +
+        Math.cos((x - y) * s * 0.77 - time * 0.08) * 0.44
+      );
+    }
 
-        var trip = probe.animate(
-          [
-            { transform: 'translate(' + AGENT.x + 'px,' + AGENT.y + 'px)' },
-            { transform: 'translate(' + x + 'px,' + y + 'px)' }
-          ],
-          { duration: 780, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' }
-        );
+    var EPS = 1.2;
+    function velocityAt(x, y, time, out) {
+      var dpdy = (potential(x, y + EPS, time) - potential(x, y - EPS, time)) / (2 * EPS);
+      var dpdx = (potential(x + EPS, y, time) - potential(x - EPS, y, time)) / (2 * EPS);
+      var vx = dpdy, vy = -dpdx;
+      var m = Math.sqrt(vx * vx + vy * vy) || 1;
+      out.x = vx / m;
+      out.y = vy / m;
+    }
 
-        trip.onfinish = function () {
-          probe.classList.remove('is-running');
-          node.classList.remove('is-degraded');
-          node.classList.add('is-healed');
+    function step(dt) {
+      t += dt;
 
-          healed += 1;
-          if (tally) tally.textContent = healed;
+      // fade the previous frame instead of clearing: this is what makes trails
+      ctx.fillStyle = 'rgba(' + INK + ',0.020)';
+      ctx.fillRect(0, 0, w, h);
 
-          timer = setTimeout(function () {
-            node.classList.remove('is-healed');
-            timer = setTimeout(cycle, 900 + Math.random() * 900);
-          }, 900);
-        };
-      }, 1100);
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineCap = 'round';
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        velocityAt(p.x, p.y, t, vel);
+        var nx = p.x + vel.x * p.speed * 2.1;
+        var ny = p.y + vel.y * p.speed * 2.1;
+
+        // fade in and out over the particle's life so nothing pops
+        var k = p.life / p.max;
+        var alpha = Math.sin(Math.min(k, 1) * Math.PI) * 0.95;
+
+        ctx.strokeStyle = p.warm
+          ? 'rgba(255,196,128,' + (alpha * 0.42).toFixed(3) + ')'
+          : 'rgba(201,247,90,' + (alpha * 0.62).toFixed(3) + ')';
+        ctx.lineWidth = p.weight;
+
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(nx, ny);
+        ctx.stroke();
+
+        p.x = nx;
+        p.y = ny;
+        p.life += 1;
+
+        if (p.life > p.max || p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20) {
+          particles[i] = spawn();
+        }
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    var lastTs = 0;
+    function frame(ts) {
+      if (!running) return;
+      var dt = lastTs ? Math.min((ts - lastTs) / 1000, 0.05) : 0.016;
+      lastTs = ts;
+      step(dt);
+      raf = requestAnimationFrame(frame);
     }
 
     function start() {
-      if (running) return;
+      if (running || !w) return;
       running = true;
-      panel.classList.add('is-live');
-      timer = setTimeout(cycle, 900);
+      lastTs = 0;
+      raf = requestAnimationFrame(frame);
     }
 
     function stop() {
       running = false;
-      clearTimeout(timer);
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
     }
 
+    if (!resize()) return;
+
     if (reduced) {
-      // a composed still: one service degraded, nothing moving
-      panel.classList.add('is-live');
-      nodes[2].classList.add('is-degraded');
-      if (tally) tally.textContent = '\u2014';
+      // one composed still frame — the field without the motion
+      for (var n = 0; n < 420; n++) step(0.016);
       return;
     }
 
-    if (!('IntersectionObserver' in window) || !probe.animate) { start(); return; }
-
-    var vis = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) start(); else stop();
-      });
-    }, { threshold: 0.2 });
-    vis.observe(panel);
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 220);
+    });
 
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) stop();
-      else if (panel.getBoundingClientRect().top < window.innerHeight) start();
+      if (document.hidden) stop(); else start();
     });
+
+    if ('IntersectionObserver' in window) {
+      var vis = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) start(); else stop();
+        });
+      }, { threshold: 0.05 });
+      vis.observe(field);
+    } else {
+      start();
+    }
   }
 
-  if (panel) startMesh();
+  if (field) startField();
 
   /* ---- active section in nav ---- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));

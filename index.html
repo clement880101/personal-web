@@ -74,75 +74,11 @@
       </div>
     </div>
 
-    <!-- self-healing topology -->
-    <aside class="panel reveal" style="--d:360ms">
-      <div class="panel__bar">
-        <span class="panel__title">production topology</span>
-        <span class="panel__live"><span class="pulse" aria-hidden="true"></span>self-healing</span>
-      </div>
-
-      <div class="panel__viz">
-        <svg class="mesh" viewBox="0 0 360 300" role="img"
-             aria-label="Diagram of a service mesh. Services degrade at random and a central agent node reaches out and repairs each one without paging a human.">
-          <defs>
-            <radialGradient id="core">
-              <stop offset="0%" stop-color="var(--signal)" stop-opacity=".30" />
-              <stop offset="65%" stop-color="var(--signal)" stop-opacity=".05" />
-              <stop offset="100%" stop-color="var(--signal)" stop-opacity="0" />
-            </radialGradient>
-          </defs>
-
-          <g class="mesh__edges">
-            <line x1="180" y1="150" x2="234" y2="116" /><line x1="180" y1="150" x2="138" y2="204" />
-            <line x1="180" y1="150" x2="124" y2="102" />
-            <line x1="234" y1="116" x2="180" y2="40" /><line x1="234" y1="116" x2="266" y2="74" />
-            <line x1="234" y1="116" x2="310" y2="152" />
-            <line x1="138" y1="204" x2="268" y2="232" /><line x1="138" y1="204" x2="180" y2="264" />
-            <line x1="138" y1="204" x2="92" y2="236" />
-            <line x1="124" y1="102" x2="50" y2="152" /><line x1="124" y1="102" x2="94" y2="72" />
-            <line x1="124" y1="102" x2="180" y2="40" />
-          </g>
-
-          <g class="mesh__ring">
-            <line x1="180" y1="40" x2="266" y2="74" /><line x1="266" y1="74" x2="310" y2="152" />
-            <line x1="310" y1="152" x2="268" y2="232" /><line x1="268" y1="232" x2="180" y2="264" />
-            <line x1="180" y1="264" x2="92" y2="236" /><line x1="92" y1="236" x2="50" y2="152" />
-            <line x1="50" y1="152" x2="94" y2="72" /><line x1="94" y1="72" x2="180" y2="40" />
-          </g>
-
-          <circle class="mesh__glow" cx="180" cy="150" r="58" fill="url(#core)" />
-
-          <g class="mesh__nodes">
-            <g class="node" data-x="234" data-y="116"><circle class="node__ripple" cx="234" cy="116" r="7" /><circle class="node__dot" cx="234" cy="116" r="5" /></g>
-            <g class="node" data-x="138" data-y="204"><circle class="node__ripple" cx="138" cy="204" r="7" /><circle class="node__dot" cx="138" cy="204" r="5" /></g>
-            <g class="node" data-x="124" data-y="102"><circle class="node__ripple" cx="124" cy="102" r="7" /><circle class="node__dot" cx="124" cy="102" r="5" /></g>
-            <g class="node" data-x="180" data-y="40"><circle class="node__ripple" cx="180" cy="40" r="6" /><circle class="node__dot" cx="180" cy="40" r="4" /></g>
-            <g class="node" data-x="266" data-y="74"><circle class="node__ripple" cx="266" cy="74" r="6" /><circle class="node__dot" cx="266" cy="74" r="4" /></g>
-            <g class="node" data-x="310" data-y="152"><circle class="node__ripple" cx="310" cy="152" r="6" /><circle class="node__dot" cx="310" cy="152" r="4" /></g>
-            <g class="node" data-x="268" data-y="232"><circle class="node__ripple" cx="268" cy="232" r="6" /><circle class="node__dot" cx="268" cy="232" r="4" /></g>
-            <g class="node" data-x="180" data-y="264"><circle class="node__ripple" cx="180" cy="264" r="6" /><circle class="node__dot" cx="180" cy="264" r="4" /></g>
-            <g class="node" data-x="92" data-y="236"><circle class="node__ripple" cx="92" cy="236" r="6" /><circle class="node__dot" cx="92" cy="236" r="4" /></g>
-            <g class="node" data-x="50" data-y="152"><circle class="node__ripple" cx="50" cy="152" r="6" /><circle class="node__dot" cx="50" cy="152" r="4" /></g>
-            <g class="node" data-x="94" data-y="72"><circle class="node__ripple" cx="94" cy="72" r="6" /><circle class="node__dot" cx="94" cy="72" r="4" /></g>
-          </g>
-
-          <g class="mesh__probe" aria-hidden="true"><circle r="3.5" /></g>
-
-          <g class="agent">
-            <circle class="agent__pulse" cx="180" cy="150" r="14" />
-            <circle class="agent__well" cx="180" cy="150" r="13" />
-            <circle class="agent__core" cx="180" cy="150" r="7.5" />
-            <text class="agent__label" x="180" y="177" text-anchor="middle">agent</text>
-          </g>
-        </svg>
-      </div>
-
-      <div class="panel__legend">
-        <span class="key"><i class="key__dot key__dot--ok" aria-hidden="true"></i>healthy</span>
-        <span class="key"><i class="key__dot key__dot--warn" aria-hidden="true"></i>degraded</span>
-        <span class="key key--tally mono">resolved with no page <b class="tally">0</b></span>
-      </div>
-    </aside>
+    <!-- purely decorative: a slow generative flow field -->
+    <figure class="field reveal" style="--d:360ms" aria-hidden="true">
+      <canvas class="field__canvas"></canvas>
+      <span class="field__edge"></span>
+    </figure>
 
   </div>
 
