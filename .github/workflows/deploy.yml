@@ -1,0 +1,78 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow one concurrent deployment; let in-progress runs finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Validate site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Structure, links and anchors
+        run: node scripts/check.mjs
+
+      - name: Check external links are reachable
+        run: |
+          set -euo pipefail
+          urls=$(grep -rhoE 'https?://[^"'"'"' )]+' index.html 404.html \
+                 | grep -vE 'fonts\.(googleapis|gstatic)\.com|schema\.org|w3\.org' \
+                 | sort -u)
+          fail=0
+          for u in $urls; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -L --max-time 20 "$u" || echo 000)
+            if [ "$code" -ge 400 ] || [ "$code" = "000" ]; then
+              echo "::warning title=Unreachable link::$u returned $code"
+              fail=$((fail+1))
+            else
+              echo "ok  $code  $u"
+            fi
+          done
+          echo "$fail link(s) could not be verified"
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: check
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

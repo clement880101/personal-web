@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clement Chang — Reliability Engineer, Agent-First</title>
+<meta name="description" content="Reliability engineer at Meta. Five years keeping large systems inside their SLOs — and building the agents that root-cause, revert and resolve their own incidents." />
+<meta name="author" content="Clement Chang" />
+<meta name="theme-color" content="#08090a" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Clement Chang — Reliability Engineer, Agent-First" />
+<meta property="og:description" content="Reliability engineering, done agent-first. I keep large systems inside their SLOs." />
+<meta property="og:url" content="https://clement880101.github.io/personal-web/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Clement Chang — Reliability Engineer, Agent-First" />
+<meta name="twitter:description" content="Reliability engineering, done agent-first. I keep large systems inside their SLOs." />
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="nav__mark" href="#top">
+    <span class="dot" aria-hidden="true"></span>
+    <span>clement chang</span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#agent-first">agent-first</a>
+    <a href="#work">work</a>
+    <a href="#projects">projects</a>
+    <a href="#stack">stack</a>
+    <a href="#contact">contact</a>
+  </nav>
+  <a class="nav__cta" href="https://github.com/clement880101" target="_blank" rel="noopener">
+    github <span aria-hidden="true">&#8599;</span>
+  </a>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero__grid">
+
+    <div class="hero__lede">
+      <p class="eyebrow reveal" style="--d:0ms">
+        <span class="pulse" aria-hidden="true"></span>
+        Production Engineer &nbsp;/&nbsp; Reliability &nbsp;/&nbsp; Meta, Menlo Park
+      </p>
+
+      <h1 class="display reveal" style="--d:90ms">
+        Clement<br />Chang<em>.</em>
+      </h1>
+
+      <p class="hero__sub reveal" style="--d:180ms">
+        A <span class="hl">reliability</span> engineer &mdash; five years keeping large systems
+        inside their SLOs, on-call for the ones that matter. I do it
+        <b>agent-first</b>: the agents root-cause their own breakages, shepherd their
+        own incidents, and write their own reverts.
+      </p>
+
+      <div class="hero__actions reveal" style="--d:270ms">
+        <a class="btn btn--primary" href="#work">See the work</a>
+        <a class="btn" href="mailto:clement.chang.dev@gmail.com">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- instrumentation panel -->
+    <aside class="panel reveal" style="--d:360ms" aria-label="Selected impact metrics">
+      <div class="panel__bar">
+        <span class="panel__title">reliability &mdash; selected impact</span>
+        <span class="panel__live"><span class="pulse" aria-hidden="true"></span>live</span>
+      </div>
+
+      <div class="panel__chart">
+        <svg viewBox="0 0 320 96" preserveAspectRatio="none" role="img" aria-label="Line chart showing trunk-health SLO attainment climbing from about 60 percent to 100 percent over five months">
+          <defs>
+            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--signal)" stop-opacity=".28" />
+              <stop offset="100%" stop-color="var(--signal)" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g class="chart__grid">
+            <line x1="0" y1="24" x2="320" y2="24" /><line x1="0" y1="48" x2="320" y2="48" />
+            <line x1="0" y1="72" x2="320" y2="72" />
+          </g>
+          <path class="chart__area" d="M0,74 L46,68 L92,58 L138,44 L184,40 L230,22 L276,10 L320,8 L320,96 L0,96 Z" fill="url(#fade)" />
+          <path class="chart__line" d="M0,74 L46,68 L92,58 L138,44 L184,40 L230,22 L276,10 L320,8" />
+          <circle class="chart__end" cx="320" cy="8" r="3.5" />
+        </svg>
+        <div class="panel__axis">
+          <span>trunk-health SLO attainment</span>
+          <span class="mono">60% &#8594; 100% / 5 mo</span>
+        </div>
+      </div>
+
+      <dl class="stats">
+        <div class="stat">
+          <dt>engineer-hours saved</dt>
+          <dd><span class="num" data-count="24" data-prefix="~">0</span><span class="unit">/wk</span></dd>
+        </div>
+        <div class="stat">
+          <dt>breakages auto-resolved</dt>
+          <dd><span class="num" data-count="15" data-prefix="~">0</span><span class="unit">%</span></dd>
+        </div>
+        <div class="stat">
+          <dt>alert latency</dt>
+          <dd><span class="num" data-count="5" data-prefix="~">0</span><span class="unit">min</span></dd>
+        </div>
+        <div class="stat">
+          <dt>years shipping infra</dt>
+          <dd><span class="num" data-count="5">0</span><span class="unit">+</span></dd>
+        </div>
+      </dl>
+    </aside>
+
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>reliability engineering</span><i>&#9679;</i><span>CI/CD</span><i>&#9679;</i><span>SLO / SLA</span><i>&#9679;</i>
+      <span>kubernetes-adjacent infra</span><i>&#9679;</i><span>incident automation</span><i>&#9679;</i>
+      <span>LLM tooling</span><i>&#9679;</i><span>edge deployment</span><i>&#9679;</i>
+      <span>reliability engineering</span><i>&#9679;</i><span>CI/CD</span><i>&#9679;</i><span>SLO / SLA</span><i>&#9679;</i>
+      <span>kubernetes-adjacent infra</span><i>&#9679;</i><span>incident automation</span><i>&#9679;</i>
+      <span>LLM tooling</span><i>&#9679;</i><span>edge deployment</span><i>&#9679;</i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AGENT-FIRST ============ -->
+<section class="creed" id="agent-first">
+  <div class="creed__inner">
+    <p class="creed__kicker mono reveal">
+      <span class="pulse" aria-hidden="true"></span> how I work
+    </p>
+    <h2 class="creed__line reveal">
+      I build <em>agent-first</em>.
+    </h2>
+    <p class="creed__body reveal">
+      Reliability used to be measured in how fast a human could be woken up. I think the
+      better question is <b>what should never need a page at all</b>. So I design systems
+      where agents hold the pager first: they investigate, they attribute, they revert, and
+      they hand a human the one decision that actually needed judgment. Same SLOs &mdash;
+      far fewer humans losing sleep over them.
+    </p>
+    <ul class="creed__proof">
+      <li class="reveal">
+        <span class="creed__num mono">01</span>
+        <b>Agents that debug themselves.</b> autoInvestigator root-causes trunk breakages
+        and generates the reverting change &mdash; ~15% close with no engineer in the loop.
+      </li>
+      <li class="reveal">
+        <span class="creed__num mono">02</span>
+        <b>Agents that run process.</b> Incident and change &ldquo;babysitters&rdquo; shepherd
+        risky changes through their whole lifecycle, returning ~24 engineer-hours a week.
+      </li>
+      <li class="reveal">
+        <span class="creed__num mono">03</span>
+        <b>Harnesses, not prompts.</b> A Claude Code harness for Meta&rsquo;s recommendation
+        systems took trunk-health SLO attainment from ~60% to 100% in five months.
+      </li>
+      <li class="reveal">
+        <span class="creed__num mono">04</span>
+        <b>Shipped before it was a trend.</b> LLM triage tooling at Synopsys in 2023
+        (LlamaIndex, vLLM, Hugging Face); agent scaffolding used by Ollama and the U.S. Air Force.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="section" id="work">
+  <div class="section__head reveal">
+    <span class="section__idx mono">01</span>
+    <h2 class="section__title">Work</h2>
+    <p class="section__note">Five years of keeping production quiet.</p>
+  </div>
+
+  <ol class="timeline">
+
+    <li class="job reveal">
+      <div class="job__meta">
+        <span class="job__date mono">Jan 2026 &mdash; Now</span>
+        <span class="job__place mono">Menlo Park, CA</span>
+      </div>
+      <div class="job__body">
+        <h3 class="job__co">Meta <span class="job__badge">current</span></h3>
+        <p class="job__role">Production Engineer &mdash; Recommendation System ML</p>
+        <ul class="job__points">
+          <li>Raised trunk-health SLO attainment from <b>~60% to 100% in five months</b> by building a Claude Code harness for Meta's recommendation systems, and owning trunk-health on-call.</li>
+          <li>Created <b>autoInvestigator</b>, a service that root-causes trunk breakages and generates reverting changes automatically &mdash; resolving <b>~15% of breakages end-to-end</b> with minimal engineer involvement.</li>
+          <li>Developed incident and change &ldquo;babysitter&rdquo; automations that shepherd incidents and risky changes through their lifecycle, saving the team <b>~24 engineer-hours per week</b>.</li>
+          <li>Automated SEV-to-SLO-miss attribution, giving external partners and leadership a biweekly at-a-glance view of a complex production system.</li>
+          <li>Fixed and extended <b>MUMU</b>, our recommendation-AI-specific SLO/SLA monitoring stack, to handle complex model lifecycle requirements.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="job reveal">
+      <div class="job__meta">
+        <span class="job__date mono">Oct 2021 &mdash; Nov 2025</span>
+        <span class="job__place mono">Sunnyvale, CA</span>
+      </div>
+      <div class="job__body">
+        <h3 class="job__co">Synopsys</h3>
+        <p class="job__role">DevOps / Infrastructure Engineer &mdash; R&amp;D Engineer II</p>
+        <ul class="job__points">
+          <li>Maintained legacy Jenkins CI/CD on bare metal supporting <b>hundreds of pipelines across three product families</b>, meeting SLAs through daily and weekend on-call.</li>
+          <li>Re-designed and shipped a real-time infrastructure monitoring platform on InfluxDB, Python and Grafana &mdash; cutting incident alert latency to <b>~5 minutes</b> behind one centralized hub.</li>
+          <li>Architected and optimized containerized CI/CD on GitLab and GitHub, onboarding two production modules onto a scalable infrastructure platform.</li>
+          <li>Wrote Python automation that caught <b>hundreds of overlooked test cases</b>.</li>
+          <li>Prototyped AI-powered internal ticketing tools (LlamaIndex, Hugging Face, vLLM) that automated triage and accelerated issue resolution.</li>
+          <li>Mentored junior engineers on Linux, system workflows and infrastructure debugging.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="job reveal">
+      <div class="job__meta">
+        <span class="job__date mono">Sep 2025 &mdash; Present</span>
+        <span class="job__place mono">San Francisco, CA</span>
+      </div>
+      <div class="job__body">
+        <h3 class="job__co">StreamDeploy <span class="job__badge job__badge--alt">founder</span></h3>
+        <p class="job__role">Founder &mdash; Infrastructure &amp; Full-stack Engineer</p>
+        <ul class="job__points">
+          <li>Designed and implemented an OTA deployment platform &mdash; <i>&ldquo;Vercel for Edge&rdquo;</i> &mdash; on Pulumi (GCP), FastAPI, Next.js, Pub/Sub, Cloudflare CDN, BigQuery and a Go device agent for robotics and IoT fleets.</li>
+          <li>Ran pilots with early customers including several R&amp;D labs and small businesses, demonstrating multi-device rollout and monitoring across diverse environments.</li>
+          <li>Built containerized AI chatbot scaffolding (UI, backend, frontend) used by <b>Ollama</b> and the <b>U.S. Air Force</b> for rapid experimentation and deployment automation.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="job reveal">
+      <div class="job__meta">
+        <span class="job__date mono">Mar 2023 &mdash; Jul 2023</span>
+        <span class="job__place mono">San Francisco, CA</span>
+      </div>
+      <div class="job__body">
+        <h3 class="job__co">Blockchain Company</h3>
+        <p class="job__role">Infrastructure &amp; Blockchain Engineer</p>
+        <ul class="job__points">
+          <li>Built the infrastructure and frontend of an online hospitality DApp on Next.js, Solidity and Cloudflare CDN, optimizing performance and streamlining bookings.</li>
+          <li>Defined and integrated Ethereum smart contracts for token-based transactions; token market cap surpassed <b>$46,000</b> as of Sep 2024.</li>
+        </ul>
+      </div>
+    </li>
+
+  </ol>
+
+  <div class="edu reveal">
+    <span class="edu__label mono">education</span>
+    <div>
+      <h3>Emory University <span class="edu__loc mono">Atlanta, GA</span></h3>
+      <p>B.S. Computer Science &mdash; double major in Biology</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="projects">
+  <div class="section__head reveal">
+    <span class="section__idx mono">02</span>
+    <h2 class="section__title">Things I built</h2>
+    <p class="section__note">Shipped software and production case studies.</p>
+  </div>
+
+  <div class="cards">
+
+    <article class="card card--wide reveal">
+      <div class="card__top">
+        <span class="tag tag--signal">macOS &middot; Swift</span>
+        <span class="card__status mono">shipping</span>
+      </div>
+      <h3 class="card__title">Audio Adjuster</h3>
+      <p class="card__desc">
+        Per-app volume control for macOS: a menu-bar slider for every application
+        currently making noise, built directly on Core Audio process taps. No Dock
+        icon, no window &mdash; it lives in the menu bar and gets out of the way.
+        Ad-hoc signed, installable in one <span class="mono">curl</span>, with CI on every commit.
+      </p>
+      <ul class="card__facts">
+        <li><span class="mono">core audio</span> process taps</li>
+        <li><span class="mono">macOS 14.2+</span> / Swift 6.3</li>
+        <li><span class="mono">make app</span> &rarr; signed bundle + checksum</li>
+      </ul>
+      <div class="card__links">
+        <a href="https://clement880101.github.io/audio-adjuster-mac" target="_blank" rel="noopener">Site <span aria-hidden="true">&#8599;</span></a>
+        <a href="https://github.com/clement880101/audio-adjuster-mac" target="_blank" rel="noopener">Source <span aria-hidden="true">&#8599;</span></a>
+        <a href="https://github.com/clement880101/audio-adjuster-mac/releases/latest" target="_blank" rel="noopener">Download <span aria-hidden="true">&#8599;</span></a>
+      </div>
+    </article>
+
+    <article class="card card--wide reveal">
+      <div class="card__top">
+        <span class="tag tag--amber">founder &middot; platform</span>
+        <span class="card__status mono">in pilot</span>
+      </div>
+      <h3 class="card__title">StreamDeploy</h3>
+      <p class="card__desc">
+        An over-the-air deployment platform for robotics and IoT &mdash; think Vercel,
+        but the target is a fleet of devices in the field. Infrastructure as code on
+        Pulumi and GCP, a FastAPI control plane, Pub/Sub for rollout orchestration,
+        BigQuery for telemetry, and a Go agent on the device itself.
+      </p>
+      <ul class="card__facts">
+        <li><span class="mono">pulumi</span> / GCP / Cloudflare CDN</li>
+        <li><span class="mono">go agent</span> on-device OTA</li>
+        <li>pilots with R&amp;D labs &amp; small businesses</li>
+      </ul>
+      <div class="card__links">
+        <span class="card__note mono">chatbot scaffolding used by Ollama and the U.S. Air Force</span>
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <div class="card__top">
+        <span class="tag">case study &middot; Meta</span>
+        <span class="card__status mono">production</span>
+      </div>
+      <h3 class="card__title">autoInvestigator</h3>
+      <p class="card__desc">
+        A service that watches trunk breakages, root-causes them, and writes the
+        reverting change itself. About <b>15% of breakages</b> now close end-to-end
+        without an engineer touching them.
+      </p>
+      <ul class="card__facts">
+        <li>automated root-cause &rarr; revert</li>
+        <li>paired with incident &ldquo;babysitter&rdquo; automations</li>
+      </ul>
+    </article>
+
+    <article class="card reveal">
+      <div class="card__top">
+        <span class="tag">case study &middot; Synopsys</span>
+        <span class="card__status mono">production</span>
+      </div>
+      <h3 class="card__title">Real-time infra monitoring</h3>
+      <p class="card__desc">
+        Replaced scattered, slow alerting with one centralized hub on InfluxDB,
+        Python and Grafana &mdash; dropping incident alert latency to roughly
+        <b>five minutes</b> across three product families.
+      </p>
+      <ul class="card__facts">
+        <li><span class="mono">influxdb</span> + Grafana + Python</li>
+        <li>hundreds of pipelines, one pane of glass</li>
+      </ul>
+    </article>
+
+    <article class="card reveal">
+      <div class="card__top">
+        <span class="tag tag--signal">open source</span>
+        <span class="card__status mono">npm</span>
+      </div>
+      <h3 class="card__title">web3-login</h3>
+      <p class="card__desc">
+        A drop-in MUI React component for web3 wallet connection &mdash; the boring,
+        fiddly part of every DApp, packaged once and reused.
+      </p>
+      <div class="card__links">
+        <a href="https://github.com/clement880101/web3-login" target="_blank" rel="noopener">Source <span aria-hidden="true">&#8599;</span></a>
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <div class="card__top">
+        <span class="tag tag--signal">open source</span>
+        <span class="card__status mono">tooling</span>
+      </div>
+      <h3 class="card__title">secret-manager</h3>
+      <p class="card__desc">
+        Small utility for handling secrets in local and CI environments without
+        scattering credentials across a dozen config files.
+      </p>
+      <div class="card__links">
+        <a href="https://github.com/clement880101/secret-manager" target="_blank" rel="noopener">Source <span aria-hidden="true">&#8599;</span></a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section class="section" id="stack">
+  <div class="section__head reveal">
+    <span class="section__idx mono">03</span>
+    <h2 class="section__title">Stack</h2>
+    <p class="section__note">What I reach for.</p>
+  </div>
+
+  <div class="stack">
+    <div class="stack__group reveal">
+      <h3 class="stack__label mono">cloud &amp; infrastructure</h3>
+      <ul class="chips">
+        <li>GCP</li><li>AWS</li><li>Docker</li><li>Pulumi</li><li>Jenkins</li>
+        <li>GitLab CI</li><li>GitHub Actions</li><li>Cloud Run</li><li>Pub/Sub</li>
+      </ul>
+    </div>
+    <div class="stack__group reveal">
+      <h3 class="stack__label mono">languages</h3>
+      <ul class="chips">
+        <li>Python</li><li>Go</li><li>Java</li><li>JavaScript</li><li>TypeScript</li><li>Swift</li>
+      </ul>
+    </div>
+    <div class="stack__group reveal">
+      <h3 class="stack__label mono">ml &amp; ai</h3>
+      <ul class="chips">
+        <li>LangChain</li><li>LlamaIndex</li><li>Hugging Face</li><li>VectorDB</li>
+        <li>Streamlit</li><li>llama.cpp</li><li>vLLM</li>
+      </ul>
+    </div>
+    <div class="stack__group reveal">
+      <h3 class="stack__label mono">databases</h3>
+      <ul class="chips">
+        <li>Postgres</li><li>MongoDB</li><li>InfluxDB</li><li>DynamoDB</li>
+        <li>Firebase</li><li>Supabase</li><li>BigQuery</li>
+      </ul>
+    </div>
+    <div class="stack__group reveal">
+      <h3 class="stack__label mono">web</h3>
+      <ul class="chips">
+        <li>Next.js</li><li>React</li><li>Svelte</li><li>FastAPI</li><li>Express</li><li>Flask</li><li>Gin</li>
+      </ul>
+    </div>
+    <div class="stack__group reveal">
+      <h3 class="stack__label mono">os &amp; tools</h3>
+      <ul class="chips">
+        <li>Linux</li><li>Vim</li><li>Bash</li><li>Claude Code</li><li>Codex</li><li>Raspberry Pi</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section--contact" id="contact">
+  <div class="contact reveal">
+    <span class="section__idx mono">04</span>
+    <h2 class="contact__title">Let&rsquo;s talk<em>.</em></h2>
+    <p class="contact__sub">
+      Open to conversations about reliability, production engineering, developer
+      infrastructure, and anything that makes a system easier to trust.
+    </p>
+    <div class="contact__links">
+      <a class="contact__link" href="mailto:clement.chang.dev@gmail.com">
+        <span class="mono">email</span>
+        <span class="contact__val">clement.chang.dev@gmail.com</span>
+      </a>
+      <a class="contact__link" href="https://github.com/clement880101" target="_blank" rel="noopener">
+        <span class="mono">github</span>
+        <span class="contact__val">@clement880101 <i aria-hidden="true">&#8599;</i></span>
+      </a>
+      <a class="contact__link" href="https://www.linkedin.com/in/clement-chang-815501145/" target="_blank" rel="noopener">
+        <span class="mono">linkedin</span>
+        <span class="contact__val">clement-chang <i aria-hidden="true">&#8599;</i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="mono">&copy; <span id="year">2026</span> Clement Chang</span>
+  <span class="mono foot__built">Bay Area, CA &nbsp;&middot;&nbsp; hand-written HTML, deployed by GitHub Actions</span>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

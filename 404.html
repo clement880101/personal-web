@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>404 — Clement Chang</title>
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#08090a" />
+<link rel="icon" href="/personal-web/assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/personal-web/assets/css/style.css" />
+<style>
+  .lost{
+    min-height:100vh; display:grid; place-content:center; text-align:center;
+    padding:40px var(--gut); position:relative; z-index:1;
+  }
+  .lost__code{
+    font-family:var(--serif); font-size:clamp(96px,22vw,220px);
+    line-height:.85; margin:0 0 18px; letter-spacing:-.03em;
+  }
+  .lost__code em{ color:var(--signal); font-style:normal; }
+  .lost__msg{ color:var(--muted); font-size:17px; margin:0 0 34px; }
+  .lost__status{
+    font-family:var(--mono); font-size:12px; letter-spacing:.08em;
+    color:var(--dim); text-transform:uppercase; margin:0 0 22px;
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<main class="lost">
+  <p class="lost__status"><span class="pulse" aria-hidden="true"></span>signal lost</p>
+  <h1 class="lost__code">4<em>0</em>4</h1>
+  <p class="lost__msg">That page isn&rsquo;t in the fleet. Nothing paged &mdash; it simply was never deployed.</p>
+  <p><a class="btn btn--primary" href="/personal-web/">Back to safety</a></p>
+</main>
+</body>
+</html>
