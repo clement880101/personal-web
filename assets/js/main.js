@@ -34,50 +34,103 @@
     revealables.forEach(function (el) { revealer.observe(el); });
   }
 
-  /* ---- panel chart + counters ---- */
+  /* ---- self-healing topology ----
+     A service degrades at random; the agent sends a probe out to it and the
+     service recovers. Loops forever, pauses when the panel is off-screen. */
   var panel = document.querySelector('.panel');
 
-  function countUp(el) {
-    var target = parseFloat(el.getAttribute('data-count'));
-    var prefix = el.getAttribute('data-prefix') || '';
-    if (isNaN(target)) return;
+  function startMesh() {
+    var svg = panel.querySelector('.mesh');
+    var nodes = Array.prototype.slice.call(svg.querySelectorAll('.node'));
+    var probe = svg.querySelector('.mesh__probe');
+    var tally = panel.querySelector('.tally');
+    if (!nodes.length || !probe) return;
 
-    if (reduced) { el.textContent = prefix + target; return; }
+    var AGENT = { x: 180, y: 150 };
+    var healed = 0;
+    var last = -1;
+    var timer = null;
+    var running = false;
 
-    var duration = 1100;
-    var start = null;
-
-    function step(ts) {
-      if (start === null) start = ts;
-      var p = Math.min((ts - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = prefix + Math.round(target * eased);
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = prefix + target;
+    function pick() {
+      var i;
+      do { i = Math.floor(Math.random() * nodes.length); } while (nodes.length > 1 && i === last);
+      last = i;
+      return nodes[i];
     }
-    requestAnimationFrame(step);
-  }
 
-  function activatePanel() {
-    if (!panel || panel.classList.contains('is-live')) return;
-    panel.classList.add('is-live');
-    panel.querySelectorAll('.num').forEach(countUp);
-  }
+    function cycle() {
+      var node = pick();
+      var x = parseFloat(node.getAttribute('data-x'));
+      var y = parseFloat(node.getAttribute('data-y'));
 
-  if (panel) {
-    if (reduced || !('IntersectionObserver' in window)) {
-      activatePanel();
-    } else {
-      var panelObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          activatePanel();
-          panelObserver.disconnect();
-        });
-      }, { threshold: 0.35 });
-      panelObserver.observe(panel);
+      node.classList.add('is-degraded');
+
+      // agent notices, then dispatches
+      timer = setTimeout(function () {
+        probe.classList.add('is-running');
+        probe.style.transform = 'translate(' + AGENT.x + 'px,' + AGENT.y + 'px)';
+
+        var trip = probe.animate(
+          [
+            { transform: 'translate(' + AGENT.x + 'px,' + AGENT.y + 'px)' },
+            { transform: 'translate(' + x + 'px,' + y + 'px)' }
+          ],
+          { duration: 780, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' }
+        );
+
+        trip.onfinish = function () {
+          probe.classList.remove('is-running');
+          node.classList.remove('is-degraded');
+          node.classList.add('is-healed');
+
+          healed += 1;
+          if (tally) tally.textContent = healed;
+
+          timer = setTimeout(function () {
+            node.classList.remove('is-healed');
+            timer = setTimeout(cycle, 900 + Math.random() * 900);
+          }, 900);
+        };
+      }, 1100);
     }
+
+    function start() {
+      if (running) return;
+      running = true;
+      panel.classList.add('is-live');
+      timer = setTimeout(cycle, 900);
+    }
+
+    function stop() {
+      running = false;
+      clearTimeout(timer);
+    }
+
+    if (reduced) {
+      // a composed still: one service degraded, nothing moving
+      panel.classList.add('is-live');
+      nodes[2].classList.add('is-degraded');
+      if (tally) tally.textContent = '\u2014';
+      return;
+    }
+
+    if (!('IntersectionObserver' in window) || !probe.animate) { start(); return; }
+
+    var vis = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) start(); else stop();
+      });
+    }, { threshold: 0.2 });
+    vis.observe(panel);
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop();
+      else if (panel.getBoundingClientRect().top < window.innerHeight) start();
+    });
   }
+
+  if (panel) startMesh();
 
   /* ---- active section in nav ---- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
