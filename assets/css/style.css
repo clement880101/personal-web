@@ -421,15 +421,17 @@ body{
     grid-template-areas:
       "top   top"
       "title facts"
+      "meta  facts"
       "desc  links";
     column-gap:clamp(28px,3.4vw,52px);
     align-content:start;
   }
   .card--wide .card__top{ grid-area:top; }
   .card--wide .card__title{ grid-area:title; align-self:end; }
+  .card--wide .card__meta{ grid-area:meta; margin:2px 0 16px; }
   .card--wide .card__desc{ grid-area:desc; margin-bottom:0; max-width:58ch; }
   .card--wide .card__facts{
-    grid-area:facts; align-self:end; margin:0 0 6px;
+    grid-area:facts; align-self:end; margin:0 0 18px;
     flex-direction:column; gap:9px;
     padding-left:20px; border-left:1px solid var(--line);
   }
@@ -459,6 +461,10 @@ body{
   font-family:var(--serif); font-weight:400;
   font-size:clamp(26px,3vw,36px); line-height:1.08; letter-spacing:-.012em;
   margin:0 0 12px;
+}
+.card__meta{
+  font-size:11.5px; letter-spacing:.04em; color:var(--dim);
+  margin:-6px 0 14px; text-transform:lowercase;
 }
 .card__desc{ color:var(--muted); font-size:15px; margin:0 0 18px; max-width:62ch; }
 .card__desc b{ color:var(--text); font-weight:600; }
