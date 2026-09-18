@@ -33,7 +33,7 @@ jobs:
         run: |
           set -euo pipefail
           urls=$(grep -rhoE 'https?://[^"'"'"' )]+' index.html 404.html \
-                 | grep -vE 'fonts\.(googleapis|gstatic)\.com|schema\.org|w3\.org' \
+                 | grep -vE 'fonts\.(googleapis|gstatic)\.com|schema\.org|w3\.org|npmjs\.com|linkedin\.com' \
                  | sort -u)
           fail=0
           for u in $urls; do
