@@ -522,6 +522,9 @@ body{
   font-family:var(--serif); font-size:clamp(20px,2.6vw,30px); line-height:1.2;
 }
 .contact__val i{ font-style:normal; font-size:.6em; color:var(--signal); margin-left:6px; }
+.contact__link[data-copy]{ cursor:copy; }
+.contact__link.is-copied .mono{ color:var(--signal); opacity:1; }
+.contact__link.is-copied .contact__val{ color:var(--signal); }
 .contact__link:hover{ padding-left:16px; color:var(--signal); }
 .contact__link:hover .mono{ color:var(--signal); opacity:.8; }
 

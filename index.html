@@ -114,23 +114,28 @@
     <ul class="creed__proof">
       <li class="reveal">
         <span class="creed__num mono">01</span>
-        <b>Agents that debug themselves.</b> autoInvestigator root-causes trunk breakages
-        and generates the reverting change &mdash; ~15% close with no engineer in the loop.
+        <b>Systems that repair themselves.</b> Automation that diagnoses its own
+        failures and writes the fix, so a whole class of incident closes out with
+        no engineer in the loop at all.
       </li>
       <li class="reveal">
         <span class="creed__num mono">02</span>
-        <b>Agents that run process.</b> Incident and change &ldquo;babysitters&rdquo; shepherd
-        risky changes through their whole lifecycle, returning ~24 engineer-hours a week.
+        <b>Agents that own a workflow.</b> Not a bot that fires an alert and stops
+        &mdash; automation that carries work through its whole lifecycle: intake,
+        triage, escalation, follow-through, closure.
       </li>
       <li class="reveal">
         <span class="creed__num mono">03</span>
-        <b>Harnesses, not prompts.</b> A Claude Code harness for Meta&rsquo;s recommendation
-        systems took trunk-health SLO attainment from ~60% to 100% in five months.
+        <b>Harnesses, not prompts.</b> The leverage is in the scaffolding around the
+        model &mdash; the tools it can reach, the guardrails it runs inside, the
+        evaluation loop that proves it worked. That is what turns a demo into
+        something you can put an SLO on.
       </li>
       <li class="reveal">
         <span class="creed__num mono">04</span>
-        <b>Shipped before it was a trend.</b> LLM triage tooling at Synopsys in 2023
-        (LlamaIndex, vLLM, Hugging Face); agent scaffolding used by Ollama and the U.S. Air Force.
+        <b>Shipped before it was a trend.</b> Running LLMs in production since 2023
+        &mdash; retrieval, self-hosted inference, agent scaffolding &mdash; back when
+        the tooling was unsettled and there were no defaults to copy.
       </li>
     </ul>
   </div>
@@ -423,8 +428,9 @@
       infrastructure, and anything that makes a system easier to trust.
     </p>
     <div class="contact__links">
-      <a class="contact__link" href="mailto:clement.chang.dev@gmail.com">
-        <span class="mono">email</span>
+      <a class="contact__link" href="mailto:clement.chang.dev@gmail.com"
+         data-copy="clement.chang.dev@gmail.com">
+        <span class="mono" data-copy-label>email</span>
         <span class="contact__val">clement.chang.dev@gmail.com</span>
       </a>
       <a class="contact__link" href="https://github.com/clement880101" target="_blank" rel="noopener">

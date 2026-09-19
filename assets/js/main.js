@@ -213,6 +213,65 @@
 
   if (field) startField();
 
+  /* ---- click-to-copy email ----
+     The anchor keeps its mailto href, so without JS (or without a usable
+     clipboard) clicking still opens a mail client. With JS, a click copies
+     the address instead and the label reports what happened. */
+  var copyLinks = document.querySelectorAll('[data-copy]');
+
+  Array.prototype.forEach.call(copyLinks, function (link) {
+    var label = link.querySelector('[data-copy-label]');
+    var original = label ? label.textContent : '';
+    var revert = null;
+
+    link.setAttribute('aria-live', 'polite');
+    link.title = 'Click to copy';
+
+    function flash(message, ok) {
+      if (!label) return;
+      label.textContent = message;
+      link.classList.toggle('is-copied', ok !== false);
+      clearTimeout(revert);
+      revert = setTimeout(function () {
+        label.textContent = original;
+        link.classList.remove('is-copied');
+      }, 1800);
+    }
+
+    // used where the async clipboard API is missing or refuses the write
+    function legacyCopy(value) {
+      var ta = document.createElement('textarea');
+      ta.value = value;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    function done(value) {
+      if (legacyCopy(value)) flash('copied ✓', true);
+      else window.location.href = link.href;   // last resort: open mail client
+    }
+
+    link.addEventListener('click', function (e) {
+      var value = link.getAttribute('data-copy');
+      e.preventDefault();
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(
+          function () { flash('copied ✓', true); },
+          function () { done(value); }
+        );
+        return;
+      }
+      done(value);
+    });
+  });
+
   /* ---- active section in nav ---- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
   var sections = navLinks
