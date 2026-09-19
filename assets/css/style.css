@@ -303,11 +303,13 @@ body{
   padding:34px 0; border-top:1px solid var(--line);
   position:relative;
 }
-.job::before{
+.job::before,
+.edu::before{
   content:""; position:absolute; top:-1px; left:0; height:1px; width:0;
   background:var(--signal); transition:width .6s var(--ease);
 }
-.job:hover::before{ width:100%; }
+.job:hover::before,
+.edu:hover::before{ width:100%; }
 .job:last-of-type{ border-bottom:1px solid var(--line); }
 
 .job__meta{ display:flex; flex-direction:column; gap:5px; padding-top:5px; }
@@ -368,6 +370,7 @@ body{
 .edu{
   display:grid; grid-template-columns:200px 1fr; gap:clamp(20px,4vw,52px);
   margin-top:46px; padding:26px 0 0; border-top:1px solid var(--line);
+  position:relative;   /* anchors the sweep line shared with .job */
 }
 .edu__label{
   font-size:12px; color:var(--dim); letter-spacing:.06em; padding-top:6px;
