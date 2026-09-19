@@ -319,6 +319,29 @@ body{
   line-height:1.1; margin:0 0 4px; letter-spacing:-.01em;
   display:flex; align-items:center; gap:12px; flex-wrap:wrap;
 }
+/* company / university names link out to their own sites. Underline sits
+   below the serif descenders, and the arrow only appears on hover so the
+   headings stay clean. */
+.orglink{
+  color:inherit; text-decoration:none;
+  position:relative; display:inline;
+  background-image:linear-gradient(var(--signal),var(--signal));
+  background-repeat:no-repeat;
+  background-size:0% 1px;
+  background-position:0 calc(100% - 2px);
+  transition:background-size .34s var(--ease), color .24s var(--ease);
+}
+.orglink:hover,
+.orglink:focus-visible{ color:var(--signal); background-size:100% 1px; }
+.orglink__arrow{
+  font-size:.42em; margin-left:.32em; vertical-align:.45em;
+  color:var(--signal); opacity:0;
+  transition:opacity .24s var(--ease), transform .24s var(--ease);
+  display:inline-block; transform:translate(-3px,3px);
+}
+.orglink:hover .orglink__arrow,
+.orglink:focus-visible .orglink__arrow{ opacity:1; transform:none; }
+
 .job__badge{
   font-family:var(--mono); font-size:10px; letter-spacing:.08em;
   text-transform:uppercase; color:#0a0b0a; background:var(--signal);
